@@ -15,7 +15,10 @@ dependencies:
   get: ^4.3.8
   get_storage:
   rive: ^0.7.33
-
+  carousel_slider: ^4.0.0
+  google_fonts: ^2.2.0
+  lottie: ^1.2.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

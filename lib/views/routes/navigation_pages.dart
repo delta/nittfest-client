@@ -1,5 +1,7 @@
 import 'package:get/get_navigation/src/routes/get_route.dart';
-import 'package:nittfest/views/pages/inductions/inductions_page.dart';
+import 'package:nittfest/bindings/forms_binding.dart';
+import 'package:nittfest/views/pages/forms/forms_page.dart';
+import 'package:nittfest/views/pages/home/home_page.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
 import 'package:nittfest/bindings/inductions_binding.dart';
 import 'package:nittfest/bindings/splash_binding.dart';
@@ -13,9 +15,14 @@ class NavigationPages {
           binding: SplashBindings(),
         ),
         GetPage(
-          name: NavigationRoutes.inductionsRoute,
-          page: () => InductionsPage(),
+          name: NavigationRoutes.inductionsHomeRoute,
+          page: () => HomePage(),
           binding: InductionsBindings(),
+        ),
+        GetPage(
+          name: NavigationRoutes.inductionsFormsRoute,
+          page: () => FormsPage(),
+          binding: FormsBindings(),
         ),
       ];
 }

@@ -1,5 +1,6 @@
 class NavigationRoutes {
   static String splashRoute = '/';
-  static String inductionsRoute = '/inductions';
+  static String inductionsHomeRoute = '/inductions/home';
+  static String inductionsFormsRoute = '/inductions/forms';
   static String authRoute = '/auth';
 }

@@ -13,7 +13,7 @@ class RegisterButton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         onPressed: () {},
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 35.0),
+          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 30.0),
           child: Text(
             'REGISTER',
             style: TextStyle(
