@@ -1,7 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:rive/rive.dart';
 
 class InductionsController extends GetxController {
@@ -9,6 +9,7 @@ class InductionsController extends GetxController {
   late RiveAnimationController flyingcarController;
   var isHovered = false.obs;
   var isHovered2 = 0.obs;
+  Stream<int> onRotate = const Stream.empty();
   ImageProvider bg = const AssetImage('bg1.png');
   void togglePlay() => carController.isActive = !carController.isActive;
 
@@ -17,5 +18,8 @@ class InductionsController extends GetxController {
     carController = SimpleAnimation('driwing');
     flyingcarController = SimpleAnimation('Animation');
     super.onInit();
+    onRotate.listen((p0) {
+      log(p0.toString());
+    });
   }
 }

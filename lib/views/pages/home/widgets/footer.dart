@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nittfest/views/themes/app_themes.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({Key? key}) : super(key: key);
+  final double size;
+  const Footer({Key? key, required this.size}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => const Center(
-      child: Text('Made with 💚 by Delta Force & NITTFEST DesCon',
-          style: TextStyle(fontSize: 16)));
+  Widget build(BuildContext context) => Center(
+        child: Text(
+          'Made with 💚 by DeltaForce & Graphique',
+          style: GoogleFonts.lato(
+              fontWeight: FontWeight.bold,
+              fontSize: size,
+              shadows: AppTheme.shadows,
+              color: Colors.white70),
+        ),
+      );
 }

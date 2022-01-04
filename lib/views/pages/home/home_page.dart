@@ -5,6 +5,7 @@ import 'package:nittfest/constants/break_points.dart';
 import 'package:nittfest/controllers/inductions_controller.dart';
 import 'package:nittfest/views/pages/home/responsive/home_page_desktop.dart';
 import 'package:nittfest/views/pages/home/responsive/home_page_phone.dart';
+import 'package:nittfest/views/pages/home/widgets/social_icons.dart';
 
 class HomePage extends GetView<InductionsController> {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class HomePage extends GetView<InductionsController> {
             BoxDecoration(image: DecorationImage(image: bg, fit: BoxFit.cover)),
         child: HomeResponsive(),
       ),
+      floatingActionButton: const SocialIcons(),
     );
   }
 }
