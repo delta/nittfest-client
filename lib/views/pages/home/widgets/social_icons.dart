@@ -11,29 +11,45 @@ class SocialIcons extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => FabCircularMenu(
-          fabOpenIcon: Image.asset(
-            'assets/logo_nf.png',
-            width: 20,
-          ),
-          ringColor: Colors.transparent,
-          fabSize: 54,
-          fabColor: Colors.white,
-          fabOpenColor: Colors.black,
-          ringDiameter: 300,
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.instagram),
-                onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/')),
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.facebook),
-                onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/')),
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.linkedin),
-                onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/'))
-          ]);
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return FabCircularMenu(
+        fabOpenIcon: Image.asset(
+          'assets/logo_nf.png',
+          width: 20,
+          color: Colors.deepPurple,
+        ),
+        fabCloseIcon: const Icon(
+          Icons.close,
+          color: Colors.deepPurple,
+        ),
+        ringColor: Colors.black.withOpacity(0.25),
+        fabSize: size.width < 400 ? (size.width / 400) * 54 : 54,
+        fabColor: Colors.white,
+        fabElevation: 64,
+        ringDiameter: 240,
+        fabMargin:
+            const EdgeInsets.only(left: 20, top: 0, right: 0, bottom: 20),
+        alignment: Alignment.bottomLeft,
+        children: <Widget>[
+          IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.instagram,
+              ),
+              onPressed: () =>
+                  _launchURL('https://www.instagram.com/nittfest/')),
+          IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.facebook,
+              ),
+              onPressed: () =>
+                  _launchURL('https://www.instagram.com/nittfest/')),
+          IconButton(
+              icon: const Icon(
+                FontAwesomeIcons.linkedin,
+              ),
+              onPressed: () =>
+                  _launchURL('https://www.instagram.com/nittfest/'))
+        ]);
+  }
 }

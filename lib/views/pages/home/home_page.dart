@@ -12,9 +12,12 @@ class HomePage extends GetView<InductionsController> {
 
   @override
   Widget build(BuildContext context) {
-    ImageProvider bg = const AssetImage('bg1.webp');
+    Size size = MediaQuery.of(context).size;
+    ImageProvider bg = const AssetImage('assets/bg1.webp');
     return Scaffold(
       body: Container(
+        height: size.height,
+        width: size.width,
         decoration:
             BoxDecoration(image: DecorationImage(image: bg, fit: BoxFit.cover)),
         child: HomeResponsive(),

@@ -22,7 +22,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Image.asset(
@@ -40,7 +40,7 @@ class Content extends StatelessWidget {
           ),
           SizedBox(height: gapSize),
           Text(
-            'Witness The Battle Of Departments',
+            'The Battle Of Departments',
             style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
                 fontSize: bodySize,
