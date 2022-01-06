@@ -16,12 +16,12 @@ class NavigationPages {
         ),
         GetPage(
           name: NavigationRoutes.inductionsHomeRoute,
-          page: () => HomePage(),
+          page: () => const HomePage(),
           binding: InductionsBindings(),
         ),
         GetPage(
           name: NavigationRoutes.inductionsFormsRoute,
-          page: () => FormsPage(),
+          page: () => const FormsPage(),
           binding: FormsBindings(),
         ),
       ];

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/controllers/forms_controller.dart';
 import 'package:nittfest/models/card_content_model.dart';
+import 'package:nittfest/views/themes/app_themes.dart';
 
 class CardContent extends StatelessWidget {
   final CardContentModel value;
@@ -28,7 +29,7 @@ class CardContent extends StatelessWidget {
                             child: Text(
                               '$index-> ',
                               style: GoogleFonts.poppins(
-                                  fontSize: 20, color: Colors.grey),
+                                  fontSize: 20, color: AppTheme.bodycolorDark),
                             ))),
                     Expanded(
                         child: Column(
@@ -37,7 +38,7 @@ class CardContent extends StatelessWidget {
                           Text(
                             value.question!,
                             style: GoogleFonts.poppins(
-                                fontSize: 36, color: Colors.white),
+                                fontSize: 36, color: AppTheme.bodycolor),
                           ),
                           const SizedBox(
                             height: 10,
@@ -45,7 +46,7 @@ class CardContent extends StatelessWidget {
                           Text(
                             value.hint!,
                             style: GoogleFonts.poppins(
-                                fontSize: 22, color: Colors.grey),
+                                fontSize: 22, color: AppTheme.bodycolorDark),
                             textAlign: TextAlign.left,
                           ),
                           const SizedBox(height: 20),
@@ -65,12 +66,12 @@ class CardContent extends StatelessWidget {
                                     .buttonCarouselController.nextPage,
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                        Colors.white)),
+                                        AppTheme.bodycolor)),
                                 child: Text('OK',
                                     style: GoogleFonts.poppins(
                                         fontSize: 22,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.pinkAccent)),
+                                        color: AppTheme.primaryColor)),
                               ))
                         ])),
                   ]),

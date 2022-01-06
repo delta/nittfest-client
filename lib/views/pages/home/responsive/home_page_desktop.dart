@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:nittfest/controllers/inductions_controller.dart';
 import 'package:nittfest/views/pages/home/widgets/baloon.dart';
 import 'package:nittfest/views/pages/home/widgets/content.dart';
 import 'package:nittfest/views/pages/home/widgets/footer.dart';
@@ -11,7 +9,6 @@ class HomePageDesktop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<InductionsController>();
     Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Row(children: [

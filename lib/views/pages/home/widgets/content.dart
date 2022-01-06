@@ -27,7 +27,7 @@ class Content extends StatelessWidget {
         children: <Widget>[
           Image.asset(
             'assets/logo_nf.png',
-            color: Colors.white,
+            color: AppTheme.bodycolor,
             height: logoSize,
           ),
           Text(
@@ -36,7 +36,7 @@ class Content extends StatelessWidget {
                 fontSize: headerSize,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 6,
-                color: Colors.white),
+                color: AppTheme.bodycolor),
           ),
           SizedBox(height: gapSize),
           Text(

@@ -4,6 +4,7 @@ import 'package:nittfest/controllers/forms_controller.dart';
 import 'package:nittfest/views/pages/forms/widgets/card_content.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel_navigator.dart';
+import 'package:nittfest/views/themes/app_themes.dart';
 
 class FormsPageDesktop extends StatelessWidget {
   const FormsPageDesktop({Key? key}) : super(key: key);
@@ -17,7 +18,7 @@ class FormsPageDesktop extends StatelessWidget {
           left: 50,
           child: Image.asset(
             'assets/logo_nf.png',
-            color: Colors.white,
+            color: AppTheme.bodycolor,
             width: 45,
           )),
       Carousel(
