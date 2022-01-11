@@ -16,28 +16,26 @@ class CarouselNavigator extends StatelessWidget {
         ),
         child: Row(children: [
           Obx(() => IconButton(
-                onPressed: controller.pageNumber.value > 0
+                onPressed: controller.pageNumber.value > 1
                     ? controller.previousPage
                     : null,
                 icon: Icon(
                   Icons.keyboard_arrow_up,
-                  color: controller.pageNumber.value > 0
+                  color: controller.pageNumber.value > 1
                       ? AppTheme.primaryColor
                       : AppTheme.primaryColorLight,
                 ),
               )),
           const Divider(),
           Obx(() => IconButton(
-              onPressed:
-                  controller.pageNumber.value < controller.maxPage.value - 1
-                      ? controller.nextPage
-                      : null,
+              onPressed: controller.pageNumber.value < controller.maxPage
+                  ? controller.nextPage
+                  : null,
               icon: Icon(
                 Icons.keyboard_arrow_down,
-                color:
-                    controller.pageNumber.value < controller.maxPage.value - 1
-                        ? AppTheme.primaryColor
-                        : AppTheme.primaryColorLight,
+                color: controller.pageNumber.value < controller.maxPage
+                    ? AppTheme.primaryColor
+                    : AppTheme.primaryColorLight,
               ))),
         ]));
   }

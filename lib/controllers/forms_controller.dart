@@ -8,16 +8,10 @@ import 'package:rive/rive.dart';
 class FormsController extends GetxController {
   var isPlaying = false.obs;
   var pageNumber = 0.obs;
-  var maxPage = 0.obs;
+  late int maxPage;
   late Artboard? treeArtboard;
   late CarouselController buttonCarouselController;
   late SMINumber growInput;
-
-  @override
-  void onInit() {
-    buttonCarouselController = CarouselController();
-    super.onInit();
-  }
 
   var content = [
     CardContentModel(
@@ -41,6 +35,14 @@ class FormsController extends GetxController {
         hint:
             'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)')
   ];
+
+  @override
+  void onInit() {
+    buttonCarouselController = CarouselController();
+    maxPage = content.length;
+    super.onInit();
+  }
+
   void onRiveTreeInit(Artboard artboard) {
     final treeController =
         StateMachineController.fromArtboard(artboard, 'State Machine 1')!;
@@ -48,31 +50,21 @@ class FormsController extends GetxController {
     growInput = treeController.findInput<double>('input') as SMINumber;
   }
 
-  void treeGrow() =>
-      (growInput.value) < 100 ? growInput.change((growInput.value) + 10) : 100;
-
-  void treeShrink() =>
-      (growInput.value) >= 10 ? growInput.change((growInput.value) - 10) : 0;
-
   void nextPage() {
-    if (pageNumber.value < maxPage.value) {
+    if (pageNumber.value < maxPage) {
       buttonCarouselController.nextPage(
           duration: const Duration(milliseconds: 100),
           curve: Curves.easeInCirc);
-      pageNumber++;
-      //treeGrow();
     } else {
-      pageNumber.value = maxPage.value;
+      pageNumber.value = maxPage;
     }
   }
 
   void previousPage() {
     if (pageNumber.value > 0) {
-      pageNumber--;
       buttonCarouselController.previousPage(
           duration: const Duration(milliseconds: 100),
           curve: Curves.easeInCirc);
-      //treeShrink();
     } else {
       pageNumber.value = 0;
     }

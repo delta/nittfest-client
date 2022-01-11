@@ -5,10 +5,7 @@ import 'package:get/instance_manager.dart';
 import 'package:nittfest/controllers/inductions_controller.dart';
 
 class GiantWheel extends StatelessWidget {
-  final double wratio;
-  final double hratio;
-  const GiantWheel({Key? key, required this.wratio, required this.hratio})
-      : super(key: key);
+  const GiantWheel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

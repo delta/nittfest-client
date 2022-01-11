@@ -14,11 +14,15 @@ class Carousel extends StatelessWidget {
     return CarouselSlider(
       carouselController: controller.buttonCarouselController,
       options: CarouselOptions(
-        height: MediaQuery.of(context).size.height,
-        autoPlay: false,
-        enableInfiniteScroll: false,
-        scrollDirection: Axis.vertical,
-      ),
+          height: MediaQuery.of(context).size.height,
+          autoPlay: false,
+          enableInfiniteScroll: false,
+          scrollDirection: Axis.vertical,
+          onPageChanged: (index, reason) {
+            if (reason.name == 'controller') {
+              controller.pageNumber.value = index + 1;
+            }
+          }),
       items: children,
     );
   }

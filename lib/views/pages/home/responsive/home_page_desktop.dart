@@ -29,7 +29,7 @@ class HomePageDesktop extends StatelessWidget {
               bottom: -10,
               left: 100,
               width: size.height / 2,
-              child: const GiantWheel(hratio: 1.4, wratio: 2)),
+              child: const GiantWheel()),
         ]))
       ]),
       const Positioned(
@@ -38,7 +38,7 @@ class HomePageDesktop extends StatelessWidget {
           right: 0,
           child: Footer(
             size: 16,
-          ))
+          )),
     ]);
   }
 }

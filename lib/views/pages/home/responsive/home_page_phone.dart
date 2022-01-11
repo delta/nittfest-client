@@ -10,14 +10,14 @@ class HomePagePhone extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Column(children: [
-      const Expanded(
+      Expanded(
         child: Content(
-            logoSize: 150.0,
-            headerSize: 30,
-            bodySize: 25.0,
-            gapSize: 15,
-            gapSize2: 30,
-            buttonSize: 12.0),
+            logoSize: size.height * 0.20,
+            headerSize: size.height * 0.050,
+            bodySize: size.height * 0.030,
+            gapSize: size.height * 0.005,
+            gapSize2: size.height * 0.025,
+            buttonSize: size.height * 0.025),
       ),
       Expanded(
           child: Stack(children: [
@@ -25,11 +25,12 @@ class HomePagePhone extends StatelessWidget {
             right: 0,
             bottom: -10,
             height: size.height / 2.2,
-            child: const GiantWheel(
-              wratio: 1.8,
-              hratio: 1.8,
-            )),
-        const Positioned(bottom: 10, left: 0, right: 0, child: Footer(size: 12))
+            child: const GiantWheel()),
+        Positioned(
+            bottom: 10,
+            left: 0,
+            right: 0,
+            child: Footer(size: size.width * 0.025))
       ]))
     ]);
   }

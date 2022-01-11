@@ -22,7 +22,7 @@ class HomePage extends GetView<InductionsController> {
             BoxDecoration(image: DecorationImage(image: bg, fit: BoxFit.cover)),
         child: HomeResponsive(),
       ),
-      floatingActionButton: const SocialIcons(),
+      floatingActionButton: SocialIcons(buttonSize: size),
     );
   }
 }

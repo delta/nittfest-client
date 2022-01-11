@@ -11,14 +11,15 @@ class FormsPagePhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<FormsController>();
+
     return Stack(children: [
       Positioned(
-          top: 20,
-          left: 50,
+          top: 10,
+          left: 10,
           child: Image.asset(
             'assets/logo_nf.png',
             color: Colors.white,
-            width: 45,
+            width: 25,
           )),
       Carousel(
         children: controller.content

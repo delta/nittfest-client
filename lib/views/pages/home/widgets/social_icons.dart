@@ -5,7 +5,8 @@ import 'package:nittfest/views/themes/app_themes.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SocialIcons extends StatelessWidget {
-  const SocialIcons({Key? key}) : super(key: key);
+  final Size buttonSize;
+  const SocialIcons({Key? key, required this.buttonSize}) : super(key: key);
 
   void _launchURL(String url) async {
     if (!await launch(url)) throw 'Could not launch $url';
@@ -18,10 +19,10 @@ class SocialIcons extends StatelessWidget {
             width: 20,
           ),
           ringColor: Colors.transparent,
-          fabSize: 54,
+          fabSize: buttonSize.width < 400 ? (buttonSize.width / 400) * 54 : 54,
           fabColor: AppTheme.bodycolor,
-          fabOpenColor: Colors.black,
-          ringDiameter: 300,
+          fabCloseIcon: const Icon(Icons.close, color: Colors.black),
+          ringDiameter: 240,
           alignment: Alignment.bottomLeft,
           children: <Widget>[
             IconButton(
