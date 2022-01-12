@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
-import 'package:nittfest/controllers/inductions_controller.dart';
+import 'package:nittfest/controllers/home_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
@@ -10,39 +10,7 @@ class SpinWheel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var map = [
-      {
-        'name': 'OC',
-        'color': const Color(0xFF9D34E6),
-        'icon': Icons.group_rounded
-      },
-      {
-        'name': 'CONTENT',
-        'color': const Color(0xFF911DB0),
-        'icon': Icons.book_rounded
-      },
-      {
-        'name': 'DESIGN',
-        'color': const Color(0xFF9D34E6),
-        'icon': Icons.design_services_rounded
-      },
-      {
-        'name': 'EVENTS',
-        'color': const Color(0xFF911DB0),
-        'icon': Icons.event_rounded
-      },
-      {
-        'name': 'AV',
-        'color': const Color(0xFF9D34E6),
-        'icons': Icons.video_collection_rounded
-      },
-      {
-        'name': 'AMBIENCE',
-        'color': const Color(0xFF911DB0),
-        'icon': Icons.architecture_rounded
-      }
-    ];
-    var controller = Get.find<InductionsController>();
+    var controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
     return MouseRegion(
         onEnter: (event) => controller.isHovered2.value = 5,
@@ -69,7 +37,7 @@ class SpinWheel extends StatelessWidget {
                   ),
                 ],
                 selected: controller.onRotate,
-                items: map
+                items: controller.spinWheelMap
                     .map((value) => FortuneItem(
                         child: Text(
                           value['name'].toString(),

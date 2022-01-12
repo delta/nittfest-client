@@ -2,14 +2,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:nittfest/controllers/inductions_controller.dart';
+import 'package:nittfest/controllers/home_controller.dart';
 
 class GiantWheel extends StatelessWidget {
   const GiantWheel({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<InductionsController>();
+    var controller = Get.find<HomeController>();
     return Obx(() => Container(
         decoration: BoxDecoration(boxShadow: [
           BoxShadow(

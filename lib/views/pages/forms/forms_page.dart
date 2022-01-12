@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 import 'package:nittfest/constants/break_points.dart';
-import 'package:nittfest/controllers/inductions_controller.dart';
+import 'package:nittfest/controllers/home_controller.dart';
 import 'package:nittfest/views/pages/forms/responsive/forms_page_desktop.dart';
 import 'package:nittfest/views/pages/forms/responsive/forms_page_phone.dart';
 
-class FormsPage extends GetView<InductionsController> {
+class FormsPage extends GetView<HomeController> {
   const FormsPage({Key? key}) : super(key: key);
 
   @override
@@ -25,7 +25,7 @@ class FormsPage extends GetView<InductionsController> {
   }
 }
 
-class FormsPageResponsive extends GetResponsiveView<InductionsController> {
+class FormsPageResponsive extends GetResponsiveView<HomeController> {
   FormsPageResponsive({Key? key})
       : super(key: key, settings: BreakPoints.getResponsiveScreenSettings());
   @override
