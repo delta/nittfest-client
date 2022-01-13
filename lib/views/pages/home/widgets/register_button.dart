@@ -13,7 +13,8 @@ class RegisterButton extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(20.0))),
         onPressed: () {},
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 35.0),
+          padding: EdgeInsets.symmetric(
+              vertical: buttonSize * 0.6, horizontal: buttonSize * 0.6),
           child: Text(
             'REGISTER',
             style: TextStyle(
@@ -21,7 +22,7 @@ class RegisterButton extends StatelessWidget {
               letterSpacing: 2,
               fontWeight: FontWeight.w600,
               shadows: AppTheme.shadows,
-              fontSize: buttonSize,
+              fontSize: buttonSize < 400 ? buttonSize * 0.8 : buttonSize,
             ),
           ),
         ),

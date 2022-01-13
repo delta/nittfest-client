@@ -15,6 +15,12 @@ dependencies:
   get: ^4.3.8
   get_storage:
   rive: ^0.7.33
+  carousel_slider: ^4.0.0
+  google_fonts: ^2.2.0
+  flutter_fortune_wheel: ^1.2.0
+  fab_circular_menu: ^1.0.2
+  url_launcher: ^6.0.17
+  font_awesome_flutter: ^9.2.0
 
 dev_dependencies:
   flutter_test:

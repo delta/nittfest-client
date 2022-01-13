@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/utils.dart';
-import 'package:nittfest/controllers/inductions_controller.dart';
+import 'package:nittfest/controllers/home_controller.dart';
 import 'package:rive/rive.dart' as rive;
 
 class Car extends StatelessWidget {
@@ -10,7 +10,7 @@ class Car extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InductionsController controller = Get.find<InductionsController>();
+    final HomeController controller = Get.find<HomeController>();
     return GetPlatform.isMobile
         ? GestureDetector(
             onPanDown: (details) {
