@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:nittfest/views/routes/navigation_pages.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
 
 Future<void> main() async {
+  await initServices();
   runApp(const NITTFEST());
+}
+
+Future<void> initServices() async {
+  //print('starting services ...');
+
+  await Get.putAsync(() => StorageServices().initStorage());
+  //print('All services started...');
 }
 
 class NITTFEST extends StatelessWidget {
