@@ -36,7 +36,6 @@ class SpinWheel extends StatelessWidget {
                         child: Image.asset('assets/roulettecenter.png')),
                   ),
                 ],
-                selected: controller.onRotate,
                 items: controller.spinWheelMap
                     .map((value) => FortuneItem(
                         child: Text(

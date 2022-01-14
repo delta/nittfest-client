@@ -36,3 +36,4 @@ linter:
     avoid_function_literals_in_foreach_calls: true
     camel_case_types: true
     constant_identifier_names: true
+    
