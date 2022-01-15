@@ -17,12 +17,14 @@ class SocialIcons extends StatelessWidget {
           fabOpenIcon: Image.asset(
             'assets/logo_nf.png',
             width: 20,
+            color: Colors.purple,
           ),
           ringColor: Colors.transparent,
           fabSize: buttonSize.width < 400 ? (buttonSize.width / 400) * 54 : 54,
           fabColor: AppTheme.bodycolor,
           fabCloseIcon: const Icon(Icons.close, color: Colors.black),
-          ringDiameter: 240,
+          ringDiameter: 250,
+          animationDuration: const Duration(milliseconds: 400),
           alignment: Alignment.bottomLeft,
           children: <Widget>[
             IconButton(
@@ -32,10 +34,10 @@ class SocialIcons extends StatelessWidget {
             IconButton(
                 icon: const Icon(FontAwesomeIcons.facebook),
                 onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/')),
+                    _launchURL('https://www.facebook.com/NITTFEST')),
             IconButton(
                 icon: const Icon(FontAwesomeIcons.linkedin),
                 onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/'))
+                    _launchURL('https://www.linkedin.com/company/nittfest/'))
           ]);
 }

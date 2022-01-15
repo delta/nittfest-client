@@ -11,7 +11,7 @@ class FormsPagePhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<FormsController>();
-
+    Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Positioned(
           top: 10,
@@ -25,7 +25,14 @@ class FormsPagePhone extends StatelessWidget {
         children: controller.content
             .asMap()
             .map((i, value) => MapEntry(
-                i, CardContent(index: (i + 1).toString(), value: value)))
+                i,
+                Center(
+                    child: Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                        width: size.width,
+                        height: size.height,
+                        child: CardContent(
+                            index: (i + 1).toString(), value: value)))))
             .values
             .toList(),
       ),

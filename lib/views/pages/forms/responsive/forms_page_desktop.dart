@@ -12,6 +12,7 @@ class FormsPageDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var controller = Get.find<FormsController>();
+    Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Positioned(
           top: 20,
@@ -25,7 +26,13 @@ class FormsPageDesktop extends StatelessWidget {
         children: controller.content
             .asMap()
             .map((i, value) => MapEntry(
-                i, CardContent(index: (i + 1).toString(), value: value)))
+                i,
+                Center(
+                    child: SizedBox(
+                        width: 2000,
+                        height: size.height,
+                        child: CardContent(
+                            index: (i + 1).toString(), value: value)))))
             .values
             .toList(),
       ),

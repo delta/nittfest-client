@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nittfest/views/pages/home/widgets/baloon.dart';
 import 'package:nittfest/views/pages/home/widgets/content.dart';
 import 'package:nittfest/views/pages/home/widgets/footer.dart';
-import 'package:nittfest/views/pages/home/widgets/giant_wheel.dart';
+import 'package:nittfest/views/pages/home/widgets/register_button.dart';
+import 'package:nittfest/views/pages/home/widgets/spinner.dart';
 
 class HomePageDesktop extends StatelessWidget {
   const HomePageDesktop({Key? key}) : super(key: key);
@@ -12,25 +13,25 @@ class HomePageDesktop extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Row(children: [
-        const Expanded(
-            child: Center(
-          child: Content(
-              logoSize: 200.0,
-              headerSize: 50,
-              bodySize: 30.0,
-              gapSize: 20,
-              gapSize2: 45,
-              buttonSize: 18.0),
-        )),
         Expanded(
-            child: Stack(children: [
-          const Positioned(right: 1, top: 50, child: Baloon()),
-          Positioned(
-              bottom: -10,
-              left: 100,
-              width: size.height / 2,
-              child: const GiantWheel()),
-        ]))
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Content(
+            mainAxisAlignment: MainAxisAlignment.center,
+            logoSize: (300.0 / 1848) * size.width,
+            headerSize: (70 / 1848) * size.width,
+            bodySize: (32.0 / 1848) * size.width,
+            gapSize: (20 / 980) * size.height,
+            gapSize2: (40 / 980) * size.height,
+          ),
+          SizedBox(height: (40 / 980) * size.height),
+          RegisterButton(buttonSize: (26.0 / 1848) * size.width),
+        ])),
+        Expanded(
+            child: Stack(children: const [
+          Positioned(right: 1, top: 50, child: Baloon()),
+          Center(child: Spinner()),
+        ])),
       ]),
       const Positioned(
           bottom: 10,
