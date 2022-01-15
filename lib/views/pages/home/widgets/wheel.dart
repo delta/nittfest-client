@@ -59,36 +59,36 @@ class Wheel extends CustomPainter {
 
   void drawArcs(Canvas canvas, HomeController controller, Size size,
       double startAngle, Offset center) {
-    const grad = LinearGradient(
-      colors: [Colors.black, Colors.orange, Colors.amber, Colors.yellow],
-      begin: Alignment.topLeft,
-      end: Alignment.bottomRight,
-    );
-    final frect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
-    final linePaint1 = Paint()
-      ..shader = grad.createShader(frect)
-      ..strokeWidth = 8;
+    // const grad = LinearGradient(
+    //   colors: [Colors.black, Colors.orange, Colors.amber, Colors.yellow],
+    //   begin: Alignment.topLeft,
+    //   end: Alignment.bottomRight,
+    // );
+    // final frect = Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    // final linePaint1 = Paint()
+    //   ..shader = grad.createShader(frect)
+    //   ..strokeWidth = 8;
 
-    for (var d in controller.data) {
-      const sweepAngle = (1 / 6) * 360.0 * pi / 180.0;
-      final paint = Paint()
-        ..style = PaintingStyle.fill
-        ..color = d.color;
-      final radius = m / 1.8;
-      final rect =
-          Rect.fromCenter(center: center, width: radius, height: radius);
-      canvas.drawArc(rect, startAngle, sweepAngle, true, paint);
-      final dx = radius / 2 * cos(startAngle);
-      final dy = radius / 2 * sin(startAngle);
-      final p2 = center + Offset(dx, dy);
-      canvas.drawLine(center, p2, linePaint1);
-      drawLabels(canvas, center, radius, startAngle, sweepAngle, d.name!, size);
-      if (startAngle % (2 * pi) >= (4 / 6) * 360.0 * pi / 180.0 - 0.05 &&
-          startAngle % (2 * pi) <= (5 / 6) * 360.0 * pi / 180.0 - 0.05) {
-        controller.choosenTeam = d.name.toString();
-      }
-      startAngle += sweepAngle;
-    }
+    // for (var d in controller.data) {
+    //   const sweepAngle = (1 / 6) * 360.0 * pi / 180.0;
+    //   final paint = Paint()
+    //     ..style = PaintingStyle.fill
+    //     ..color = d.color;
+    //   final radius = m / 1.8;
+    //   final rect =
+    //       Rect.fromCenter(center: center, width: radius, height: radius);
+    //   canvas.drawArc(rect, startAngle, sweepAngle, true, paint);
+    //   final dx = radius / 2 * cos(startAngle);
+    //   final dy = radius / 2 * sin(startAngle);
+    //   final p2 = center + Offset(dx, dy);
+    //   canvas.drawLine(center, p2, linePaint1);
+    //   drawLabels(canvas, center, radius, startAngle, sweepAngle, d.name!, size);
+    //   if (startAngle % (2 * pi) >= (4 / 6) * 360.0 * pi / 180.0 - 0.05 &&
+    //       startAngle % (2 * pi) <= (5 / 6) * 360.0 * pi / 180.0 - 0.05) {
+    //     controller.choosenTeam = d.name.toString();
+    //   }
+    //   startAngle += sweepAngle;
+    // }
   }
 
   void drawCircle(Canvas canvas, Offset center, Size size) {

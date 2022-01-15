@@ -3,7 +3,7 @@ import 'package:nittfest/views/pages/home/widgets/baloon.dart';
 import 'package:nittfest/views/pages/home/widgets/content.dart';
 import 'package:nittfest/views/pages/home/widgets/footer.dart';
 import 'package:nittfest/views/pages/home/widgets/register_button.dart';
-import 'package:nittfest/views/pages/home/widgets/spinner.dart';
+import 'package:nittfest/views/pages/home/widgets/spin_wheel.dart';
 
 class HomePageDesktop extends StatelessWidget {
   const HomePageDesktop({Key? key}) : super(key: key);
@@ -25,21 +25,25 @@ class HomePageDesktop extends StatelessWidget {
             gapSize2: (40 / 980) * size.height,
           ),
           SizedBox(height: (40 / 980) * size.height),
-          RegisterButton(buttonSize: (26.0 / 1848) * size.width),
+          RegisterButton(buttonSize: (350.0 / 1848) * size.width),
         ])),
         Expanded(
             child: Stack(children: const [
           Positioned(right: 1, top: 50, child: Baloon()),
-          Center(child: Spinner()),
+          Center(
+              child: SpinWheel(
+            isDesktopView: true,
+          )),
         ])),
       ]),
       const Positioned(
           bottom: 10,
           left: 0,
           right: 0,
-          child: Footer(
+          child: Center(
+              child: Footer(
             size: 16,
-          )),
+          ))),
     ]);
   }
 }
