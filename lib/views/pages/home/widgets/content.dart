@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
@@ -24,22 +25,37 @@ class Content extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
+          SizedBox(height: gapSize),
           Image.asset(
             'assets/logo_nf.png',
             color: AppTheme.bodycolor,
             height: logoSize,
           ),
-          const SizedBox(height: 10),
-          Text(
-            'INDUCTIONS',
-            style: GoogleFonts.poppins(
-                fontSize: headerSize,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 6,
-                shadows: AppTheme.shadows,
-                color: AppTheme.bodycolor),
-          ),
           SizedBox(height: gapSize),
+          // Text(
+          //   'INDUCTIONS',
+          //   style: GoogleFonts.sanchez(
+          //       fontSize: headerSize,
+          //       fontWeight: FontWeight.bold,
+          //       letterSpacing: 6,
+          //       shadows: AppTheme.shadows,
+          //       color: AppTheme.bodycolor),
+          // ),
+          AnimatedTextKit(
+            repeatForever: true,
+            animatedTexts: [
+              FlickerAnimatedText(
+                'INDUCTIONS',
+                textStyle: GoogleFonts.sanchez(
+                    fontSize: headerSize,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 6,
+                    shadows: AppTheme.shadows,
+                    color: AppTheme.bodycolor),
+              ),
+            ],
+          ),
+          SizedBox(height: gapSize2),
           Text(
             'The Battle Of Departments',
             style: GoogleFonts.poppins(

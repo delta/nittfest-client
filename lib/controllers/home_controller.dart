@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nittfest/models/resource_response.dart';
-import 'package:nittfest/models/team_data_model.dart';
 import 'package:nittfest/services/api/api_manager.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
@@ -21,17 +20,17 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   final storage = Get.find<StorageServices>();
   ImageProvider bg = const AssetImage('bg2.webp');
   var currentPointer = const Offset(0, 0);
-  var center = const Offset(0, 0);
+  var center = const Offset(217.0, 208.9);
   var startAngle = 0.0.obs;
-  var choosenTeam = 'A/V';
+  var choosenTeam = 'OC';
 
-  List<TeamDataModel> data = [
-    TeamDataModel(name: 'OC', color: Colors.red),
-    TeamDataModel(name: 'EVENTS', color: Colors.blue),
-    TeamDataModel(name: 'CONTENT', color: Colors.blueGrey),
-    TeamDataModel(name: 'PR&C', color: Colors.green),
-    TeamDataModel(name: 'MARKETING', color: Colors.indigo),
-    TeamDataModel(name: 'AMBIENCE', color: Colors.purple),
+  List<String> data = [
+    'OC',
+    'EVENTS',
+    'AMBIENCE',
+    'PR&C',
+    'MARKETING',
+    'DESIGN',
   ];
 
   void updateStartAngle(DragUpdateDetails details) {
@@ -54,8 +53,8 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
           startAngle.value -= theta;
         }
       }
-      currentPointer += center + details.delta;
     }
+    currentPointer += center + details.delta;
   }
 
   void adjust() {
@@ -78,8 +77,20 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
         if (startAngle.value >= 2 * pi) {
           startAngle.value = 0;
         }
+        setChosenTeamValue();
       }
     });
+  }
+
+  void setChosenTeamValue() {
+    for (int i = 1; i <= 5; i++) {
+      if (startAngle.value > i * pi / 3 - pi / 6 &&
+          startAngle.value < i * pi / 3 + pi / 6) {
+        choosenTeam = data[6 - i];
+        return;
+      }
+    }
+    choosenTeam = data[0];
   }
 
   onCallBack(String code) async {
