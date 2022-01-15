@@ -53,7 +53,7 @@ class FormsController extends GetxController {
   void nextPage() {
     if (pageNumber.value < maxPage) {
       buttonCarouselController.nextPage(
-          duration: const Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInCirc);
     } else {
       pageNumber.value = maxPage;
@@ -63,7 +63,7 @@ class FormsController extends GetxController {
   void previousPage() {
     if (pageNumber.value > 0) {
       buttonCarouselController.previousPage(
-          duration: const Duration(milliseconds: 100),
+          duration: const Duration(milliseconds: 300),
           curve: Curves.easeInCirc);
     } else {
       pageNumber.value = 0;

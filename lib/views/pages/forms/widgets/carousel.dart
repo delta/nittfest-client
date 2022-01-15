@@ -11,19 +11,22 @@ class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FormsController controller = Get.find<FormsController>();
-    return CarouselSlider(
-      carouselController: controller.buttonCarouselController,
-      options: CarouselOptions(
-          height: MediaQuery.of(context).size.height,
-          autoPlay: false,
-          enableInfiniteScroll: false,
-          scrollDirection: Axis.vertical,
-          onPageChanged: (index, reason) {
-            if (reason.name == 'controller') {
-              controller.pageNumber.value = index + 1;
-            }
-          }),
-      items: children,
-    );
+    Size size = MediaQuery.of(context).size;
+    return SizedBox(
+        width: size.width,
+        child: CarouselSlider(
+          carouselController: controller.buttonCarouselController,
+          options: CarouselOptions(
+              height: size.height,
+              autoPlay: false,
+              enableInfiniteScroll: false,
+              scrollDirection: Axis.vertical,
+              onPageChanged: (index, reason) {
+                if (reason.name == 'controller') {
+                  controller.pageNumber.value = index + 1;
+                }
+              }),
+          items: children,
+        ));
   }
 }
