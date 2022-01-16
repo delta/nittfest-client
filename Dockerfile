@@ -1,18 +1,31 @@
-FROM ubuntu AS build-env
+FROM ubuntu:20.04 AS build-env
 
 RUN apt-get update &&\
-    apt-get install --no-install-recommends -y git curl wget zip unzip xz-utils openjdk-11-jdk &&\ 
-    apt-get clean &&\ 
-    git clone https://github.com/flutter/flutter.git /usr/local/flutter 
-ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
-COPY . /app
-WORKDIR /app/
-RUN flutter doctor -v &&\
-    flutter channel master &&\
-    flutter upgrade &&\
-    flutter config --enable-web &&\
-    flutter pub get &&\
-    flutter build web
+    apt-get install -y curl unzip git &&\ 
+    apt-get clean
 
-FROM nginx:1.21.1-alpine
+RUN git clone --depth=1 https://github.com/flutter/flutter.git -b stable
+
+ENV PATH="/flutter/bin:${PATH}"
+
+WORKDIR /app
+
+COPY pubspec.* ./
+
+RUN flutter channel stable &&\
+    flutter config --no-enable-android \
+    --no-enable-linux-desktop \
+    --no-enable-windows-desktop \
+    --no-enable-macos-desktop \
+    --no-enable-windows-uwp-desktop \
+    --no-enable-ios &&\
+    flutter config --enable-web &&\
+    flutter precache &&\
+    flutter pub get
+
+COPY . .
+
+RUN flutter build web --release
+
+FROM nginx:1.21.5-alpine
 COPY --from=build-env /app/build/web /usr/share/nginx/html
