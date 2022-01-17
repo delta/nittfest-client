@@ -1,12 +1,14 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:get/instance_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nittfest/views/themes/app_themes.dart';
+import 'package:nittfest/controllers/home_controller.dart';
 
 class Content extends StatelessWidget {
   final double headerSize;
   final double logoSize;
   final double bodySize;
+  final double bodySize2;
   final double gapSize;
   final double gapSize2;
   final MainAxisAlignment mainAxisAlignment;
@@ -15,56 +17,102 @@ class Content extends StatelessWidget {
       required this.headerSize,
       required this.logoSize,
       required this.bodySize,
+      required this.bodySize2,
       required this.mainAxisAlignment,
       this.gapSize = 0,
       this.gapSize2 = 0})
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Column(
-        mainAxisAlignment: mainAxisAlignment,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          SizedBox(height: gapSize),
-          Image.asset(
-            'assets/logo_nf.png',
-            color: AppTheme.bodycolor,
-            height: logoSize,
-          ),
-          SizedBox(height: gapSize),
-          // Text(
-          //   'INDUCTIONS',
-          //   style: GoogleFonts.sanchez(
-          //       fontSize: headerSize,
-          //       fontWeight: FontWeight.bold,
-          //       letterSpacing: 6,
-          //       shadows: AppTheme.shadows,
-          //       color: AppTheme.bodycolor),
-          // ),
-          AnimatedTextKit(
-            repeatForever: true,
-            animatedTexts: [
-              FlickerAnimatedText(
-                'INDUCTIONS',
-                textStyle: GoogleFonts.sanchez(
-                    fontSize: headerSize,
+  Widget build(BuildContext context) {
+    final controller = Get.find<HomeController>();
+    controller.textSize.value = 1;
+    return Column(
+      mainAxisAlignment: mainAxisAlignment,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        SizedBox(height: gapSize),
+        Obx(() => Container(
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: controller.headerAnim.value
+                    ? [
+                        const BoxShadow(
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 100.0,
+                            color: Color(0x90F72119))
+                      ]
+                    : [
+                        const BoxShadow(
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 100.0,
+                            color: Color(0x94FFC42E))
+                      ]),
+            child: Image.asset(
+              'assets/nflogo.png',
+              height: logoSize,
+              color: controller.headerAnim.value
+                  ? const Color(0xFFee2939)
+                  : const Color(0xFFD4AF37),
+            ))),
+        Obx(() => Text(
+              'INDUCTIONS',
+              style: GoogleFonts.hanalei(
+                  fontSize: headerSize,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 6,
+                  shadows: controller.headerAnim.value
+                      ? [
+                          const Shadow(
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 20.0,
+                            color: Color(0xFFF72119),
+                          ),
+                        ]
+                      : [
+                          const Shadow(
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 20.0,
+                            color: Color(0xFFFFC42E),
+                          ),
+                        ],
+                  color: controller.headerAnim.value
+                      ? const Color(0xFFee2939)
+                      : const Color(0xFFD4AF37)),
+            )),
+        SizedBox(height: gapSize),
+        Obx(() => AnimatedScale(
+            duration: const Duration(milliseconds: 500),
+            scale: controller.textSize.value,
+            child: Text.rich(TextSpan(
+                text: 'APPLY FOR ',
+                style: GoogleFonts.eagleLake(
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 6,
-                    shadows: AppTheme.shadows,
-                    color: AppTheme.bodycolor),
-              ),
-            ],
-          ),
-          SizedBox(height: gapSize2),
-          Text(
-            'The Battle Of Departments',
-            style: GoogleFonts.poppins(
-                fontWeight: FontWeight.w900,
-                fontSize: bodySize,
-                shadows: AppTheme.shadows,
-                color: Colors.white70),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      );
+                    fontSize: bodySize2,
+                    shadows: [
+                      const Shadow(
+                        offset: Offset(5.0, 5.0),
+                        blurRadius: 20.0,
+                        color: Colors.white70,
+                      ),
+                    ],
+                    color: Colors.white),
+                children: [
+                  TextSpan(
+                      text: controller.choosenTeam.value,
+                      style: GoogleFonts.eagleLake(
+                          fontWeight: FontWeight.bold,
+                          fontSize: bodySize2,
+                          shadows: [
+                            const Shadow(
+                              offset: Offset(5.0, 5.0),
+                              blurRadius: 20.0,
+                              color: Color(0xFFFFC42E),
+                            ),
+                          ],
+                          color: const Color(0xFFD4AF37)))
+                ])))),
+      ],
+    );
+  }
 }

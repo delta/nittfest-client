@@ -11,7 +11,8 @@ import 'package:rive/rive.dart';
 import 'package:nittfest/utils/client_credentials.dart';
 import 'package:universal_html/html.dart' as html;
 
-class HomeController extends GetxController with StateMixin<ResourceResponse> {
+class HomeController extends GetxController
+    with StateMixin<ResourceResponse>, GetSingleTickerProviderStateMixin {
   late RiveAnimationController carController;
   late RiveAnimationController flyingcarController;
   var isHovered = false.obs;
@@ -22,9 +23,11 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   var currentPointer = const Offset(0, 0);
   var center = const Offset(217.0, 208.9);
   var startAngle = 0.0.obs;
-  var choosenTeam = 'OC';
-
-  List<String> data = [
+  var choosenTeam = 'OC'.obs;
+  var headerAnim = false.obs;
+  late Timer headerTimer;
+  var textSize = 0.0.obs;
+  late List<String> data = [
     'OC',
     'EVENTS',
     'AMBIENCE',
@@ -32,6 +35,14 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
     'MARKETING',
     'DESIGN',
   ];
+
+  @override
+  void onInit() {
+    headerTimer = Timer.periodic(const Duration(milliseconds: 800),
+        (timer) => headerAnim.value = !headerAnim.value);
+
+    super.onInit();
+  }
 
   void updateStartAngle(DragUpdateDetails details) {
     if (center.dx != 0 && center.dy != 0) {
@@ -86,11 +97,19 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
     for (int i = 1; i <= 5; i++) {
       if (startAngle.value > i * pi / 3 - pi / 6 &&
           startAngle.value < i * pi / 3 + pi / 6) {
-        choosenTeam = data[6 - i];
+        choosenTeam.value = data[6 - i];
+
+        Timer(const Duration(milliseconds: 250), () {
+          textSize.value = 0;
+          Timer(const Duration(milliseconds: 250), () {
+            textSize.value = 1;
+          });
+        });
+
         return;
       }
     }
-    choosenTeam = data[0];
+    choosenTeam.value = data[0];
   }
 
   onCallBack(String code) async {

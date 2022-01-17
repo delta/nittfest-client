@@ -17,7 +17,7 @@ class SocialIcons extends StatelessWidget {
           fabOpenIcon: Image.asset(
             'assets/logo_nf.png',
             width: 20,
-            color: Colors.purple,
+            color: Colors.red,
           ),
           ringColor: Colors.transparent,
           fabSize: buttonSize.width < 400 ? (buttonSize.width / 400) * 54 : 54,
