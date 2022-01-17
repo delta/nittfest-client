@@ -29,4 +29,16 @@ class AppTheme {
       color: Color.fromARGB(15, 0, 0, 25),
     ),
   ];
+  static List<Shadow>? shadowsHead = const [
+    Shadow(
+      offset: Offset(0.0, 0.0),
+      blurRadius: 10.0,
+      color: Colors.white12,
+    ),
+    Shadow(
+      offset: Offset(0.0, 0.0),
+      blurRadius: 10.0,
+      color: Colors.white70,
+    ),
+  ];
 }

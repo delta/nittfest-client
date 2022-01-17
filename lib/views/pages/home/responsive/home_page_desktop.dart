@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nittfest/views/pages/home/widgets/baloon.dart';
 import 'package:nittfest/views/pages/home/widgets/content.dart';
 import 'package:nittfest/views/pages/home/widgets/footer.dart';
-import 'package:nittfest/views/pages/home/widgets/register_button.dart';
 import 'package:nittfest/views/pages/home/widgets/spin_wheel.dart';
 
 class HomePageDesktop extends StatelessWidget {
@@ -18,18 +16,18 @@ class HomePageDesktop extends StatelessWidget {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Content(
             mainAxisAlignment: MainAxisAlignment.center,
-            logoSize: (300.0 / 1848) * size.width,
-            headerSize: (70 / 1848) * size.width,
-            bodySize: (32.0 / 1848) * size.width,
+            logoSize: (320.0 / 1848) * size.width,
+            headerSize: (120 / 1848) * size.width,
+            bodySize: (40.0 / 1848) * size.width,
+            bodySize2: (45.0 / 1848) * size.width,
             gapSize: (20 / 980) * size.height,
             gapSize2: (40 / 980) * size.height,
           ),
           SizedBox(height: (40 / 980) * size.height),
-          RegisterButton(buttonSize: (350.0 / 1848) * size.width),
         ])),
         Expanded(
             child: Stack(children: const [
-          Positioned(right: 1, top: 50, child: Baloon()),
+          // Positioned(right: 1, top: 50, child: Baloon()),
           Center(
               child: SpinWheel(
             isDesktopView: true,

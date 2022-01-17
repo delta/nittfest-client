@@ -9,18 +9,19 @@ class HomePagePhone extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox(
-              height: size.height * (3.2 / 8),
+          Expanded(
               child: Content(
                   logoSize: size.height * 0.2,
-                  headerSize: size.height * 0.054,
-                  bodySize: size.height * 0.032,
-                  gapSize: size.height * 0.02,
-                  gapSize2: size.height * 0.015,
+                  headerSize: size.height * 0.075,
+                  bodySize: size.height * 0.035,
+                  bodySize2: size.height * 0.035,
+                  gapSize: size.height * 0.015,
+                  gapSize2: size.height * 0.01,
                   mainAxisAlignment: MainAxisAlignment.center)),
           SizedBox(
               height: size.height * (3.8 / 8),
@@ -30,7 +31,7 @@ class HomePagePhone extends StatelessWidget {
           Align(
               alignment: Alignment.bottomCenter,
               child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
                   child: Footer(size: size.width * 0.03))),
         ]);
   }
