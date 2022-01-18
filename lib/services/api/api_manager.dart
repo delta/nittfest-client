@@ -37,8 +37,7 @@ class ApiManager extends GetConnect {
     var headers2 = {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': 'Accept',
-      'Authorization':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX25hbWUiOiJJbmQiLCJ1c2VyX2VtYWlsIjoiaW5kQGsuYyJ9.5XjhDmGgfW44JO608I9BoDAlVz17br6IUfhTmSLKVK0'
+      'Authorization': 'Bearer $jwt'
     };
     final response = await post(
       ApiConstants.formQuestions,

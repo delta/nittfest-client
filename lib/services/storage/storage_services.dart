@@ -6,6 +6,8 @@ import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 class StorageServices extends GetxService {
   late GetStorage storage;
 
+  // String domain = 'OC';
+
   Future<StorageServices> initStorage() async {
     await GetStorage.init();
     storage = GetStorage();
@@ -14,11 +16,24 @@ class StorageServices extends GetxService {
   }
 
   void seedData() {
-    storage.write(StorageConstants.name, '');
-    storage.write(StorageConstants.gender, '');
-    storage.write(StorageConstants.phonenumber, '');
-    storage.write(StorageConstants.email, '');
-    storage.write(StorageConstants.jwt, '');
+    if (storage.read(StorageConstants.name) == null) {
+      storage.write(StorageConstants.name, '');
+    }
+    if (storage.read(StorageConstants.email) == null) {
+      storage.write(StorageConstants.email, '');
+    }
+    if (storage.read(StorageConstants.phonenumber) == null) {
+      storage.write(StorageConstants.phonenumber, '');
+    }
+    if (storage.read(StorageConstants.gender) == null) {
+      storage.write(StorageConstants.gender, '');
+    }
+    if (storage.read(StorageConstants.jwt) == null) {
+      storage.write(StorageConstants.jwt, '');
+    }
+    if (storage.read(StorageConstants.domain) == null) {
+      storage.write(StorageConstants.domain, 'OC');
+    }
   }
 
   void storeData(ResourceResponse response) {
@@ -29,9 +44,14 @@ class StorageServices extends GetxService {
     storage.write(StorageConstants.jwt, response.jwt);
   }
 
+  void setDomain(String domain) {
+    storage.write(StorageConstants.domain, domain);
+  }
+
   String retriveName() => storage.read(StorageConstants.name);
   String retriveGender() => storage.read(StorageConstants.gender);
   String retrivePhoneNumber() => storage.read(StorageConstants.phonenumber);
   String retriveEmail() => storage.read(StorageConstants.email);
-  String retriveJWT() => storage.read(StorageConstants.jwt);
+  String retriveDomain() => storage.read(StorageConstants.domain);
+  Future<String> retriveJWT() async => await storage.read(StorageConstants.jwt);
 }

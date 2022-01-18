@@ -144,6 +144,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
     api.getCallBack(c).then((response) {
       storage.storeData(response);
       change(response, status: RxStatus.success());
+      navigateToForms();
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
     });
@@ -256,8 +257,8 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
 
   String code = '';
   late html.WindowBase _popupWin;
-  void login() {
-    if (storage.retriveJWT() == '') {
+  void login() async {
+    if (await storage.retriveJWT() == '') {
       final currentUri = Uri.base;
 
       final port = currentUri.port;
@@ -294,6 +295,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   }
 
   void navigateToForms() {
+    storage.setDomain(choosenTeam.value);
     Get.toNamed(NavigationRoutes.inductionsFormsRoute);
   }
 
