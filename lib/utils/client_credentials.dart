@@ -1,7 +1,7 @@
 class ClientCredentials {
   static const clientId = '';
-  static const redirectUri = 'http://localhost:10000/auth/callback';
-  static const state = '';
-  static const nonce = '';
-  static const clientSecret = '';
+  static const redirectUri =
+      'https://nittfest.anirudhvs.xyz/api/auth/callback/';
+  static const state = 'afasf';
+  static const nonce = 'afa';
 }

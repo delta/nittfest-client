@@ -10,9 +10,9 @@
 </head>
 
 <body>
+    <script>
+        window.opener.postMessage(window.location.href, '*');
+    </script>
 </body>
-<script>
-    window.opener.postMessage(window.location.href, '*');
-</script>
 
 </html>
