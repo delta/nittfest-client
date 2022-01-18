@@ -27,13 +27,13 @@ class FormsPagePhone extends StatelessWidget {
             .map((i, value) => MapEntry(
                 i,
                 Center(
-                    child: Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 10),
+                    child: SizedBox(
                         width: size.width,
                         height: size.height,
                         child: CardContent(
-                            index: (i + 1).toString(),
-                            value: questionResponse.questions[i])))))
+                          index: i,
+                          value: questionResponse.questions[i],
+                        )))))
             .values
             .toList(),
       ),

@@ -1,10 +1,14 @@
+import 'dart:convert';
+
 import 'package:get_storage/get_storage.dart';
+import 'package:nittfest/models/answers_response.dart';
 import 'package:nittfest/models/resource_response.dart';
 import 'package:nittfest/services/storage/storage_constants.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_disposable.dart';
 
 class StorageServices extends GetxService {
   late GetStorage storage;
+  String domain = 'OC';
 
   // String domain = 'OC';
 
@@ -48,6 +52,14 @@ class StorageServices extends GetxService {
     storage.write(StorageConstants.domain, domain);
   }
 
+  void storeAnswers(List<Answer> answers) {
+    storage.write(
+        StorageConstants.answer, jsonEncode(AnswerResponse(answers: answers)));
+  }
+
+  List<Answer> retriveAnswers() =>
+      AnswerResponse.fromJson(jsonDecode(storage.read(StorageConstants.answer)))
+          .answers;
   String retriveName() => storage.read(StorageConstants.name);
   String retriveGender() => storage.read(StorageConstants.gender);
   String retrivePhoneNumber() => storage.read(StorageConstants.phonenumber);

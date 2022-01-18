@@ -7,7 +7,7 @@ import 'package:nittfest/views/themes/app_themes.dart';
 
 class CardContent extends StatelessWidget {
   final Question value;
-  final String index;
+  final int index;
   const CardContent({Key? key, required this.index, required this.value})
       : super(key: key);
 
@@ -18,7 +18,7 @@ class CardContent extends StatelessWidget {
     var min = (size.width < size.height) ? size.width : size.height;
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,7 @@ class CardContent extends StatelessWidget {
                         padding:
                             EdgeInsets.only(top: size.width < 600 ? 6 : 10),
                         child: Text(
-                          '$index -> ',
+                          '${index + 1} -> ',
                           style: GoogleFonts.poppins(
                               fontSize: size.width < 600 ? min * 0.03 : 20,
                               shadows: AppTheme.shadows,
@@ -38,18 +38,27 @@ class CardContent extends StatelessWidget {
                 Expanded(
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                      Text(
-                        value.question,
-                        style: GoogleFonts.poppins(
-                            fontSize: size.width < 600 ? min * 0.05 : 36,
-                            shadows: AppTheme.shadows,
-                            color: AppTheme.bodycolor),
-                      ),
+                      Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            value.question,
+                            style: GoogleFonts.poppins(
+                                fontSize: size.width < 600 ? min * 0.05 : 36,
+                                shadows: AppTheme.shadows,
+                                color: AppTheme.bodycolor),
+                          )),
                       SizedBox(height: min > 300 ? 20 : 10),
                       TextFormField(
+                        controller: controller.textControllers[index],
+                        maxLength: 2000,
+                        minLines: 1,
+                        maxLines: 5,
                         autofocus: true,
+                        // initialValue: controller.getAnswer(),
                         showCursor: true,
+                        // onChanged: controller.setValue,
                         cursorColor: AppTheme.primaryColor,
                         decoration: const InputDecoration(
                             hintText: 'Type Your Answer Here....'),
@@ -61,12 +70,18 @@ class CardContent extends StatelessWidget {
                       Align(
                           alignment: Alignment.topLeft,
                           child: TextButton(
-                            onPressed:
-                                controller.buttonCarouselController.nextPage,
+                            onPressed: controller.pageNumber.value !=
+                                    controller.maxPage - 1
+                                ? controller.buttonCarouselController.nextPage
+                                : controller.submitAnswers,
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     AppTheme.bodycolor)),
-                            child: Text('OK',
+                            child: Text(
+                                controller.pageNumber.value ==
+                                        controller.maxPage - 1
+                                    ? 'Submit'
+                                    : 'Next',
                                 style: GoogleFonts.poppins(
                                     fontSize:
                                         size.width < 600 ? min * 0.034 : 22,

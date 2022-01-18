@@ -32,8 +32,9 @@ class FormsPageDesktop extends StatelessWidget {
                         width: 2000,
                         height: size.height,
                         child: CardContent(
-                            index: (i + 1).toString(),
-                            value: questionResponse.questions[i])))))
+                          index: i,
+                          value: questionResponse.questions[i],
+                        )))))
             .values
             .toList(),
       ),

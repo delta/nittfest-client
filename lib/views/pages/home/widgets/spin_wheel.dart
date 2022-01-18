@@ -14,12 +14,11 @@ class SpinWheel extends StatelessWidget {
     double m = isDesktopView ? size.width : size.height;
     double r = isDesktopView ? 2.8 : 2.1;
     return SizedBox(
-        height: m / r,
-        width: m / r,
-        child: Stack(
-          children: [
+      height: m / r,
+      width: m / r,
+      child: Obx(() => Stack(children: [
             Center(
-                child: Obx(() => Transform.rotate(
+                child: Transform.rotate(
                     angle: controller.startAngle.value,
                     child: GestureDetector(
                         onPanDown: (details) {
@@ -30,7 +29,7 @@ class SpinWheel extends StatelessWidget {
                         onPanEnd: (details) => controller.adjust(),
                         child: Image.asset(
                           'assets/carouselbg.webp',
-                        ))))),
+                        )))),
             Positioned(
                 top: 0,
                 left: 0,
@@ -39,14 +38,17 @@ class SpinWheel extends StatelessWidget {
                 child: Center(
                     child: Image.asset(
                   'assets/indicator.png',
-                  height: m / (2.1 * r),
+                  // height: size.width > size.height
+                  //     ? size.width / (2 * 3.5)
+                  //     : size.height / (2 * 2),
+                  height: m / (2 * r),
                 ))),
             Center(
                 child: GestureDetector(
                     onTap: controller.showcontent,
                     child: Image.asset('assets/apply_sign.webp',
                         width: m / (2 * r)))),
-          ],
-        ));
+          ])),
+    );
   }
 }

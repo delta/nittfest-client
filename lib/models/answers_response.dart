@@ -11,6 +11,8 @@ class AnswerResponse {
   });
 
   final List<Answer> answers;
+  // final int preference_no;
+  // final
 
   factory AnswerResponse.fromJson(Map<String, dynamic> json) => AnswerResponse(
         answers:
