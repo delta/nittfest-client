@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/controllers/forms_controller.dart';
-import 'package:nittfest/models/card_content_model.dart';
+
+import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
 
 class CardContent extends StatelessWidget {
-  final CardContentModel value;
+  final Question value;
   final String index;
   const CardContent({Key? key, required this.index, required this.value})
       : super(key: key);
@@ -40,22 +41,11 @@ class CardContent extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                       Text(
-                        value.question!,
+                        value.question,
                         style: GoogleFonts.poppins(
                             fontSize: size.width < 600 ? min * 0.05 : 36,
                             shadows: AppTheme.shadows,
                             color: AppTheme.bodycolor),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        value.hint!,
-                        style: GoogleFonts.poppins(
-                            fontSize: size.width < 600 ? min * 0.032 : 22,
-                            shadows: AppTheme.shadows,
-                            color: AppTheme.bodycolorDark),
-                        textAlign: TextAlign.left,
                       ),
                       SizedBox(height: min > 300 ? 20 : 10),
                       TextFormField(

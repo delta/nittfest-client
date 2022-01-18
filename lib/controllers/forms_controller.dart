@@ -1,15 +1,21 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/animation.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
+import 'package:get/instance_manager.dart';
 import 'package:nittfest/models/card_content_model.dart';
+import 'package:nittfest/models/questions_response.dart';
+import 'package:nittfest/services/api/api_manager.dart';
+import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:rive/rive.dart';
 
-class FormsController extends GetxController {
+class FormsController extends GetxController with StateMixin<QuestionResponse> {
   var isPlaying = false.obs;
   var pageNumber = 0.obs;
   late int maxPage;
   late Artboard? treeArtboard;
+  ApiManager api = ApiManager();
+  final storage = Get.find<StorageServices>();
   late CarouselController buttonCarouselController;
   late SMINumber growInput;
 
@@ -40,7 +46,16 @@ class FormsController extends GetxController {
   void onInit() {
     buttonCarouselController = CarouselController();
     maxPage = content.length;
+    getFormQuestions('NOC');
     super.onInit();
+  }
+
+  getFormQuestions(String domain) async {
+    api.getFormQuestions(domain, storage.retriveJWT()).then((response) {
+      change(response, status: RxStatus.success());
+    }, onError: (err) {
+      change(null, status: RxStatus.error(err.toString()));
+    });
   }
 
   void onRiveTreeInit(Artboard artboard) {

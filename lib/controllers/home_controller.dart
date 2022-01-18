@@ -11,8 +11,7 @@ import 'package:rive/rive.dart';
 import 'package:nittfest/utils/client_credentials.dart';
 import 'package:universal_html/html.dart' as html;
 
-class HomeController extends GetxController
-    with StateMixin<ResourceResponse>, GetSingleTickerProviderStateMixin {
+class HomeController extends GetxController with StateMixin<ResourceResponse> {
   late RiveAnimationController carController;
   late RiveAnimationController flyingcarController;
   var isHovered = false.obs;
@@ -42,6 +41,12 @@ class HomeController extends GetxController
         (timer) => headerAnim.value = !headerAnim.value);
 
     super.onInit();
+  }
+
+  @override
+  void onClose() {
+    headerTimer.cancel();
+    super.onClose();
   }
 
   void updateStartAngle(DragUpdateDetails details) {
@@ -100,7 +105,7 @@ class HomeController extends GetxController
         choosenTeam.value = data[6 - i];
 
         Timer(const Duration(milliseconds: 250), () {
-          textSize.value = 0;
+          textSize.value = 0.5;
           Timer(const Duration(milliseconds: 250), () {
             textSize.value = 1;
           });

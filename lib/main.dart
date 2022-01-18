@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:nittfest/views/routes/navigation_pages.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 Future<void> main() async {
   await initServices();
+  setPathUrlStrategy();
   runApp(const NITTFEST());
 }
 

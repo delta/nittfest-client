@@ -22,6 +22,7 @@ class HomePagePhone extends StatelessWidget {
                   bodySize2: size.height * 0.035,
                   gapSize: size.height * 0.015,
                   gapSize2: size.height * 0.01,
+                  isDesktop: false,
                   mainAxisAlignment: MainAxisAlignment.center)),
           SizedBox(
               height: size.height * (3.8 / 8),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:nittfest/controllers/forms_controller.dart';
+import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/views/pages/forms/widgets/card_content.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel_navigator.dart';
 
 class FormsPagePhone extends StatelessWidget {
-  const FormsPagePhone({Key? key}) : super(key: key);
+  final QuestionResponse questionResponse;
+  const FormsPagePhone({Key? key, required this.questionResponse})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var controller = Get.find<FormsController>();
     Size size = MediaQuery.of(context).size;
     return Stack(children: [
       Positioned(
@@ -22,7 +22,7 @@ class FormsPagePhone extends StatelessWidget {
             width: 25,
           )),
       Carousel(
-        children: controller.content
+        children: questionResponse.questions
             .asMap()
             .map((i, value) => MapEntry(
                 i,
@@ -32,7 +32,8 @@ class FormsPagePhone extends StatelessWidget {
                         width: size.width,
                         height: size.height,
                         child: CardContent(
-                            index: (i + 1).toString(), value: value)))))
+                            index: (i + 1).toString(),
+                            value: questionResponse.questions[i])))))
             .values
             .toList(),
       ),
