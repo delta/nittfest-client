@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
 import 'package:nittfest/controllers/home_controller.dart';
@@ -17,50 +18,79 @@ class _SpinWheelState extends State<SpinWheel> {
 
   void _showcontent() {
     showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => Center(
-              child: ClipRect(
-                child: BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 800),
-                    child: Container(
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: Colors.black.withOpacity(0.45),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            offset: const Offset(0, 0),
-                            blurRadius: 20,
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) => Center(
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 700),
+              child: Container(
+                padding: const EdgeInsets.all(40),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: Colors.black.withOpacity(0.45),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      offset: const Offset(0, 0),
+                      blurRadius: 20,
+                    ),
+                  ],
+                ),
+                child: Wrap(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          controller.getTitle(),
+                          style: const TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(controller.getContent(),
+                          style: const TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: ElevatedButton(
+                              onPressed: controller.login,
+                              child: const Text('Apply'),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: ElevatedButton(
+                              onPressed: Get.back,
+                              child: const Text('Close'),
+                            ),
                           ),
                         ],
                       ),
-                      child: Wrap(children: [
-                        Center(
-                          widthFactor: 1.0,
-                          child: Text(controller.getContent(),
-                              style: const TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white)),
-                        ),
-                        Align(
-                            alignment: Alignment.topRight,
-                            child: ElevatedButton(
-                                // on press controller.login
-                                onPressed: controller.login,
-                                child: const Text('Apply'))),
-                      ]
-                          // Add button right aligned with text apply
-                          ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-            ));
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   @override
