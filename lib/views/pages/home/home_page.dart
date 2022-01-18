@@ -16,12 +16,16 @@ class HomePage extends GetView<HomeController> {
 
     return Scaffold(
       body: Container(
-        height: size.height,
-        width: size.width,
-        decoration: BoxDecoration(
-            image: DecorationImage(image: controller.bg, fit: BoxFit.cover)),
-        child: HomeResponsive(),
-      ),
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(image: controller.bg, fit: BoxFit.cover)),
+          child: Stack(children: [
+            Container(
+                decoration:
+                    BoxDecoration(color: Colors.black.withOpacity(0.36))),
+            HomeResponsive(),
+          ])),
       floatingActionButton: SocialIcons(buttonSize: size),
     );
   }
