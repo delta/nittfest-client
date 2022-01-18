@@ -12,7 +12,7 @@ class SpinWheel extends StatelessWidget {
     final controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
     double m = isDesktopView ? size.width : size.height;
-    double r = isDesktopView ? 2.75 : 2.1;
+    double r = isDesktopView ? 2.8 : 2.1;
     return SizedBox(
         height: m / r,
         width: m / r,
@@ -39,7 +39,7 @@ class SpinWheel extends StatelessWidget {
                 child: Center(
                     child: Image.asset(
                   'assets/indicator.png',
-                  height: m / (2 * r),
+                  height: m / (2.1 * r),
                 ))),
             Center(
                 child: GestureDetector(
