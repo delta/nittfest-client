@@ -11,44 +11,47 @@ class SpinWheel extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
-    double m = isDesktopView ? size.width : size.height;
-    double r = isDesktopView ? 2.8 : 2.1;
+    double m = isDesktopView ? size.width * 1.11 : size.height;
+    double r = isDesktopView ? 3.2 : 2.1;
     return SizedBox(
       height: m / r,
       width: m / r,
-      child: Obx(() => Stack(children: [
-            Center(
-                child: Transform.rotate(
-                    angle: controller.startAngle.value,
-                    child: GestureDetector(
-                        onPanDown: (details) {
-                          controller.currentPointer = details.localPosition;
-                          controller.center = Offset(m / (2 * r), m / (2 * r));
-                        },
-                        onPanUpdate: controller.updateStartAngle,
-                        onPanEnd: (details) => controller.adjust(),
-                        child: Image.asset(
-                          'assets/carouselbg.webp',
-                        )))),
-            Positioned(
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: m / (2 * r),
-                child: Center(
-                    child: Image.asset(
-                  'assets/indicator.png',
-                  // height: size.width > size.height
-                  //     ? size.width / (2 * 3.5)
-                  //     : size.height / (2 * 2),
-                  height: m / (2 * r),
-                ))),
-            Center(
+      child: Stack(children: [
+        Center(
+            child: Obx(() => Transform.rotate(
+                angle: controller.startAngle.value,
                 child: GestureDetector(
-                    onTap: controller.showcontent,
-                    child: Image.asset('assets/apply_sign.webp',
-                        width: m / (2 * r)))),
-          ])),
+                    onPanDown: (details) {
+                      controller.currentPointer = details.localPosition;
+                      controller.center = Offset(m / (2 * r), m / (2 * r));
+                    },
+                    onPanUpdate: controller.updateStartAngle,
+                    onPanEnd: (details) => controller.adjust(),
+                    child: Image.asset(
+                      'assets/carouselbg.webp',
+                    ))))),
+        Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: m / (2 * r),
+            child: Center(
+                child: Image.asset(
+              'assets/indicator.png',
+              height: m / (2 * r),
+            ))),
+        Center(
+            child: Obx(() => InkWell(
+                onTap: controller.showcontent,
+                onHover: (value) => value
+                    ? controller.applyElevation.value += 10
+                    : controller.applyElevation.value -= 10,
+                child: Image.asset(
+                  'assets/apply_sign.webp',
+                  width: m / (2 * r),
+                  scale: controller.applyElevation.value,
+                ))))
+      ]),
     );
   }
 }

@@ -29,6 +29,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   var headerAnim = false.obs;
   late Timer headerTimer;
   var textSize = 0.0.obs;
+  var applyElevation = 1.0.obs;
   late List<String> data = [
     'OC',
     'EVENTS',
@@ -149,10 +150,10 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 700),
               child: Container(
-                padding: const EdgeInsets.all(30),
+                padding: const EdgeInsets.all(40),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.black.withOpacity(0.45),
+                  color: Colors.black.withOpacity(0.6),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),

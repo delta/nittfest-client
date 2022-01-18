@@ -23,8 +23,8 @@ class HomePageDesktop extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             logoSize: (270.0 / 1848) * size.width,
             headerSize: (90 / 1848) * size.width,
-            bodySize: (32.0 / 1848) * size.width,
-            bodySize2: (20.0 / 1848) * size.width,
+            bodySize: (36.0 / 1848) * size.width,
+            bodySize2: (22.0 / 1848) * size.width,
             gapSize: (20 / 980) * size.height,
             isDesktop: true,
             gapSize2: (40 / 980) * size.height,
@@ -40,7 +40,8 @@ class HomePageDesktop extends StatelessWidget {
                   child: SpinWheel(
                 isDesktopView: true,
               )),
-              Align(
+              Container(
+                  padding: const EdgeInsets.all(15),
                   alignment: Alignment.topCenter,
                   child: Obx(() => AnimatedScale(
                       duration: const Duration(milliseconds: 800),
