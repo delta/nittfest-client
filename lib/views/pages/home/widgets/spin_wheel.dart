@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:get/instance_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/controllers/home_controller.dart';
 
 class SpinWheel extends StatefulWidget {
@@ -27,9 +28,9 @@ class _SpinWheelState extends State<SpinWheel> {
             child: ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 700),
               child: Container(
-                padding: const EdgeInsets.all(40),
+                padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
+                  borderRadius: BorderRadius.circular(10),
                   color: Colors.black.withOpacity(0.45),
                   boxShadow: [
                     BoxShadow(
@@ -46,20 +47,36 @@ class _SpinWheelState extends State<SpinWheel> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           controller.getTitle(),
-                          style: const TextStyle(
-                            fontSize: 40,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                          style: GoogleFonts.eagleLake(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 40.0,
+                              shadows: [
+                                const Shadow(
+                                  offset: Offset(5.0, 5.0),
+                                  blurRadius: 20.0,
+                                  color: Colors.white38,
+                                ),
+                              ],
+                              color: Colors.white),
                         ),
                       ),
                     ),
                     Center(
-                      child: Text(controller.getContent(),
-                          style: const TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
+                      child: Text(
+                        controller.getContent(),
+                        textAlign: TextAlign.justify,
+                        style: GoogleFonts.eagleLake(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0,
+                            shadows: [
+                              const Shadow(
+                                offset: Offset(5.0, 5.0),
+                                blurRadius: 20.0,
+                                color: Colors.white70,
+                              ),
+                            ],
+                            color: Colors.white),
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
