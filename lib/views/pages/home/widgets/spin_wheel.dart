@@ -6,6 +6,7 @@ import 'package:nittfest/controllers/home_controller.dart';
 class SpinWheel extends StatelessWidget {
   const SpinWheel({Key? key, required this.isDesktopView}) : super(key: key);
   final bool isDesktopView;
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
@@ -42,7 +43,7 @@ class SpinWheel extends StatelessWidget {
                 ))),
             Center(
                 child: GestureDetector(
-                    onTap: controller.login,
+                    onTap: controller.showcontent,
                     child: Image.asset('assets/apply_sign.webp',
                         width: m / (2 * r)))),
           ],
