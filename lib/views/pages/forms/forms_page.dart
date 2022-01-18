@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/get.dart';
 import 'package:nittfest/constants/break_points.dart';
 import 'package:nittfest/controllers/forms_controller.dart';
 import 'package:nittfest/controllers/home_controller.dart';
@@ -17,14 +17,15 @@ class FormsPage extends GetView<FormsController> {
     ImageProvider bg = const AssetImage('assets/bg1.webp');
     return Scaffold(
       body: controller.obx(
-          (questions) => Container(
-                height: size.height,
-                width: size.width,
-                decoration: BoxDecoration(
-                    image: DecorationImage(image: bg, fit: BoxFit.cover)),
-                child: FormsPageResponsive(questionResponse: questions!),
-              ),
-          onLoading: const Loader()),
+        (questions) => Container(
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(
+              image: DecorationImage(image: bg, fit: BoxFit.cover)),
+          child: FormsPageResponsive(questionResponse: questions!),
+        ),
+        onLoading: const Loader(),
+      ),
     );
   }
 }
