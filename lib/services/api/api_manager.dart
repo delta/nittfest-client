@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:get/get_connect/connect.dart';
+import 'package:nittfest/models/answers_response.dart';
 import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/models/resource_response.dart';
 import 'package:nittfest/services/api/api_constants.dart';
@@ -21,9 +22,14 @@ class ApiManager extends GetConnect {
     }
   }
 
-  Future<String> getDescription(String domain) async {
-    final response = await get('${ApiConstants.description}?domain=$domain',
-        headers: headers);
+  Future<String> postFormAnswers(AnswerResponse answers, String jwt) async {
+    var headers2 = {
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': 'Accept',
+      'Authorization': 'Bearer $jwt'
+    };
+    final response = await post(ApiConstants.formAnswers, answers.toJson(),
+        headers: headers2);
 
     if (response.status.hasError) {
       return Future.error(response.statusText!);

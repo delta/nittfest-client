@@ -1,13 +1,15 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/animation.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/instance_manager.dart';
-import 'package:nittfest/models/card_content_model.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:nittfest/models/answers_response.dart';
 import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/services/api/api_manager.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
+import 'package:nittfest/views/routes/navigation_routes.dart';
 import 'package:rive/rive.dart';
+import 'package:get/get.dart';
 
 class FormsController extends GetxController with StateMixin<QuestionResponse> {
   var isPlaying = false.obs;
@@ -17,35 +19,13 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   ApiManager api = ApiManager();
   final storage = Get.find<StorageServices>();
   late CarouselController buttonCarouselController;
-  late SMINumber growInput;
-
-  var content = [
-    CardContentModel(
-        question: 'What talent would you show off in a talent show?',
-        hint:
-            'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)'),
-    CardContentModel(
-        question: 'What talent would you show off in a talent show?',
-        hint:
-            'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)'),
-    CardContentModel(
-        question: 'What talent would you show off in a talent show?',
-        hint:
-            'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)'),
-    CardContentModel(
-        question: 'What talent would you show off in a talent show?',
-        hint:
-            'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)'),
-    CardContentModel(
-        question: 'What talent would you show off in a talent show?',
-        hint:
-            'Thanks for showing your interest in Chroma\'22. We need to know your name (in case you win XD)')
-  ];
+  late List<TextEditingController> textControllers = List.empty(growable: true);
+  List<Answer> answ = <Answer>[];
+  var questions = <Question>[];
 
   @override
   void onInit() {
     buttonCarouselController = CarouselController();
-    maxPage = content.length;
     getFormQuestions(storage.retriveDomain());
     super.onInit();
   }
@@ -53,36 +33,138 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   getFormQuestions(String domain) async {
     String jwt = await storage.retriveJWT();
     api.getFormQuestions(domain, jwt).then((response) {
+      maxPage = response.questions.length;
+      questions = response.questions;
+      for (int i = 0; i < questions.length; i++) {
+        textControllers.add(TextEditingController(text: questions[i].answer));
+      }
       change(response, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
     });
   }
 
-  void onRiveTreeInit(Artboard artboard) {
-    final treeController =
-        StateMachineController.fromArtboard(artboard, 'State Machine 1')!;
-    artboard.addController(treeController);
-    growInput = treeController.findInput<double>('input') as SMINumber;
-  }
-
   void nextPage() {
     if (pageNumber.value < maxPage) {
       buttonCarouselController.nextPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInCirc);
+          duration: const Duration(milliseconds: 300));
+      pageNumber.value++;
     } else {
       pageNumber.value = maxPage;
+      submitAnswers();
     }
   }
 
   void previousPage() {
     if (pageNumber.value > 0) {
       buttonCarouselController.previousPage(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInCirc);
+          duration: const Duration(milliseconds: 300));
+      pageNumber.value--;
     } else {
       pageNumber.value = 0;
     }
+  }
+
+  void submitAnswers() async {
+    Get.dialog(
+      Center(
+          child: SingleChildScrollView(
+              child: Material(
+        type: MaterialType.transparency,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 700),
+              child: Container(
+                padding: const EdgeInsets.all(30),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.1),
+                      offset: const Offset(0, 0),
+                      blurRadius: 20,
+                    ),
+                  ],
+                ),
+                child: Wrap(
+                  children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Are you sure?',
+                          style: GoogleFonts.eagleLake(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40.0,
+                            shadows: [
+                              const Shadow(
+                                offset: Offset(5.0, 5.0),
+                                blurRadius: 20.0,
+                                color: Colors.white38,
+                              ),
+                            ],
+                            color: const Color(0xFFD4AF37),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.only(right: 20),
+                              child: MaterialButton(
+                                textColor: const Color(0xFFD4AF37),
+                                onPressed: submit,
+                                child: Text(
+                                  'Yes',
+                                  style: GoogleFonts.eagleLake(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20),
+                            child: MaterialButton(
+                              textColor: const Color(0xFFD4AF37),
+                              onPressed: Get.back,
+                              child: Text('Close',
+                                  style: GoogleFonts.eagleLake(
+                                    fontWeight: FontWeight.bold,
+                                  )),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ))),
+      barrierDismissible: false,
+    );
+  }
+
+  void submit() async {
+    if (answ.isNotEmpty) {
+      answ.clear();
+    }
+    for (int i = 0; i < questions.length; i++) {
+      answ.add(
+          Answer(answer: textControllers[i].text, questionId: questions[i].id));
+    }
+    var answerResponse = AnswerResponse(answers: answ);
+    api.postFormAnswers(answerResponse, await storage.retriveJWT()).then(
+        (response) {
+      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+    }, onError: (err) {});
   }
 }

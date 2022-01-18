@@ -22,7 +22,7 @@ class HomePageDesktop extends StatelessWidget {
           Content(
             mainAxisAlignment: MainAxisAlignment.center,
             logoSize: (270.0 / 1848) * size.width,
-            headerSize: (120 / 1848) * size.width,
+            headerSize: (90 / 1848) * size.width,
             bodySize: (32.0 / 1848) * size.width,
             bodySize2: (20.0 / 1848) * size.width,
             gapSize: (20 / 980) * size.height,

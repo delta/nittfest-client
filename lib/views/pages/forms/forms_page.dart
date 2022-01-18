@@ -18,12 +18,14 @@ class FormsPage extends GetView<FormsController> {
     return Scaffold(
       body: controller.obx(
         (questions) => Container(
-          height: size.height,
-          width: size.width,
-          decoration: BoxDecoration(
-              image: DecorationImage(image: bg, fit: BoxFit.cover)),
-          child: FormsPageResponsive(questionResponse: questions!),
-        ),
+            height: size.height,
+            width: size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(image: bg, fit: BoxFit.cover)),
+            child: Stack(children: [
+              Container(decoration: const BoxDecoration(color: Colors.black38)),
+              FormsPageResponsive(questionResponse: questions!),
+            ])),
         onLoading: const Loader(),
       ),
     );

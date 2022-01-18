@@ -24,5 +24,10 @@ class NavigationPages {
           page: () => const FormsPage(),
           binding: FormsBindings(),
         ),
+        GetPage(
+          name: NavigationRoutes.preferencesRoute,
+          page: () => const FormsPage(),
+          binding: FormsBindings(),
+        ),
       ];
 }

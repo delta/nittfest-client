@@ -31,6 +31,7 @@ class Question {
     required this.isSubjective,
     required this.domain,
     required this.id,
+    required this.answer,
   });
 
   final String question;
@@ -38,6 +39,7 @@ class Question {
   final bool isSubjective;
   final String domain;
   final int id;
+  String answer;
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
         question: json['question'],
@@ -45,6 +47,7 @@ class Question {
         isSubjective: json['is_subjective'],
         domain: json['domain'],
         id: json['id'],
+        answer: json['answer'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +56,6 @@ class Question {
         'is_subjective': isSubjective,
         'domain': domain,
         'id': id,
+        'answer': answer,
       };
 }

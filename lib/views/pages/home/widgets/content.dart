@@ -58,7 +58,7 @@ class Content extends StatelessWidget {
             ))),
         Obx(() => Text(
               'INDUCTIONS',
-              style: GoogleFonts.hanalei(
+              style: GoogleFonts.eagleLake(
                   fontSize: headerSize,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 6,
@@ -88,8 +88,8 @@ class Content extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 36),
                 child: Text(
                   'NITTFEST is an inter-department cultural extravaganza wherein the students showcase their talents in a multitude of events, all in effort to make their department the best of the best. With the glory of the department on the line, this fest is a celebration of arts and talents as engineering students prove their adeptness in the cultural world with their own music, dance, language and theatrics.',
-                  style: GoogleFonts.eagleLake(
-                      fontWeight: FontWeight.bold,
+                  style: GoogleFonts.montserrat(
+                      fontWeight: FontWeight.w400,
                       fontSize: bodySize2,
                       shadows: [
                         const Shadow(
