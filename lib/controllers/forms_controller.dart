@@ -46,12 +46,13 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   void onInit() {
     buttonCarouselController = CarouselController();
     maxPage = content.length;
-    getFormQuestions('NOC');
+    getFormQuestions(storage.retriveDomain());
     super.onInit();
   }
 
   getFormQuestions(String domain) async {
-    api.getFormQuestions(domain, storage.retriveJWT()).then((response) {
+    String jwt = await storage.retriveJWT();
+    api.getFormQuestions(domain, jwt).then((response) {
       change(response, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
