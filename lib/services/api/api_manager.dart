@@ -69,7 +69,7 @@ class ApiManager extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      return response.body as bool;
+      return json.decode(response.bodyString!)['status'] as bool;
     }
   }
 
