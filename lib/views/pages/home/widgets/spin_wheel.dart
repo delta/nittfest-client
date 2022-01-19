@@ -16,7 +16,9 @@ class SpinWheel extends StatelessWidget {
         ? size.width > 1440
             ? size.width > 1920
                 ? 3.8
-                : 3.5
+                : size.width > 1940
+                    ? 4
+                    : 4
             : 3.2
         : 2.1;
     return SizedBox(

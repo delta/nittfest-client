@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:collection';
 import 'dart:ui';
 
@@ -27,29 +26,30 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   List<Answer> answ = <Answer>[];
   var questions = <Question>[];
   final _preferences = List.filled(3, 'OC').obs;
-
+  var isButtonEnabled = true;
   get preferences => _preferences;
 
   @override
   void onInit() async {
     buttonCarouselController = CarouselController();
-    var args = Get.arguments;
-    getFormQuestions(args[0]);
-    if (!(await api.isPrefrencesFilled(await storage.retriveJWT()))) {
-      showPreferences();
-    }
+    getFormQuestions();
+
     super.onInit();
   }
 
-  getFormQuestions(String domain) async {
+  getFormQuestions() async {
     String jwt = await storage.retriveJWT();
-    api.getFormQuestions(domain, jwt).then((response) {
+    var domain = Get.parameters['domain'];
+    api.getFormQuestions(domain!, jwt).then((response) async {
       maxPage = response.questions.length - 1;
       questions = response.questions;
       for (int i = 0; i < questions.length; i++) {
         textControllers.add(TextEditingController(text: questions[i].answer));
       }
       change(response, status: RxStatus.success());
+      if (!(await api.isPrefrencesFilled(await storage.retriveJWT()))) {
+        showPreferences();
+      }
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
     });
@@ -83,32 +83,16 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
       if (set.contains(pref)) {
         isDuplicate = true;
       }
+      set.add(pref);
     });
     if (isDuplicate) {
-      Get.snackbar('Error', 'All the preferences should be Unique');
+      Get.snackbar('Error', 'All the preferences should be Unique',
+          backgroundColor: Colors.red.withOpacity(0.5));
       return;
     } else {
-      Get.dialog(Container(
-        constraints: const BoxConstraints(maxWidth: 300),
-        child: Column(
-          children: [
-            const Text('Are You Sure ?'),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                MaterialButton(onPressed: Get.back, child: const Text('No')),
-                MaterialButton(
-                    onPressed: () async {
-                      await postPreferences();
-                      storage.storePreferences(true);
-                      Get.back();
-                    },
-                    child: const Text('Yes'))
-              ],
-            )
-          ],
-        ),
-      ));
+      await postPreferences();
+      storage.storePreferences(true);
+      Get.back();
     }
   }
 
@@ -122,117 +106,121 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
 
   void showPreferences() {
     Get.dialog(
-        Material(
-            child: Center(
-                child: SingleChildScrollView(
-                    child: SingleChildScrollView(
-                        child: Material(
-                            type: MaterialType.transparency,
-                            child: ClipRect(
-                                child: BackdropFilter(
-                                    filter:
-                                        ImageFilter.blur(sigmaX: 1, sigmaY: 1),
-                                    child: ConstrainedBox(
-                                        constraints:
-                                            const BoxConstraints(maxWidth: 500),
-                                        child: Container(
-                                            padding: const EdgeInsets.all(40),
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.black
-                                                  .withOpacity(0.79),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.black
-                                                      .withOpacity(0.1),
-                                                  offset: const Offset(0, 0),
-                                                  blurRadius: 20,
+      Center(
+          child: SingleChildScrollView(
+              child: Material(
+        type: MaterialType.transparency,
+        child: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 700),
+              child: Container(
+                  padding: const EdgeInsets.all(40),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.black.withOpacity(0.79),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        offset: const Offset(0, 0),
+                        blurRadius: 20,
+                      ),
+                    ],
+                  ),
+                  child: Column(children: [
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'PREFERENCES',
+                          style: GoogleFonts.eagleLake(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 40.0,
+                            shadows: [
+                              const Shadow(
+                                offset: Offset(5.0, 5.0),
+                                blurRadius: 20.0,
+                                color: Colors.white38,
+                              ),
+                            ],
+                            color: const Color(0xFFD4AF37),
+                          ),
+                        ),
+                      ),
+                    ),
+                    for (var pref = 0; pref < 3; ++pref)
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text('Preferences ${pref + 1} : ',
+                                style: GoogleFonts.eagleLake(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                  shadows: [
+                                    const Shadow(
+                                      offset: Offset(5.0, 5.0),
+                                      blurRadius: 20.0,
+                                      color: Colors.white38,
+                                    ),
+                                  ],
+                                  color: const Color(0xFFD4AF37),
+                                )),
+                            Obx(
+                              () => DropdownButton<String>(
+                                value: preferences[pref],
+                                items: data
+                                    .map((String value) =>
+                                        DropdownMenuItem<String>(
+                                          value: value,
+                                          child: Text(
+                                            value,
+                                            style: GoogleFonts.eagleLake(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 20.0,
+                                              shadows: [
+                                                const Shadow(
+                                                  offset: Offset(5.0, 5.0),
+                                                  blurRadius: 20.0,
+                                                  color: Colors.white38,
                                                 ),
                                               ],
+                                              color: Colors.white,
                                             ),
-                                            child: Column(children: [
-                                              Center(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Text(
-                                                    'PREFERENCES',
-                                                    style:
-                                                        GoogleFonts.eagleLake(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 40.0,
-                                                      shadows: [
-                                                        const Shadow(
-                                                          offset:
-                                                              Offset(5.0, 5.0),
-                                                          blurRadius: 20.0,
-                                                          color: Colors.white38,
-                                                        ),
-                                                      ],
-                                                      color: const Color(
-                                                          0xFFD4AF37),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              for (var pref = 0;
-                                                  pref < 3;
-                                                  ++pref)
-                                                Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    children: [
-                                                      Text(
-                                                          'Preferences ${pref + 1} : '),
-                                                      Obx(
-                                                        () => DropdownButton<
-                                                            String>(
-                                                          value:
-                                                              preferences[pref],
-                                                          items: data
-                                                              .map((String
-                                                                      value) =>
-                                                                  DropdownMenuItem<
-                                                                      String>(
-                                                                    value:
-                                                                        value,
-                                                                    child: Text(
-                                                                      value,
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .end,
-                                                                    ),
-                                                                  ))
-                                                              .toList(),
-                                                          onChanged: (value) =>
-                                                              preferences[
-                                                                  pref] = value,
-                                                        ),
-                                                      ),
-                                                    ]),
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              MaterialButton(
-                                                onPressed: () async =>
-                                                    postPreferencesCheck(),
-                                                padding:
-                                                    const EdgeInsets.all(10),
-                                                color: const Color(0xFFD4AF37),
-                                                textColor: Colors.white,
-                                                child: Text('Submit',
-                                                    style:
-                                                        GoogleFonts.eagleLake(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontSize: 20,
-                                                    )),
-                                              ),
-                                            ])))))))))),
-        barrierDismissible: false);
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ))
+                                    .toList(),
+                                onChanged: (value) => preferences[pref] = value,
+                              ),
+                            ),
+                          ]),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    MaterialButton(
+                      onPressed: () async {
+                        if (isButtonEnabled) {
+                          postPreferencesCheck();
+                          isButtonEnabled = false;
+                        }
+                      },
+                      padding: const EdgeInsets.all(10),
+                      color: const Color(0xFFD4AF37),
+                      textColor: Colors.white,
+                      child: Text('SUBMIT',
+                          style: GoogleFonts.eagleLake(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          )),
+                    ),
+                  ])),
+            ),
+          ),
+        ),
+      ))),
+      barrierDismissible: false,
+    );
   }
 
   void submitAnswers() async {
@@ -250,7 +238,7 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                 padding: const EdgeInsets.all(30),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
+                  color: Colors.black,
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
@@ -334,19 +322,14 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
     var answerResponse = AnswerResponse(answers: answ);
     api.postFormAnswers(answerResponse, await storage.retriveJWT()).then(
         (response) {
-      Get.snackbar('Success', 'Forms Submitted successfully');
-      late Timer timer;
-      timer = Timer(const Duration(milliseconds: 1000), () {
-        timer.cancel();
-        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-      });
+      Get.snackbar('Success',
+          'Response has been Successfully Submitted and Can be Edited Later',
+          backgroundColor: Colors.green.withOpacity(0.5));
+      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
     }, onError: (err) {
-      Get.snackbar('Failed', 'Error occured while submitting');
-      late Timer timer;
-      timer = Timer(const Duration(milliseconds: 1000), () {
-        timer.cancel();
-        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-      });
+      Get.snackbar('Error', 'Error While Submitting',
+          backgroundColor: Colors.red.withOpacity(0.5));
+      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
     });
   }
 }

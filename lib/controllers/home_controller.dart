@@ -21,7 +21,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   var isHovered2 = 0.obs;
   ApiManager api = ApiManager();
   final storage = Get.find<StorageServices>();
-  ImageProvider bg = const AssetImage('bg2.webp');
+  ImageProvider bg = const AssetImage('assets/bg2.webp');
   var currentPointer = const Offset(0, 0);
   var center = const Offset(217.0, 208.9);
   var startAngle = 0.0.obs;
@@ -276,8 +276,8 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
 
   void navigateToForms() {
     storage.domain = getTitle();
-    Get.toNamed(NavigationRoutes.inductionsFormsRoute,
-        arguments: [choosenTeam.value]);
+    Get.offAllNamed(NavigationRoutes.inductionsFormsRoute,
+        parameters: {'domain': choosenTeam.value});
   }
 
   void _login(String eventBody) {

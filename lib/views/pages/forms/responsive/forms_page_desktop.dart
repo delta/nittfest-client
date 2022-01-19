@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/views/pages/forms/widgets/card_content.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel.dart';
 import 'package:nittfest/views/pages/forms/widgets/carousel_navigator.dart';
+import 'package:nittfest/views/routes/navigation_routes.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
 
 class FormsPageDesktop extends StatelessWidget {
@@ -17,11 +19,14 @@ class FormsPageDesktop extends StatelessWidget {
       Positioned(
           top: 20,
           left: 50,
-          child: Image.asset(
-            'assets/logo_nf.png',
-            color: AppTheme.bodycolor,
-            width: 45,
-          )),
+          child: IconButton(
+              icon: Image.asset(
+                'assets/logo_nf.png',
+                color: AppTheme.bodycolor,
+                width: 45,
+              ),
+              onPressed: () =>
+                  Get.offAllNamed(NavigationRoutes.inductionsHomeRoute))),
       Carousel(
         children: questionResponse.questions
             .asMap()
