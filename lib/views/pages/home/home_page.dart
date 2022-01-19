@@ -12,7 +12,6 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    print('${size.width} ${size.height}');
     return Obx(() => AnimatedCrossFade(
         firstChild: Container(color: Colors.black45),
         duration: const Duration(milliseconds: 1000),
