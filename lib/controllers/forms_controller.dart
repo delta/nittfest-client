@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:ui';
 
@@ -32,7 +33,8 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   @override
   void onInit() async {
     buttonCarouselController = CarouselController();
-    getFormQuestions(await storage.retriveDomain());
+    var args = Get.arguments;
+    getFormQuestions(args[0]);
     if (!(await api.isPrefrencesFilled(await storage.retriveJWT()))) {
       showPreferences();
     }
@@ -332,7 +334,19 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
     var answerResponse = AnswerResponse(answers: answ);
     api.postFormAnswers(answerResponse, await storage.retriveJWT()).then(
         (response) {
-      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-    }, onError: (err) {});
+      Get.snackbar('Success', 'Forms Submitted successfully');
+      late Timer timer;
+      timer = Timer(const Duration(milliseconds: 1000), () {
+        timer.cancel();
+        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+      });
+    }, onError: (err) {
+      Get.snackbar('Failed', 'Error occured while submitting');
+      late Timer timer;
+      timer = Timer(const Duration(milliseconds: 1000), () {
+        timer.cancel();
+        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+      });
+    });
   }
 }
