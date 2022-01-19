@@ -36,12 +36,10 @@ class HomePageDesktop extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-              Center(
-                  child: SizedBox(
-                      height: size.height * (4.5 / 8),
-                      child: const SpinWheel(
-                        isDesktopView: true,
-                      ))),
+              const Center(
+                  child: SpinWheel(
+                isDesktopView: true,
+              )),
               Container(
                   padding: const EdgeInsets.all(15),
                   alignment: Alignment.topCenter,
