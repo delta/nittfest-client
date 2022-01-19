@@ -12,7 +12,11 @@ class SpinWheel extends StatelessWidget {
     final controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
     double m = isDesktopView ? size.width * 1.11 : size.height;
-    double r = isDesktopView ? 3.2 : 2.1;
+    double r = isDesktopView
+        ? size.width > 1440
+            ? 3.5
+            : 3.2
+        : 2.1;
     return SizedBox(
       height: m / r,
       width: m / r,
@@ -31,13 +35,13 @@ class SpinWheel extends StatelessWidget {
                       'assets/carouselbg.webp',
                     ))))),
         Positioned(
-            top: 0,
+            //top: 0,
             left: 0,
             right: 0,
             bottom: m / (2 * r),
             child: Center(
                 child: Image.asset(
-              'assets/indicator.png',
+              'assets/Indicator_small.png',
               height: m / (2 * r),
             ))),
         Center(

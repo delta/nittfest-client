@@ -31,7 +31,7 @@ class NITTFEST extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       onUnknownRoute: (settings) {
-        Get.offAndToNamed(NavigationRoutes.splashRoute);
+        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
       },
       initialRoute: NavigationRoutes.inductionsHomeRoute,
       getPages: NavigationPages.getPages(),

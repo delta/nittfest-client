@@ -107,12 +107,12 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
     });
   }
 
-  void setChosenTeamValue() {
+  void setChosenTeamValue() async {
     for (int i = 1; i <= 5; i++) {
       if (startAngle.value > i * pi / 3 - pi / 6 &&
           startAngle.value < i * pi / 3 + pi / 6) {
         choosenTeam.value = data[6 - i];
-
+        storage.setDomain(data[6 - i]);
         Timer(const Duration(milliseconds: 250), () {
           textSize.value = 0.5;
           Timer(const Duration(milliseconds: 250), () {
