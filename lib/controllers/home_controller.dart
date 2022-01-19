@@ -32,14 +32,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   var applyElevation = 1.0.obs;
   var crossFadeState = CrossFadeState.showFirst.obs;
   final _preferences = ['OC', 'OC', 'OC'].obs;
-  List<String> data = [
-    'OC',
-    'EVENTS',
-    'AMBIENCE',
-    'PR&C',
-    'MARKETING',
-    'DESIGN',
-  ];
+
   get preferences => _preferences;
 
   String getContent() =>
@@ -283,14 +276,15 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
 
   void navigateToForms() {
     storage.domain = getTitle();
-    Get.toNamed(NavigationRoutes.inductionsFormsRoute);
+    Get.toNamed(NavigationRoutes.inductionsFormsRoute,
+        arguments: [choosenTeam.value]);
   }
 
   void _login(String eventBody) {
     final receivedUri = Uri.parse(eventBody);
     String token = receivedUri.queryParameters['code']!;
     code = token;
-    onCallBack(code);
     _popupWin.close();
+    onCallBack(code);
   }
 }

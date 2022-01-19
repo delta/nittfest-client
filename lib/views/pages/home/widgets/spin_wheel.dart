@@ -14,7 +14,9 @@ class SpinWheel extends StatelessWidget {
     double m = isDesktopView ? size.width * 1.11 : size.height;
     double r = isDesktopView
         ? size.width > 1440
-            ? 3.5
+            ? size.width > 1920
+                ? 3.8
+                : 3.5
             : 3.2
         : 2.1;
     return SizedBox(
