@@ -11,9 +11,12 @@ class SpinWheel extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
-    double m = isDesktopView ? size.width : size.height;
-<<<<<<< HEAD
-    double r = isDesktopView ? size.width / 1440 * 3.2 : 2.1;
+    double m = isDesktopView ? size.width * 1.11 : size.height;
+    double r = isDesktopView
+        ? size.width > 1440
+            ? 3.5
+            : 3.2
+        : 2.1;
     return SizedBox(
       height: m / r,
       width: m / r,
@@ -49,51 +52,9 @@ class SpinWheel extends StatelessWidget {
                     : controller.applyElevation.value -= 10,
                 child: Image.asset(
                   'assets/apply_sign.webp',
-                  width: m / (2 * r),
-                  scale: controller.applyElevation.value,
+                  width: m / (2 * r) + controller.applyElevation.value,
                 ))))
       ]),
     );
-=======
-    double r = isDesktopView ? size.aspectRatio * 1.5 : 2.1;
-    return Stack(children: [
-      Center(
-          child: Obx(() => Transform.rotate(
-              angle: controller.startAngle.value,
-              child: GestureDetector(
-                  onPanDown: (details) {
-                    controller.currentPointer = details.localPosition;
-                    controller.center = Offset(m / (2 * r), m / (2 * r));
-                  },
-                  onPanUpdate: controller.updateStartAngle,
-                  onPanEnd: (details) => controller.adjust(),
-                  child: Image.asset(
-                    'assets/carouselbg.webp',
-                    scale: 1,
-                  ))))),
-      Positioned(
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: m / (2 * r),
-          child: Center(
-              child: Image.asset(
-            'assets/indicator.png',
-            height: m / (2 * r),
-            scale: 0.5,
-          ))),
-      Center(
-          child: Obx(() => InkWell(
-              onTap: controller.showcontent,
-              onHover: (value) => value
-                  ? controller.applyElevation.value += 10
-                  : controller.applyElevation.value -= 10,
-              child: Image.asset(
-                'assets/apply_sign.webp',
-                width: m / (2 * r),
-                scale: controller.applyElevation.value,
-              ))))
-    ]);
->>>>>>> 4777134 (update(splashPage): change background color)
   }
 }
