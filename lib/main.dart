@@ -23,16 +23,16 @@ class NITTFEST extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    precacheImage(const AssetImage('bg1.webp'), context);
-    precacheImage(const AssetImage('bg2.webp'), context);
-    precacheImage(const AssetImage('bg.png'), context);
-    precacheImage(const AssetImage('logo_nf.png'), context);
+    precacheImage(const AssetImage('assets/bg1.webp'), context);
+    precacheImage(const AssetImage('assets/bg2.webp'), context);
+    precacheImage(const AssetImage('assets/bg.png'), context);
+    precacheImage(const AssetImage('assets/logo_nf.png'), context);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
       onUnknownRoute: (settings) {
         Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
       },
+      theme: ThemeData.dark(),
       initialRoute: NavigationRoutes.inductionsHomeRoute,
       getPages: NavigationPages.getPages(),
     );

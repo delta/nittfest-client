@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/simple/get_responsive.dart';
-import 'package:get/get_state_manager/src/simple/get_view.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:nittfest/constants/break_points.dart';
 import 'package:nittfest/controllers/home_controller.dart';
 import 'package:nittfest/views/pages/home/responsive/home_page_desktop.dart';
@@ -13,21 +12,26 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    return Scaffold(
-      body: Container(
-          height: size.height,
-          width: size.width,
-          decoration: BoxDecoration(
-              image: DecorationImage(image: controller.bg, fit: BoxFit.cover)),
-          child: Stack(children: [
-            Container(
-                decoration:
-                    BoxDecoration(color: Colors.black.withOpacity(0.36))),
-            HomeResponsive(),
-          ])),
-      floatingActionButton: SocialIcons(buttonSize: size),
-    );
+    print('${size.width} ${size.height}');
+    return Obx(() => AnimatedCrossFade(
+        firstChild: Container(color: Colors.black45),
+        duration: const Duration(milliseconds: 1000),
+        crossFadeState: controller.crossFadeState.value,
+        secondChild: Scaffold(
+          body: Container(
+              height: size.height,
+              width: size.width,
+              decoration: BoxDecoration(
+                  image:
+                      DecorationImage(image: controller.bg, fit: BoxFit.cover)),
+              child: Stack(children: [
+                Container(
+                    decoration:
+                        BoxDecoration(color: Colors.black.withOpacity(0.36))),
+                HomeResponsive(),
+              ])),
+          floatingActionButton: SocialIcons(buttonSize: size),
+        )));
   }
 }
 

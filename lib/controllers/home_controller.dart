@@ -30,6 +30,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   late Timer headerTimer;
   var textSize = 0.0.obs;
   var applyElevation = 1.0.obs;
+  var crossFadeState = CrossFadeState.showFirst.obs;
   late List<String> data = [
     'OC',
     'EVENTS',
@@ -48,7 +49,8 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   void onInit() {
     headerTimer = Timer.periodic(const Duration(milliseconds: 800),
         (timer) => headerAnim.value = !headerAnim.value);
-
+    Timer(const Duration(milliseconds: 2000),
+        () => crossFadeState.value = CrossFadeState.showSecond);
     super.onInit();
   }
 
