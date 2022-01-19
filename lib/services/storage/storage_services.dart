@@ -10,8 +10,6 @@ class StorageServices extends GetxService {
   late GetStorage storage;
   String domain = 'OC';
 
-  // String domain = 'OC';
-
   Future<StorageServices> initStorage() async {
     await GetStorage.init();
     storage = GetStorage();
@@ -38,6 +36,9 @@ class StorageServices extends GetxService {
     if (storage.read(StorageConstants.domain) == null) {
       storage.write(StorageConstants.domain, 'OC');
     }
+    if (storage.read(StorageConstants.preferences) == null) {
+      storage.write(StorageConstants.preferences, false);
+    }
   }
 
   void storeData(ResourceResponse response) {
@@ -50,6 +51,8 @@ class StorageServices extends GetxService {
 
   void setDomain(String domain) =>
       storage.write(StorageConstants.domain, domain);
+  void storePreferences(bool isFilled) =>
+      storage.write(StorageConstants.preferences, isFilled);
 
   void storeAnswers(List<Answer> answers) {
     storage.write(
@@ -66,4 +69,6 @@ class StorageServices extends GetxService {
   Future<String> retriveDomain() async =>
       await storage.read(StorageConstants.domain);
   Future<String> retriveJWT() async => await storage.read(StorageConstants.jwt);
+  Future<bool> retrivePreferences() async =>
+      await storage.read(StorageConstants.preferences);
 }

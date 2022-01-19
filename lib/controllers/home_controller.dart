@@ -31,7 +31,8 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
   var textSize = 0.0.obs;
   var applyElevation = 1.0.obs;
   var crossFadeState = CrossFadeState.showFirst.obs;
-  late List<String> data = [
+  final _preferences = ['OC', 'OC', 'OC'].obs;
+  List<String> data = [
     'OC',
     'EVENTS',
     'AMBIENCE',
@@ -39,6 +40,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
     'MARKETING',
     'DESIGN',
   ];
+  get preferences => _preferences;
 
   String getContent() =>
       teamContent[choosenTeam.value] ?? teamContent['OC'] ?? '';
@@ -155,7 +157,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
                 padding: const EdgeInsets.all(40),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.black.withOpacity(0.6),
+                  color: Colors.black.withOpacity(0.79),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),

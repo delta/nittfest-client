@@ -4,4 +4,5 @@ class ApiConstants {
   static String formQuestions = '${baseUrl}form_questions';
   static String formAnswers = '${baseUrl}form_questions/submit';
   static String description = '${baseUrl}description/';
+  static String preferences = '${baseUrl}preferences/';
 }
