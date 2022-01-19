@@ -12,3 +12,12 @@ var teamContent = {
   'DESIGN':
       'You’ve seen the logo that shines above all. You\'ve seen the the colors that provide the backdrop for the glory.The Design team is at the helm of all that and much more. We bring out the fest in its artistic grandeur and put it out for the world to see.\nVideos, posters,illustrations, we’ve got it all.So if you’ve got ideas to bring out the life of the fest, or if you just have a taste for digital renderings, you\'ll fit right in.\nAll those with an artistic flair and a imaginative mind,\nhead on over and fill out our induction form!',
 };
+
+List<String> data = [
+  'OC',
+  'EVENTS',
+  'AMBIENCE',
+  'PR&C',
+  'MARKETING',
+  'DESIGN',
+];
