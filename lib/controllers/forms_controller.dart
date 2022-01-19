@@ -24,16 +24,16 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   var questions = <Question>[];
 
   @override
-  void onInit() {
+  void onInit() async {
     buttonCarouselController = CarouselController();
-    getFormQuestions(storage.retriveDomain());
+    getFormQuestions(await storage.retriveDomain());
     super.onInit();
   }
 
   getFormQuestions(String domain) async {
     String jwt = await storage.retriveJWT();
     api.getFormQuestions(domain, jwt).then((response) {
-      maxPage = response.questions.length;
+      maxPage = response.questions.length - 1;
       questions = response.questions;
       for (int i = 0; i < questions.length; i++) {
         textControllers.add(TextEditingController(text: questions[i].answer));

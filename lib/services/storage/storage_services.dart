@@ -48,9 +48,8 @@ class StorageServices extends GetxService {
     storage.write(StorageConstants.jwt, response.jwt);
   }
 
-  void setDomain(String domain) {
-    storage.write(StorageConstants.domain, domain);
-  }
+  void setDomain(String domain) =>
+      storage.write(StorageConstants.domain, domain);
 
   void storeAnswers(List<Answer> answers) {
     storage.write(
@@ -64,6 +63,7 @@ class StorageServices extends GetxService {
   String retriveGender() => storage.read(StorageConstants.gender);
   String retrivePhoneNumber() => storage.read(StorageConstants.phonenumber);
   String retriveEmail() => storage.read(StorageConstants.email);
-  String retriveDomain() => storage.read(StorageConstants.domain);
+  Future<String> retriveDomain() async =>
+      await storage.read(StorageConstants.domain);
   Future<String> retriveJWT() async => await storage.read(StorageConstants.jwt);
 }

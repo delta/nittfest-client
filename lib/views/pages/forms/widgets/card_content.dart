@@ -67,19 +67,19 @@ class CardContent extends StatelessWidget {
                             fontFamily: 'Poppins'),
                       ),
                       SizedBox(height: min > 300 ? 20 : 5),
-                      Align(
+                      Obx(() => Align(
                           alignment: Alignment.topLeft,
                           child: TextButton(
-                            onPressed: controller.pageNumber.value !=
-                                    controller.maxPage - 1
-                                ? controller.buttonCarouselController.nextPage
-                                : controller.submitAnswers,
+                            onPressed: controller.pageNumber.value ==
+                                    controller.maxPage + 1
+                                ? controller.submitAnswers
+                                : controller.buttonCarouselController.nextPage,
                             style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all(
                                     AppTheme.bodycolor)),
                             child: Text(
                                 controller.pageNumber.value ==
-                                        controller.maxPage - 1
+                                        controller.maxPage + 1
                                     ? 'Submit'
                                     : 'Next',
                                 style: GoogleFonts.poppins(
@@ -87,7 +87,7 @@ class CardContent extends StatelessWidget {
                                         size.width < 600 ? min * 0.034 : 22,
                                     fontWeight: FontWeight.bold,
                                     color: AppTheme.primaryColor)),
-                          ))
+                          )))
                     ])),
               ]),
         ]);
