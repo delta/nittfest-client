@@ -11,12 +11,8 @@ class SpinWheel extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<HomeController>();
     Size size = MediaQuery.of(context).size;
-    double m = isDesktopView ? size.width * 1.11 : size.height;
-    double r = isDesktopView
-        ? size.width > 1440
-            ? 3.5
-            : 3.2
-        : 2.1;
+    double m = isDesktopView ? size.width : size.height;
+    double r = isDesktopView ? size.width / 1440 * 3.2 : 2.1;
     return SizedBox(
       height: m / r,
       width: m / r,

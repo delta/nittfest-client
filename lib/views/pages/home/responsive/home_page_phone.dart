@@ -17,9 +17,9 @@ class HomePagePhone extends StatelessWidget {
           Expanded(
               child: Content(
                   logoSize: size.height * 0.2,
-                  headerSize: size.height * 0.055,
-                  bodySize: size.height * 0.035,
-                  bodySize2: size.height * 0.035,
+                  headerSize: size.height * 0.044,
+                  bodySize: size.height * 0.032,
+                  bodySize2: size.height * 0.03,
                   gapSize: size.height * 0.015,
                   gapSize2: size.height * 0.01,
                   isDesktop: false,
