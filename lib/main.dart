@@ -22,19 +22,13 @@ class NITTFEST extends StatelessWidget {
   const NITTFEST({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    precacheImage(const AssetImage('assets/bg1.webp'), context);
-    precacheImage(const AssetImage('assets/bg2.webp'), context);
-    precacheImage(const AssetImage('assets/bg.png'), context);
-    precacheImage(const AssetImage('assets/logo_nf.png'), context);
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      onUnknownRoute: (settings) {
-        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-      },
-      theme: ThemeData.dark(),
-      initialRoute: NavigationRoutes.inductionsHomeRoute,
-      getPages: NavigationPages.getPages(),
-    );
-  }
+  Widget build(BuildContext context) => GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        onUnknownRoute: (settings) {
+          Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+        },
+        theme: ThemeData.dark(),
+        initialRoute: NavigationRoutes.inductionsHomeRoute,
+        getPages: NavigationPages.getPages(),
+      );
 }

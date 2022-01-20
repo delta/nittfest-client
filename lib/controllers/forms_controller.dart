@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/constants/team_description.dart';
 import 'package:nittfest/models/answers_response.dart';
 import 'package:nittfest/models/preference_model.dart';
@@ -11,14 +10,12 @@ import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/services/api/api_manager.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
-import 'package:rive/rive.dart';
 import 'package:get/get.dart';
 
 class FormsController extends GetxController with StateMixin<QuestionResponse> {
   var isPlaying = false.obs;
   var pageNumber = 0.obs;
   late int maxPage;
-  late Artboard? treeArtboard;
   ApiManager api = ApiManager();
   final storage = Get.find<StorageServices>();
   late CarouselController buttonCarouselController;
@@ -100,7 +97,10 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
     Preferences prefs = Preferences(
         preference1: preferences[0],
         preference2: preferences[1],
-        preference3: preferences[2]);
+        preference3: preferences[2],
+        preference4: preferences[3],
+        preference5: preferences[4],
+        preference6: preferences[5]);
     api.postPreference(await storage.retriveJWT(), prefs);
   }
 
@@ -129,22 +129,23 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                     ],
                   ),
                   child: Column(children: [
-                    Center(
+                    const Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           'PREFERENCES',
-                          style: GoogleFonts.eagleLake(
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             fontSize: 40.0,
                             shadows: [
-                              const Shadow(
+                              Shadow(
                                 offset: Offset(5.0, 5.0),
                                 blurRadius: 20.0,
                                 color: Colors.white38,
                               ),
                             ],
-                            color: const Color(0xFFD4AF37),
+                            color: Color(0xFFD4AF37),
                           ),
                         ),
                       ),
@@ -154,17 +155,18 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text('Preferences ${pref + 1} : ',
-                                style: GoogleFonts.eagleLake(
+                                style: const TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
                                   shadows: [
-                                    const Shadow(
+                                    Shadow(
                                       offset: Offset(5.0, 5.0),
                                       blurRadius: 20.0,
                                       color: Colors.white38,
                                     ),
                                   ],
-                                  color: const Color(0xFFD4AF37),
+                                  color: Color(0xFFD4AF37),
                                 )),
                             Obx(
                               () => DropdownButton<String>(
@@ -175,11 +177,12 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                                           value: value,
                                           child: Text(
                                             value,
-                                            style: GoogleFonts.eagleLake(
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.bold,
                                               fontSize: 20.0,
+                                              fontFamily: 'Poppins',
                                               shadows: [
-                                                const Shadow(
+                                                Shadow(
                                                   offset: Offset(5.0, 5.0),
                                                   blurRadius: 20.0,
                                                   color: Colors.white38,
@@ -208,8 +211,9 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                       padding: const EdgeInsets.all(10),
                       color: const Color(0xFFD4AF37),
                       textColor: Colors.white,
-                      child: Text('SUBMIT',
-                          style: GoogleFonts.eagleLake(
+                      child: const Text('SUBMIT',
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           )),
@@ -249,22 +253,23 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                 ),
                 child: Wrap(
                   children: [
-                    Center(
+                    const Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Are you sure?',
-                          style: GoogleFonts.eagleLake(
+                          style: TextStyle(
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             fontSize: 40.0,
                             shadows: [
-                              const Shadow(
+                              Shadow(
                                 offset: Offset(5.0, 5.0),
                                 blurRadius: 20.0,
                                 color: Colors.white38,
                               ),
                             ],
-                            color: const Color(0xFFD4AF37),
+                            color: Color(0xFFD4AF37),
                           ),
                         ),
                       ),
@@ -279,9 +284,10 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                               child: MaterialButton(
                                 textColor: const Color(0xFFD4AF37),
                                 onPressed: submit,
-                                child: Text(
+                                child: const Text(
                                   'Yes',
-                                  style: GoogleFonts.eagleLake(
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -291,8 +297,9 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                             child: MaterialButton(
                               textColor: const Color(0xFFD4AF37),
                               onPressed: Get.back,
-                              child: Text('Close',
-                                  style: GoogleFonts.eagleLake(
+                              child: const Text('Close',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   )),
                             ),

@@ -14,18 +14,18 @@ class FormsPage extends GetView<FormsController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    ImageProvider bg = const AssetImage('assets/bg1.webp');
     return Scaffold(
       body: controller.obx(
-        (questions) => Container(
+        (questions) => Stack(children: [
+          Image.asset(
+            'assets/bg1.webp',
             height: size.height,
             width: size.width,
-            decoration: BoxDecoration(
-                image: DecorationImage(image: bg, fit: BoxFit.cover)),
-            child: Stack(children: [
-              Container(decoration: const BoxDecoration(color: Colors.black38)),
-              FormsPageResponsive(questionResponse: questions!),
-            ])),
+            fit: BoxFit.fill,
+          ),
+          Container(decoration: const BoxDecoration(color: Colors.black38)),
+          FormsPageResponsive(questionResponse: questions!),
+        ]),
         onLoading: const Loader(),
       ),
     );

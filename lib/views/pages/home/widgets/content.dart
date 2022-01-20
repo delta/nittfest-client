@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:nittfest/controllers/home_controller.dart';
 
 class Content extends StatelessWidget {
@@ -58,7 +58,8 @@ class Content extends StatelessWidget {
             ))),
         Obx(() => Text(
               'INDUCTIONS',
-              style: GoogleFonts.eagleLake(
+              style: TextStyle(
+                  fontFamily: 'Poppins',
                   fontSize: headerSize,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 6,
@@ -88,18 +89,19 @@ class Content extends StatelessWidget {
                     const EdgeInsets.symmetric(vertical: 10, horizontal: 36),
                 child: Text(
                   'NITTFEST is an inter-department cultural extravaganza wherein the students showcase their talents in a multitude of events, all in effort to make their department the best of the best. With the glory of the department on the line.',
-                  style: GoogleFonts.eagleLake(
-                      fontWeight: FontWeight.w800,
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w600,
                       fontSize: bodySize2,
                       wordSpacing: 1,
                       letterSpacing: 2.4,
-                      shadows: [
-                        const Shadow(
-                          offset: Offset(5.0, 5.0),
-                          blurRadius: 20.0,
-                          color: Colors.white70,
-                        ),
-                      ],
+                      // shadows: [
+                      //   const Shadow(
+                      //     offset: Offset(5.0, 5.0),
+                      //     blurRadius: 20.0,
+                      //     color: Colors.white70,
+                      //   ),
+                      // ],
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 ))
@@ -108,11 +110,12 @@ class Content extends StatelessWidget {
                 scale: controller.textSize.value,
                 child: Text.rich(TextSpan(
                     text: 'APPLY FOR ',
-                    style: GoogleFonts.eagleLake(
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
                         fontWeight: FontWeight.bold,
                         fontSize: bodySize2,
-                        shadows: [
-                          const Shadow(
+                        shadows: const [
+                          Shadow(
                             offset: Offset(5.0, 5.0),
                             blurRadius: 20.0,
                             color: Colors.black45,
@@ -122,11 +125,12 @@ class Content extends StatelessWidget {
                     children: [
                       TextSpan(
                           text: controller.choosenTeam.value,
-                          style: GoogleFonts.eagleLake(
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontWeight: FontWeight.bold,
                               fontSize: bodySize2,
-                              shadows: [
-                                const Shadow(
+                              shadows: const [
+                                Shadow(
                                   offset: Offset(5.0, 5.0),
                                   blurRadius: 20.0,
                                   color: Color(0xFFFFC42E),
