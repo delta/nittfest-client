@@ -4,7 +4,7 @@ import 'package:nittfest/constants/break_points.dart';
 import 'package:nittfest/controllers/home_controller.dart';
 import 'package:nittfest/views/pages/home/responsive/home_page_desktop.dart';
 import 'package:nittfest/views/pages/home/responsive/home_page_phone.dart';
-import 'package:nittfest/views/pages/home/widgets/social_icons.dart';
+//import 'package:nittfest/views/pages/home/widgets/social_icons.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
@@ -17,19 +17,15 @@ class HomePage extends GetView<HomeController> {
         duration: const Duration(milliseconds: 1000),
         crossFadeState: controller.crossFadeState.value,
         secondChild: Scaffold(
-          body: Container(
-              height: size.height,
-              width: size.width,
-              decoration: BoxDecoration(
-                  image:
-                      DecorationImage(image: controller.bg, fit: BoxFit.cover)),
-              child: Stack(children: [
-                Container(
-                    decoration:
-                        BoxDecoration(color: Colors.black.withOpacity(0.36))),
-                HomeResponsive(),
-              ])),
-          floatingActionButton: SocialIcons(buttonSize: size),
+          body: Stack(children: [
+            Image.asset('assets/bg2.webp',
+                height: size.height, width: size.width, fit: BoxFit.cover),
+            Container(
+                decoration:
+                    BoxDecoration(color: Colors.black.withOpacity(0.36))),
+            HomeResponsive(),
+          ]),
+          //floatingActionButton: SocialIcons(buttonSize: size),
         )));
   }
 }

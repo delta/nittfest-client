@@ -1,16 +1,15 @@
 import 'package:fab_circular_menu/fab_circular_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
-import 'package:url_launcher/url_launcher.dart';
+//import 'package:url_launcher/url_launcher.dart';
 
 class SocialIcons extends StatelessWidget {
   final Size buttonSize;
   const SocialIcons({Key? key, required this.buttonSize}) : super(key: key);
 
-  void _launchURL(String url) async {
-    if (!await launch(url)) throw 'Could not launch $url';
-  }
+  // void _launchURL(String url) async {
+  //   if (!await launch(url)) throw 'Could not launch $url';
+  // }
 
   @override
   Widget build(BuildContext context) => FabCircularMenu(
@@ -27,17 +26,18 @@ class SocialIcons extends StatelessWidget {
           animationDuration: const Duration(milliseconds: 400),
           alignment: Alignment.bottomLeft,
           children: <Widget>[
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.instagram),
-                onPressed: () =>
-                    _launchURL('https://www.instagram.com/nittfest/')),
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.facebook),
-                onPressed: () =>
-                    _launchURL('https://www.facebook.com/NITTFEST')),
-            IconButton(
-                icon: const Icon(FontAwesomeIcons.linkedin),
-                onPressed: () =>
-                    _launchURL('https://www.linkedin.com/company/nittfest/'))
+            IconButton(onPressed: () {}, icon: const Icon(Icons.ac_unit))
+            // IconButton(
+            //     icon: const Icon(FontAwesomeIcons.instagram),
+            //     onPressed: () =>
+            //         _launchURL('https://www.instagram.com/nittfest/')),
+            // IconButton(
+            //     icon: const Icon(FontAwesomeIcons.facebook),
+            //     onPressed: () =>
+            //         _launchURL('https://www.facebook.com/NITTFEST')),
+            // IconButton(
+            //     icon: const Icon(FontAwesomeIcons.linkedin),
+            //     onPressed: () =>
+            //         _launchURL('https://www.linkedin.com/company/nittfest/'))
           ]);
 }

@@ -36,7 +36,7 @@ class SpinWheel extends StatelessWidget {
                     onPanUpdate: controller.updateStartAngle,
                     onPanEnd: (details) => controller.adjust(),
                     child: Image.asset(
-                      'assets/carouselbg.webp',
+                      'assets/carosel.webp',
                     ))))),
         Positioned(
             //top: 0,
@@ -55,7 +55,7 @@ class SpinWheel extends StatelessWidget {
                     ? controller.applyElevation.value += 10
                     : controller.applyElevation.value -= 10,
                 child: Image.asset(
-                  'assets/apply_sign.webp',
+                  'assets/apply.webp',
                   width: m / (2 * r) + controller.applyElevation.value,
                 ))))
       ]),

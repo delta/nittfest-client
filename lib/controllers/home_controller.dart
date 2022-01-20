@@ -4,19 +4,16 @@ import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/constants/team_description.dart';
 import 'package:nittfest/models/resource_response.dart';
 import 'package:nittfest/services/api/api_manager.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
 import 'package:nittfest/views/routes/navigation_routes.dart';
-import 'package:rive/rive.dart';
+
 import 'package:nittfest/utils/client_credentials.dart';
 import 'package:universal_html/html.dart' as html;
 
 class HomeController extends GetxController with StateMixin<ResourceResponse> {
-  late RiveAnimationController carController;
-  late RiveAnimationController flyingcarController;
   var isHovered = false.obs;
   var isHovered2 = 0.obs;
   ApiManager api = ApiManager();
@@ -93,7 +90,7 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
 
   void moveWheel(double finishAngle) {
     Timer.periodic(const Duration(milliseconds: 10), (timer) {
-      startAngle.value += 0.01;
+      startAngle.value += 0.04;
       if (startAngle > finishAngle) {
         timer.cancel();
         if (startAngle.value >= 2 * pi) {
@@ -166,17 +163,18 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
                           getTitle(),
-                          style: GoogleFonts.eagleLake(
+                          style: const TextStyle(
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             fontSize: 40.0,
                             shadows: [
-                              const Shadow(
+                              Shadow(
                                 offset: Offset(5.0, 5.0),
                                 blurRadius: 20.0,
                                 color: Colors.white38,
                               ),
                             ],
-                            color: const Color(0xFFD4AF37),
+                            color: Color(0xFFD4AF37),
                           ),
                         ),
                       ),
@@ -184,16 +182,17 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
                     Center(
                       child: Text(
                         getContent(),
-                        style: GoogleFonts.eagleLake(
+                        style: const TextStyle(
+                            fontFamily: 'Poppins',
                             fontWeight: FontWeight.bold,
                             fontSize: 18.0,
-                            shadows: [
-                              const Shadow(
-                                offset: Offset(5.0, 5.0),
-                                blurRadius: 20.0,
-                                color: Colors.white70,
-                              ),
-                            ],
+                            // shadows: [
+                            //   const Shadow(
+                            //     offset: Offset(5.0, 5.0),
+                            //     blurRadius: 20.0,
+                            //     color: Colors.white70,
+                            //   ),
+                            // ],
                             color: Colors.white),
                       ),
                     ),
@@ -207,9 +206,10 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
                               child: MaterialButton(
                                 textColor: const Color(0xFFD4AF37),
                                 onPressed: login,
-                                child: Text(
+                                child: const Text(
                                   'Apply',
-                                  style: GoogleFonts.eagleLake(
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -219,8 +219,9 @@ class HomeController extends GetxController with StateMixin<ResourceResponse> {
                             child: MaterialButton(
                               textColor: const Color(0xFFD4AF37),
                               onPressed: Get.back,
-                              child: Text('Close',
-                                  style: GoogleFonts.eagleLake(
+                              child: const Text('Close',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontWeight: FontWeight.bold,
                                   )),
                             ),

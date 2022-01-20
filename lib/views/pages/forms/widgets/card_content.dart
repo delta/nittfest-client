@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/controllers/forms_controller.dart';
 import 'package:nittfest/models/questions_response.dart';
 import 'package:nittfest/views/themes/app_themes.dart';
@@ -30,7 +29,8 @@ class CardContent extends StatelessWidget {
                             EdgeInsets.only(top: size.width < 600 ? 6 : 10),
                         child: Text(
                           '${index + 1} -> ',
-                          style: GoogleFonts.poppins(
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
                               fontSize: size.width < 600 ? min * 0.03 : 20,
                               shadows: AppTheme.shadows,
                               color: AppTheme.primaryColor),
@@ -44,7 +44,8 @@ class CardContent extends StatelessWidget {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             value.question,
-                            style: GoogleFonts.poppins(
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
                                 fontSize: size.width < 600 ? min * 0.05 : 36,
                                 shadows: AppTheme.shadows,
                                 color: AppTheme.bodycolor),
@@ -82,7 +83,8 @@ class CardContent extends StatelessWidget {
                                         controller.maxPage + 1
                                     ? 'Submit'
                                     : 'Next',
-                                style: GoogleFonts.poppins(
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
                                     fontSize:
                                         size.width < 600 ? min * 0.034 : 22,
                                     fontWeight: FontWeight.bold,
