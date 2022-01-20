@@ -21,9 +21,12 @@ class SpinWheel extends StatelessWidget {
                     : 4
             : 3.2
         : 2.1;
-    return SizedBox(
+    return Container(
       height: m / r,
       width: m / r,
+      decoration: BoxDecoration(shape: BoxShape.circle, boxShadow: [
+        BoxShadow(color: Colors.amber.withOpacity(0.12)),
+      ]),
       child: Stack(children: [
         Center(
             child: Obx(() => Transform.rotate(

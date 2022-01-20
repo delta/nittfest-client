@@ -8,8 +8,9 @@
     display:flex;
     justify-content:center;
     align-items: center;
-    height:100vh;
-    scroll-behavior: unset;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
   	background-color: #1a1940;
     background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,153,212,0) calc(15% + 100px), rgba(0,99,138,0) calc(85% + 100px), rgba(0,0,0,0.15) 100%);
   }
@@ -23,6 +24,7 @@
     align-items:center;
     transform-style: preserve-3d;
     transform:perspective(500px) rotateX(45deg);
+	
   }
 
   .loader span{
@@ -82,6 +84,11 @@
         height:100%;
     }
 }
+@media not all and (min-resolution:.001dpcm){
+		.loader{
+      display: none;
+    }
+}
   </style>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -100,7 +107,7 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="description" content="NF inductions site">
 
   <!-- iOS meta tags & icons -->
   <meta name="apple-mobile-web-app-capable" content="yes">

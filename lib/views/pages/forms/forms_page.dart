@@ -23,7 +23,8 @@ class FormsPage extends GetView<FormsController> {
             width: size.width,
             fit: BoxFit.fill,
           ),
-          Container(decoration: const BoxDecoration(color: Colors.black38)),
+          Container(
+              decoration: BoxDecoration(color: Colors.black.withOpacity(0.6))),
           FormsPageResponsive(questionResponse: questions!),
         ]),
         onLoading: const Loader(),

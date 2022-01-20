@@ -84,7 +84,7 @@ class HomePageDesktop extends StatelessWidget {
           right: 0,
           child: Center(
               child: Footer(
-            size: 20,
+            size: 16,
           ))),
     ]);
   }

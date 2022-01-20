@@ -95,13 +95,6 @@ class Content extends StatelessWidget {
                       fontSize: bodySize2,
                       wordSpacing: 1,
                       letterSpacing: 2.4,
-                      // shadows: [
-                      //   const Shadow(
-                      //     offset: Offset(5.0, 5.0),
-                      //     blurRadius: 20.0,
-                      //     color: Colors.white70,
-                      //   ),
-                      // ],
                       color: Colors.white),
                   textAlign: TextAlign.center,
                 ))
