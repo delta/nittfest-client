@@ -22,15 +22,14 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   late List<TextEditingController> textControllers = List.empty(growable: true);
   List<Answer> answ = <Answer>[];
   var questions = <Question>[];
-  final _preferences = List.filled(3, 'OC').obs;
-  var isButtonEnabled = true;
+  final _preferences = List.filled(6, 'OC').obs;
+  var isButtonEnabled = true.obs;
   get preferences => _preferences;
-
+  bool isPreferenceFilled = false;
   @override
   void onInit() async {
     buttonCarouselController = CarouselController();
     getFormQuestions();
-
     super.onInit();
   }
 
@@ -44,7 +43,9 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
         textControllers.add(TextEditingController(text: questions[i].answer));
       }
       change(response, status: RxStatus.success());
-      if (!(await api.isPrefrencesFilled(await storage.retriveJWT()))) {
+      isPreferenceFilled =
+          await api.isPrefrencesFilled(await storage.retriveJWT());
+      if (!isPreferenceFilled) {
         showPreferences();
       }
     }, onError: (err) {
@@ -83,12 +84,13 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
       set.add(pref);
     });
     if (isDuplicate) {
+      isButtonEnabled.value = true;
       Get.snackbar('Error', 'All the preferences should be Unique',
           backgroundColor: Colors.red.withOpacity(0.5));
       return;
     } else {
       await postPreferences();
-      storage.storePreferences(true);
+
       Get.back();
     }
   }
@@ -101,7 +103,8 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
         preference4: preferences[3],
         preference5: preferences[4],
         preference6: preferences[5]);
-    api.postPreference(await storage.retriveJWT(), prefs);
+    isPreferenceFilled =
+        await api.postPreference(await storage.retriveJWT(), prefs);
   }
 
   void showPreferences() {
@@ -150,7 +153,7 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                         ),
                       ),
                     ),
-                    for (var pref = 0; pref < 3; ++pref)
+                    for (var pref = 0; pref < 6; ++pref)
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -159,13 +162,6 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                                   fontFamily: 'Poppins',
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20.0,
-                                  shadows: [
-                                    Shadow(
-                                      offset: Offset(5.0, 5.0),
-                                      blurRadius: 20.0,
-                                      color: Colors.white38,
-                                    ),
-                                  ],
                                   color: Color(0xFFD4AF37),
                                 )),
                             Obx(
@@ -178,16 +174,8 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                                           child: Text(
                                             value,
                                             style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
                                               fontSize: 20.0,
                                               fontFamily: 'Poppins',
-                                              shadows: [
-                                                Shadow(
-                                                  offset: Offset(5.0, 5.0),
-                                                  blurRadius: 20.0,
-                                                  color: Colors.white38,
-                                                ),
-                                              ],
                                               color: Colors.white,
                                             ),
                                             textAlign: TextAlign.end,
@@ -201,23 +189,26 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
                     const SizedBox(
                       height: 20,
                     ),
-                    MaterialButton(
-                      onPressed: () async {
-                        if (isButtonEnabled) {
-                          postPreferencesCheck();
-                          isButtonEnabled = false;
-                        }
-                      },
-                      padding: const EdgeInsets.all(10),
-                      color: const Color(0xFFD4AF37),
-                      textColor: Colors.white,
-                      child: const Text('SUBMIT',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
-                          )),
-                    ),
+                    Obx(() => MaterialButton(
+                          onPressed: () async {
+                            if (isButtonEnabled.value) {
+                              isButtonEnabled.value = false;
+                              postPreferencesCheck();
+                            }
+                          },
+                          padding: const EdgeInsets.all(16),
+                          color: const Color(0xFFD4AF37),
+                          textColor: Colors.white,
+                          child: isButtonEnabled.value
+                              ? const Text('SUBMIT',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                  ))
+                              : const CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                        )),
                   ])),
             ),
           ),
@@ -319,24 +310,28 @@ class FormsController extends GetxController with StateMixin<QuestionResponse> {
   }
 
   void submit() async {
-    if (answ.isNotEmpty) {
-      answ.clear();
+    if (isPreferenceFilled) {
+      if (answ.isNotEmpty) {
+        answ.clear();
+      }
+      for (int i = 0; i < questions.length; i++) {
+        answ.add(Answer(
+            answer: textControllers[i].text, questionId: questions[i].id));
+      }
+      var answerResponse = AnswerResponse(answers: answ);
+      api.postFormAnswers(answerResponse, await storage.retriveJWT()).then(
+          (response) {
+        Get.snackbar('Success',
+            'Response has been Successfully Submitted and Can be Edited Later',
+            backgroundColor: Colors.green.withOpacity(0.5));
+        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+      }, onError: (err) {
+        Get.snackbar('Error', 'Error While Submitting',
+            backgroundColor: Colors.red.withOpacity(0.5));
+        Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
+      });
+    } else {
+      showPreferences();
     }
-    for (int i = 0; i < questions.length; i++) {
-      answ.add(
-          Answer(answer: textControllers[i].text, questionId: questions[i].id));
-    }
-    var answerResponse = AnswerResponse(answers: answ);
-    api.postFormAnswers(answerResponse, await storage.retriveJWT()).then(
-        (response) {
-      Get.snackbar('Success',
-          'Response has been Successfully Submitted and Can be Edited Later',
-          backgroundColor: Colors.green.withOpacity(0.5));
-      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-    }, onError: (err) {
-      Get.snackbar('Error', 'Error While Submitting',
-          backgroundColor: Colors.red.withOpacity(0.5));
-      Get.offAndToNamed(NavigationRoutes.inductionsHomeRoute);
-    });
   }
 }

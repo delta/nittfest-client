@@ -33,7 +33,7 @@ class HomePagePhone extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Footer(size: size.width * 0.03))),
+                  child: Footer(size: size.width * 0.025))),
         ]);
   }
 }

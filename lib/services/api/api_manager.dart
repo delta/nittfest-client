@@ -73,7 +73,7 @@ class ApiManager extends GetConnect {
     }
   }
 
-  Future<String> postPreference(String jwt, Preferences preferences) async {
+  Future<bool> postPreference(String jwt, Preferences preferences) async {
     var headers2 = {
       'Accept': 'application/json',
       'Access-Control-Allow-Origin': 'Accept',
@@ -85,7 +85,7 @@ class ApiManager extends GetConnect {
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
-      return response.bodyString!;
+      return json.decode(response.bodyString!)['status'] as bool;
     }
   }
 }

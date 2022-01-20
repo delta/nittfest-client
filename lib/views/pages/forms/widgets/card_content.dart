@@ -46,14 +46,14 @@ class CardContent extends StatelessWidget {
                             value.question,
                             style: TextStyle(
                                 fontFamily: 'Poppins',
-                                fontSize: size.width < 600 ? min * 0.05 : 36,
+                                fontSize: size.width < 600 ? min * 0.05 : 32,
                                 shadows: AppTheme.shadows,
                                 color: AppTheme.bodycolor),
                           )),
                       SizedBox(height: min > 300 ? 20 : 10),
                       TextFormField(
                         controller: controller.textControllers[index],
-                        maxLength: 2000,
+                        maxLength: 300,
                         minLines: 1,
                         maxLines: 5,
                         autofocus: true,
@@ -61,35 +61,46 @@ class CardContent extends StatelessWidget {
                         showCursor: true,
                         // onChanged: controller.setValue,
                         cursorColor: AppTheme.primaryColor,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
+                            enabledBorder: const UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                color: AppTheme.primaryColor,
+                              ),
+                            ),
                             hintText: 'Type Your Answer Here....'),
                         style: TextStyle(
                             fontSize: size.width < 600 ? min * 0.035 : 28,
                             fontFamily: 'Poppins'),
                       ),
-                      SizedBox(height: min > 300 ? 20 : 5),
-                      Obx(() => Align(
+                      SizedBox(height: min > 300 ? 10 : 5),
+                      Align(
                           alignment: Alignment.topLeft,
                           child: TextButton(
-                            onPressed: controller.pageNumber.value ==
-                                    controller.maxPage + 1
-                                ? controller.submitAnswers
-                                : controller.buttonCarouselController.nextPage,
-                            style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                    AppTheme.bodycolor)),
-                            child: Text(
-                                controller.pageNumber.value ==
-                                        controller.maxPage + 1
-                                    ? 'Submit'
-                                    : 'Next',
-                                style: TextStyle(
-                                    fontFamily: 'Poppins',
-                                    fontSize:
-                                        size.width < 600 ? min * 0.034 : 22,
-                                    fontWeight: FontWeight.bold,
-                                    color: AppTheme.primaryColor)),
-                          )))
+                              onPressed: index == controller.maxPage
+                                  ? controller.submitAnswers
+                                  : controller
+                                      .buttonCarouselController.nextPage,
+                              style: ButtonStyle(
+                                  backgroundColor: MaterialStateProperty.all(
+                                      AppTheme.bodycolor)),
+                              child: Padding(
+                                padding: const EdgeInsets.all(6),
+                                child: Text(
+                                    index == controller.maxPage
+                                        ? 'SUBMIT'
+                                        : 'NEXT',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize:
+                                            size.width < 600 ? min * 0.034 : 22,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppTheme.primaryColor)),
+                              )))
                     ])),
               ]),
         ]);
