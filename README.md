@@ -53,9 +53,8 @@ MVC architecture using GetX
         * Run Formatter
         * Run Analyzer
    * if push
-        * Build Web-Application.
-        * Deploy changes using Firebase hosting.
-        * Visit [nittfest website](https://nittfest-client.web.app/#/inductions)
+        * generates apk
+        
 ## GitHooks
 
 ### Configure git-hooks path
