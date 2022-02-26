@@ -1,4 +1,4 @@
-package edu.nitt.delta.nittfest.nittfest
+package edu.nitt.delta.nittfest
 
 import io.flutter.embedding.android.FlutterActivity
 

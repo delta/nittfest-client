@@ -1,6 +1,6 @@
-# Nittfest-Client
+# Nittfest-App
 
-Client Application for NITTFEST.
+Mobile Application for NITTFEST.
 
 <p align="center"><img src="https://user-images.githubusercontent.com/63253383/146638088-96d83626-f121-46fc-9f7d-208b0f9fe725.png"></p>
 
@@ -28,7 +28,7 @@ Client Application for NITTFEST.
     ```
 * To run the App
     ```
-    flutter run 
+    ./run.sh .env
     ```
 ### Architecture 
 MVC architecture using GetX
@@ -44,6 +44,27 @@ MVC architecture using GetX
       * onReady() : called upon UI widgets appearing on screen
       * onClose() : called before the controller gets deleted from the memory
       
+## Firebase
+
+### Requirements
+- [gnupg](https://gnupg.org/download/)
+
+### Setup
+* Add google-services.json file inside android/app/
+* Add the file path in .gitignore(if not already)
+* Creating tar file [services.tar], Run the command below in your project's working directory to create the archive file:
+    
+    ``` 
+    tar cvf services.tar android/app/google-services.json
+    ```
+* Add the services.tar in .gitignore(if not already)
+* Run the command below to encrypt the services.tar file. 
+    ``` 
+    gpg -c services.tar
+    ```
+* During encryption, it will ask for password which will be used to decrypt the encrypted file. After running the command, there will be a new file in your project's working directory named `services.tar.gpg`.    
+* Add the gpg password to github secrets    
+
 ## GithubActions
 
 ### Workflow
@@ -54,7 +75,7 @@ MVC architecture using GetX
         * Run Analyzer
    * if push
         * generates apk
-        
+
 ## GitHooks
 
 ### Configure git-hooks path
@@ -70,59 +91,3 @@ MVC architecture using GetX
 * pre-push
     * Checks for un-committed files
     * Runs Test cases
-
-## Contributing to Nittfest-Client
-
-Here are the guidelines we'd like you to follow:
-
-- [Coding Rules](#rules)
-- [Commit Message Guidelines](#commit)
-
----
-
-**NOTE:**
-
-Never push directly to main repository (upstream). Only push to your forked repo (origin) and send a pull request to
-the main repository
-
----
-
-### <a id="rules"></a> Coding Rules
-
-To ensure consistency throughout the source code, keep these rules in mind as you are working:
-
-- The coding style to be followed along with instructions to use flutter_lint
-- Enable `sound-null-safety`
-
-### <a id="commit"></a> Git Commit Guidelines
-
-#### Commit Message Format
-
-Each commit message consists of a **header**, a **body** and a **footer**. The header has a special
-format that includes a **type**, a **scope** and a **subject**:
-
-```bash
-<type>(<scope>): <subject>
-<BLANK LINE>
-<body>
-<BLANK LINE>
-<footer>
-```
-
-Any line of the commit message cannot be longer 100 characters! This allows the message to be easier to read on github
-as well as in various git tools.
-
-#### Example Commit Message
-
-```bash
-feat(MainPage): Implement rive animations to MainPage
-
-In this PR,
-* rive assets are added.
-* rive animations are handled in getx controller
-
-```
-
-Please follow the conventions followed [here](http://karma-runner.github.io/latest/dev/git-commit-msg.html).
-
-Also, refer [this page](https://chris.beams.io/posts/git-commit/) on how to write the body
