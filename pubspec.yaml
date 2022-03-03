@@ -16,6 +16,7 @@ dependencies:
   firebase_messaging: ^10.0.0
   firebase_core: ^1.2.0
   flutter_local_notifications: ^5.0.0+4
+  rive: ^0.8.1
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +29,5 @@ flutter:
 
   assets:
     - assets/
+    - assets/rive/login_animation.riv
+    - assets/dauth_logo.png
