@@ -23,7 +23,7 @@ class NITTFEST extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        initialRoute: NavigationRoutes.loginRoute,
+        initialRoute: NavigationRoutes.eventsRoute,
         getPages: NavigationPages.getPages(),
       );
 }

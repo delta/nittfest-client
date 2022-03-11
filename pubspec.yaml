@@ -29,5 +29,9 @@ flutter:
 
   assets:
     - assets/
-    - assets/rive/login_animation.riv
+    - assets/logo_nf.png
     - assets/dauth_logo.png
+    - assets/rive/login_animation.riv
+    - assets/events/event_1.jpeg
+    - assets/events/event_2.jpeg
+    - assets/events/event_3.jpeg
