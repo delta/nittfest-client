@@ -16,7 +16,8 @@ dependencies:
   firebase_messaging: ^10.0.0
   firebase_core: ^1.2.0
   flutter_local_notifications: ^5.0.0+4
-
+  webviewx: ^0.2.1
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

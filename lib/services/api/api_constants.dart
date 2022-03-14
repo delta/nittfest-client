@@ -1,4 +1,3 @@
 class ApiConstants {
-  static String baseUrl = 'http://localhost:10000/';
-  static String auth = '${baseUrl}auth/callback/';
+  static String auth = 'http://localhost:10000/auth/callback/';
 }

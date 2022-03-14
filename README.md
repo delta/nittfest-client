@@ -22,10 +22,22 @@ Mobile Application for NITTFEST.
     ```
     git remote add upstream <MAIN_REPO_URL>
     ```
+* Run the following command to enable githooks
+    ```
+    git config core.hooksPath .githooks
+    ```    
 * To get all the dependencies listed in the pubspec
     ```
     flutter pub get
     ```
+* Unzip google-services.json file
+    ```
+    gpg --quiet --batch --yes --decrypt --passphrase="<PASSWORD>" \
+          --output <PATH_TO>/services.tar services.tar.gpg
+    ```
+    ```
+   tar xvf <PATH_TO>/services.tar
+    ```        
 * To run the App
     ```
     ./run.sh .env
@@ -65,29 +77,3 @@ MVC architecture using GetX
 * During encryption, it will ask for password which will be used to decrypt the encrypted file. After running the command, there will be a new file in your project's working directory named `services.tar.gpg`.    
 * Add the gpg password to github secrets    
 
-## GithubActions
-
-### Workflow
-* on: [pull_request, push] to main: This workflow will work whenever someone push or, make a pull request main branch.
-* In the steps we are:
-   * if pull_request
-        * Run Formatter
-        * Run Analyzer
-   * if push
-        * generates apk
-
-## GitHooks
-
-### Configure git-hooks path
-* Run the following command
-    ```
-    git config core.hooksPath .githooks
-    ```
- ### Features 
-* pre-commit
-    * Runs Formatter
-    * Runs Analyzer
-
-* pre-push
-    * Checks for un-committed files
-    * Runs Test cases

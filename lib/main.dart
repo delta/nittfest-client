@@ -1,19 +1,18 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nittfest/services/api/api_services.dart';
 import 'package:nittfest/services/storage/storage_services.dart';
-import 'package:nittfest/routes/navigation_pages.dart';
-import 'package:nittfest/routes/navigation_routes.dart';
+import 'package:nittfest/config/navigation_pages.dart';
+import 'package:nittfest/constants/navigation_routes.dart';
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await initServices();
   runApp(const NITTFEST());
 }
 
 Future<void> initServices() async {
-  await Firebase.initializeApp();
   await Get.putAsync(() => StorageServices().initStorage());
+  await Get.putAsync(() => ApiServices().initApi());
 }
 
 class NITTFEST extends StatelessWidget {
@@ -23,7 +22,7 @@ class NITTFEST extends StatelessWidget {
   Widget build(BuildContext context) => GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark(),
-        initialRoute: NavigationRoutes.homeRoute,
+        initialRoute: NavigationRoutes.splashRoute,
         getPages: NavigationPages.getPages(),
       );
 }
