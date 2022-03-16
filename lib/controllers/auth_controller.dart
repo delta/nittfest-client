@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nittfest/config/env.dart';
-import 'package:nittfest/services/api/api_services.dart';
-import 'package:nittfest/services/storage/storage_services.dart';
+import 'package:nittfest/config/environments.dart';
+import 'package:nittfest/services/api_services.dart';
+import 'package:nittfest/services/storage_services.dart';
 import 'package:nittfest/constants/navigation_routes.dart';
 import 'dart:developer';
 

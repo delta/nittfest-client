@@ -7,7 +7,7 @@ PODS:
   - firebase_core (1.12.0):
     - Firebase/CoreOnly (= 8.11.0)
     - Flutter
-  - firebase_messaging (10.0.9):
+  - firebase_messaging (11.2.7):
     - Firebase/Messaging (= 8.11.0)
     - firebase_core
     - Flutter
@@ -66,6 +66,8 @@ PODS:
   - path_provider_ios (0.0.1):
     - Flutter
   - PromisesObjC (2.0.0)
+  - webview_flutter_wkwebview (0.0.1):
+    - Flutter
 
 DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
@@ -73,6 +75,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - path_provider_ios (from `.symlinks/plugins/path_provider_ios/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
 
 SPEC REPOS:
   trunk:
@@ -97,11 +100,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
   path_provider_ios:
     :path: ".symlinks/plugins/path_provider_ios/ios"
+  webview_flutter_wkwebview:
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
 
 SPEC CHECKSUMS:
   Firebase: 44dd9724c84df18b486639e874f31436eaa9a20c
   firebase_core: 443bccfd6aa6b42f07be365b500773dc69db2d87
-  firebase_messaging: c6608162e71bcfd78198a81eac9c2fa27fed3aae
+  firebase_messaging: ad581310adcd3c9ab493d6f394c935af45a8f07b
   FirebaseCore: 2f4f85b453cc8fea4bb2b37e370007d2bcafe3f0
   FirebaseCoreDiagnostics: 3b40dfadef5b90433a60ae01f01e90fe87aa76aa
   FirebaseInstallations: 25764cf322e77f99449395870a65b2bef88e1545
@@ -113,6 +118,7 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   path_provider_ios: 7d7ce634493af4477d156294792024ec3485acd5
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  webview_flutter_wkwebview: 005fbd90c888a42c5690919a1527ecc6649e1162
 
 PODFILE CHECKSUM: 5b78b8abdcdd04ff1a17f82192a402de6b52af1c
 
