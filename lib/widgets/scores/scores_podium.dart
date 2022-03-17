@@ -11,8 +11,8 @@ class ScoresPodium extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ScoreBar(height: 140, dept: scoreResponse[1]),
-            ScoreBar(height: 160, dept: scoreResponse[0]),
-            ScoreBar(height: 130, dept: scoreResponse[2])
+            ScoreBar(height: 180, dept: scoreResponse[1]),
+            ScoreBar(height: 200, dept: scoreResponse[0]),
+            ScoreBar(height: 170, dept: scoreResponse[2])
           ]);
 }

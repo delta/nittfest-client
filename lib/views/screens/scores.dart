@@ -8,7 +8,9 @@ class Scores extends GetView<ScoresController> {
   const Scores({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => controller.obx(
+  Widget build(BuildContext context) => RefreshIndicator(
+      onRefresh: controller.getScores,
+      child: controller.obx(
         (scores) => CustomScrollView(slivers: [
           SliverAppBar(
               expandedHeight: 200,
@@ -23,10 +25,15 @@ class Scores extends GetView<ScoresController> {
               child: Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
             margin: const EdgeInsets.only(left: 8, right: 8),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: Color.fromRGBO(255, 255, 255, 0.09),
-            ),
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                border: Border.all(width: 0.5, color: Colors.white),
+                boxShadow: kElevationToShadow[10],
+                gradient: const LinearGradient(colors: [
+                  Color.fromRGBO(100, 100, 100, 0.08),
+                  Color.fromRGBO(255, 255, 255, 0.09),
+                  Color.fromRGBO(100, 100, 100, 0.08),
+                ])),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: const [
@@ -52,5 +59,5 @@ class Scores extends GetView<ScoresController> {
         onLoading: const Center(child: CircularProgressIndicator()),
         onEmpty: const Text('No data found'),
         onError: (error) => Text(error!),
-      );
+      ));
 }

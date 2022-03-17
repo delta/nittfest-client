@@ -19,7 +19,7 @@ class ScoresController extends GetxController
     super.onReady();
   }
 
-  getScores() async {
+  Future<void> getScores() async {
     api.getScores(storage).then((response) {
       change(sort(response), status: RxStatus.success());
     }, onError: (err) {
@@ -41,6 +41,16 @@ class ScoresController extends GetxController
       }
     }
     return scores;
+  }
+
+  List<String> getProfile(List<ScoresResponse> scores) {
+    List<String> profile = [];
+    const dept = 'ICE';
+    var response = scores.where((element) => element.department == dept).first;
+    profile.add(response.department);
+    profile.add(response.position);
+    profile.add(response.totalPoints.toString());
+    return profile;
   }
 
   String twoDigitPosition(int pos) {

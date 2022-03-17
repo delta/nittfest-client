@@ -32,7 +32,7 @@ class ClusterCard extends StatelessWidget {
             labelPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
             label: Text(
-              cluster.cluster!,
+              cluster.cluster ?? '',
             ),
             onSelected: (selected) => controller.currentCluster.value = index,
             selected: controller.currentCluster.value == index)));

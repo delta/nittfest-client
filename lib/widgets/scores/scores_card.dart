@@ -25,10 +25,13 @@ class ScoresCard extends StatelessWidget {
         },
         child: Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            margin: const EdgeInsets.only(left: 8, right: 8, bottom: 2),
-            decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: Color(0xff121222)),
+            margin: const EdgeInsets.only(left: 8, right: 8),
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              border: Border.all(width: 0.5, color: Colors.white),
+              boxShadow: kElevationToShadow[5],
+              color: const Color(0xF1121222),
+            ),
             child: Wrap(children: [
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
                 Text(scoresResponse.position,

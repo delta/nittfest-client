@@ -23,7 +23,7 @@ class EventCard extends StatelessWidget {
               left: 10,
               bottom: 10,
               child: Text(
-                event.name!,
+                event.name ?? '',
                 textAlign: TextAlign.center,
               ))
         ],

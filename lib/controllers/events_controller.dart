@@ -19,12 +19,20 @@ class EventController extends GetxController
     super.onReady();
   }
 
-  getEvents() async {
+  Future<void> getEvents() async {
     api.getEvents(storage).then((response) {
       change(response, status: RxStatus.success());
     }, onError: (err) {
       change(null, status: RxStatus.error(err.toString()));
       Get.snackbar('Failed To Get Events', 'Check Your Internet Connection');
     });
+  }
+
+  List<Event> upcomingEvents(List<EventResponse> events) {
+    List<Event> upcomingEvents = [];
+    for (var event in events) {
+      upcomingEvents.addAll(event.events);
+    }
+    return upcomingEvents;
   }
 }

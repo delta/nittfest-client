@@ -2,23 +2,23 @@
 
 import 'dart:convert';
 
-List<EventResponse> eventResponseFromJson(String? str) =>
+List<EventResponse> eventResponseFromJson(String str) =>
     List<EventResponse>.from(
-        json.decode(str!).map((x) => EventResponse.fromJson(x)));
+        json.decode(str).map((x) => EventResponse.fromJson(x)));
 
-String? eventResponseToJson(List<EventResponse> data) =>
+String eventResponseToJson(List<EventResponse> data) =>
     json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class EventResponse {
   EventResponse({
-    this.cluster,
+    required this.cluster,
     required this.events,
   });
 
   final String? cluster;
   final List<Event> events;
 
-  factory EventResponse.fromJson(Map<String?, dynamic> json) => EventResponse(
+  factory EventResponse.fromJson(Map<String, dynamic> json) => EventResponse(
         cluster: json['cluster'],
         events: List<Event>.from(json['events'].map((x) => Event.fromJson(x))),
       );
@@ -31,17 +31,18 @@ class EventResponse {
 
 class Event {
   Event({
-    this.name,
-    this.description,
-    this.rules,
-    this.formLink,
-    this.eventLink,
-    this.imageLink,
-    this.startTime,
-    this.endTime,
-    this.date,
-    this.isRegCompleted,
-    this.isEventCompleted,
+    required this.name,
+    required this.description,
+    required this.rules,
+    required this.formLink,
+    required this.eventLink,
+    required this.imageLink,
+    required this.startTime,
+    required this.endTime,
+    required this.date,
+    required this.isRegCompleted,
+    required this.isEventCompleted,
+    this.cluster = '',
     required this.points,
   });
 
@@ -54,11 +55,12 @@ class Event {
   final String? startTime;
   final String? endTime;
   final String? date;
-  final bool? isRegCompleted;
-  final bool? isEventCompleted;
+  final bool isRegCompleted;
+  final bool isEventCompleted;
+  String cluster;
   final List<Point> points;
 
-  factory Event.fromJson(Map<String?, dynamic> json) => Event(
+  factory Event.fromJson(Map<String, dynamic> json) => Event(
         name: json['name'],
         description: json['description'],
         rules: json['rules'],
@@ -73,7 +75,7 @@ class Event {
         points: List<Point>.from(json['points'].map((x) => Point.fromJson(x))),
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         'name': name,
         'description': description,
         'rules': rules,
@@ -91,22 +93,22 @@ class Event {
 
 class Point {
   Point({
-    this.point,
-    this.position,
-    this.department,
+    required this.point,
+    required this.position,
+    required this.department,
   });
 
-  final double? point;
-  final int? position;
+  final double point;
+  final int position;
   final String? department;
 
-  factory Point.fromJson(Map<String?, dynamic> json) => Point(
+  factory Point.fromJson(Map<String, dynamic> json) => Point(
         point: json['point'],
         position: json['position'],
         department: json['department'],
       );
 
-  Map<String?, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         'point': point,
         'position': position,
         'department': department,

@@ -1,49 +1,43 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:nittfest/controllers/scores_controller.dart';
+import 'package:nittfest/widgets/nf/logo.dart';
+import 'package:nittfest/widgets/nf/profile.dart';
+import 'package:nittfest/widgets/nf/upcoming_events.dart';
 
-class NF extends GetView<ScoresController> {
+class NF extends StatelessWidget {
   const NF({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) =>
-      controller.obx((scores) => Stack(children: [
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return Column(children: [
+      SizedBox(
+          height: size.height / 1.8,
+          child: Stack(children: [
             Positioned(
-                height: 200,
+                height: size.height / 4,
+                width: size.width,
                 child: Image.asset('assets/bg.png', fit: BoxFit.cover)),
             Positioned(
-              left: 0,
-              right: 0,
-              top: 200 - 40,
-              child: Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Colors.redAccent,
-                        spreadRadius: 1,
-                      )
-                    ],
-                    shape: BoxShape.circle,
-                    gradient: const LinearGradient(colors: [
-                      Color.fromARGB(240, 255, 180, 10),
-                      Color.fromARGB(220, 255, 100, 20),
-                    ]),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 150, 107, 10))),
-                transform: Matrix4.identity()
-                  ..setEntry(2, 1, 0.01)
-                  ..rotateY(0.2),
-              ),
-            ),
+                left: 0,
+                right: 0,
+                top: size.height / 4 - 40,
+                child: const Logo()),
             Positioned(
-                top: 200,
+                top: size.height / 4 + 50,
+                left: 0,
+                right: 0,
                 child: Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10))),
-                ))
-          ]));
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10))),
+                    child: const Profile()))
+          ])),
+      Container(
+          padding: const EdgeInsets.all(10),
+          child: const Text('Upcoming Events',
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900))),
+      const Expanded(child: UpcomingEvent())
+    ]);
+  }
 }

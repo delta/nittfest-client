@@ -31,7 +31,7 @@ class NITTFEST extends StatelessWidget {
                 .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
           ),
         ),
-        initialRoute: NavigationRoutes.gameRoute,
+        initialRoute: NavigationRoutes.main,
         getPages: NavigationPages.getPages(),
       );
 }

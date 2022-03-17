@@ -10,7 +10,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) => SafeArea(
       child: Scaffold(
-          backgroundColor: const Color(0xAA121212),
+          backgroundColor: const Color.fromARGB(255, 10, 10, 10),
           body: PageView(
             controller: controller.pageController,
             children: widgetItems,
@@ -22,19 +22,19 @@ class HomePage extends GetView<HomeController> {
                   .map((index, image) => MapEntry(
                       index,
                       Padding(
-                          padding: const EdgeInsets.all(2),
+                          padding: const EdgeInsets.all(4),
                           child: Image.asset(image,
-                              height: 24,
+                              height: 25,
                               color: controller.selectedIndex.value != index
                                   ? Colors.white
                                   : Colors.black))))
                   .values
                   .toList(),
               color: const Color(0xF1121222),
-              backgroundColor: const Color(0xF1121222),
+              backgroundColor: Colors.transparent,
               buttonBackgroundColor: const Color.fromARGB(255, 249, 167, 20),
               index: controller.selectedIndex.value,
-              height: 50,
+              height: 55,
               animationCurve: Curves.easeInOut,
               animationDuration: const Duration(milliseconds: 600),
               onTap: (index) {

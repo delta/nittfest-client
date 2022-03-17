@@ -28,7 +28,7 @@ class SplashController extends GetxController {
       splashTimer = Timer(const Duration(milliseconds: 3000), () {
         String route = NavigationRoutes.authRoute;
         if (token != null) {
-          route = NavigationRoutes.gameRoute;
+          route = NavigationRoutes.main;
         }
         Get.offAndToNamed(route);
       });

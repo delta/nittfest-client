@@ -17,11 +17,13 @@ class ApiServices extends GetxService {
 }
 
 class ApiManager extends GetConnect {
+  final headers = {
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  };
   Future<ResourceResponse> getCallBack(String code) async {
-    final response = await get('${ApiConstants.auth}?code=$code', headers: {
-      'Accept': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    });
+    final response =
+        await get('${ApiConstants.auth}?code=$code', headers: headers);
 
     if (response.status.hasError) {
       return Future.error(response.statusText!);
@@ -31,9 +33,7 @@ class ApiManager extends GetConnect {
   }
 
   Future<DepartmentResponse> getDepartments(String token) async {
-    final response = await get(ApiConstants.departments, headers: {
-      'Authorization': 'Bearer $token',
-    });
+    final response = await get(ApiConstants.departments, headers: headers);
     if (response.status.hasError) {
       return Future.error(response.statusText!);
     } else {
@@ -43,37 +43,39 @@ class ApiManager extends GetConnect {
 
   Future<List<EventResponse>> getEvents(StorageServices storage) async {
     final cache = storage.retriveEvents();
-    final token = storage.retriveJWT();
-    final response = await get(ApiConstants.events, headers: {
-      'Authorization': 'Bearer $token',
-    });
-    if (response.status.hasError) {
-      if (cache == null) {
-        return Future.error(response.statusText!);
+    try {
+      final response = await get(ApiConstants.events, headers: headers);
+      if (response.status.hasError) {
+        if (cache == null) {
+          return Future.error(response.statusText!);
+        } else {
+          return eventResponseFromJson(cache);
+        }
       } else {
-        return eventResponseFromJson(cache);
+        await storage.storeEvents(response.bodyString!);
+        return eventResponseFromJson(response.bodyString!);
       }
-    } else {
-      await storage.storeEvents(response.bodyString!);
-      return eventResponseFromJson(response.bodyString!);
+    } catch (e) {
+      return Future.error('Error events');
     }
   }
 
   Future<List<ScoresResponse>> getScores(StorageServices storage) async {
     final cache = storage.retriveScores();
-    final token = storage.retriveJWT();
-    final response = await get(ApiConstants.scores, headers: {
-      'Authorization': 'Bearer $token',
-    });
-    if (response.status.hasError) {
-      if (cache == null) {
-        return Future.error(response.statusText!);
+    final response = await get(ApiConstants.scores, headers: headers);
+    try {
+      if (response.status.hasError) {
+        if (cache == null) {
+          return Future.error(response.statusText!);
+        } else {
+          return scoresResponseFromMap(cache);
+        }
       } else {
-        return scoresResponseFromMap(cache);
+        await storage.storeScores(response.bodyString!);
+        return scoresResponseFromMap(response.bodyString!);
       }
-    } else {
-      await storage.storeScores(response.bodyString!);
-      return scoresResponseFromMap(response.bodyString!);
+    } catch (e) {
+      return Future.error('Error score');
     }
   }
 }

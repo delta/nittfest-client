@@ -1,5 +1,5 @@
 class NavigationRoutes {
-  static String gameRoute = '/game';
+  static String main = '/main';
   static String authRoute = '/auth';
   static String splashRoute = '/';
 }

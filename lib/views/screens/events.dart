@@ -9,7 +9,9 @@ class Events extends GetView<EventController> {
   const Events({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => controller.obx(
+  Widget build(BuildContext context) => RefreshIndicator(
+      onRefresh: controller.getEvents,
+      child: controller.obx(
         (clusters) => CustomScrollView(slivers: [
           SliverAppBar(
               expandedHeight: 200,
@@ -44,7 +46,8 @@ class Events extends GetView<EventController> {
                   child: Align(
                       alignment: Alignment.centerLeft,
                       child: Obx(() => Text(
-                            clusters[controller.currentCluster.value].cluster!,
+                            clusters[controller.currentCluster.value].cluster ??
+                                '',
                             textAlign: TextAlign.left,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 20),
@@ -54,7 +57,7 @@ class Events extends GetView<EventController> {
         onLoading: const Center(child: CircularProgressIndicator()),
         onEmpty: const Text('No data found'),
         onError: (error) => Text(error!),
-      );
+      ));
 }
 
 class CustomShapeBorder extends CustomClipper<Path> {

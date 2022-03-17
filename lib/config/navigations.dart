@@ -10,7 +10,7 @@ import 'package:nittfest/constants/navigation_routes.dart';
 class NavigationPages {
   static List<GetPage<dynamic>> getPages() => [
         GetPage(
-          name: NavigationRoutes.gameRoute,
+          name: NavigationRoutes.main,
           page: () => const HomePage(),
           binding: HomeBindings(),
         ),

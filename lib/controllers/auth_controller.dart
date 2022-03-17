@@ -52,7 +52,7 @@ class AuthController extends GetxController {
 
   void navigateToForms() {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      Get.offAndToNamed(NavigationRoutes.gameRoute);
+      Get.offAndToNamed(NavigationRoutes.main);
     });
   }
 
