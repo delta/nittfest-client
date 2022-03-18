@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nittfest/constants/cluster.dart';
 import 'package:nittfest/controllers/events_controller.dart';
-import 'package:nittfest/views/eventspage/widgets/clusters/cluster_card.dart';
+import 'package:nittfest/views/events_page/widgets/clusters/cluster_card.dart';
 
 class ClusterScroller extends GetView<EventsController> {
   const ClusterScroller({Key? key}) : super(key: key);

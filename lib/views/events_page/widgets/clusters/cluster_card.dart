@@ -34,8 +34,8 @@ class ClusterCard extends GetView<EventsController> {
               image: AssetImage(item.image),
               fit: BoxFit.cover,
               child: InkWell(onTap: () {
-                controller.startAnimation.value = false;
                 controller.clusterIndex.value = index;
+                controller.animcontroller.forward();
                 controller.eventIndex.value = 0;
               }),
             ),

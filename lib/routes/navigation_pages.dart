@@ -3,7 +3,7 @@ import 'package:get/route_manager.dart';
 import 'package:nittfest/bindings/events_binding.dart';
 import 'package:nittfest/bindings/home_binding.dart';
 import 'package:nittfest/bindings/login_binding.dart';
-import 'package:nittfest/views/eventspage/events_page.dart';
+import 'package:nittfest/views/events_page/events_page.dart';
 import 'package:nittfest/views/home/home_page.dart';
 import 'package:nittfest/routes/navigation_routes.dart';
 import 'package:nittfest/views/login/login_page.dart';
