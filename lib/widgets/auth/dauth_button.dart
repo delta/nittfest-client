@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:nittfest/controllers/auth_controller.dart';
-import 'package:nittfest/config/app_themes.dart';
+import 'package:nittfest/config/themes.dart';
 
 class DauthButton extends StatelessWidget {
   const DauthButton({Key? key}) : super(key: key);
