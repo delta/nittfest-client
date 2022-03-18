@@ -6,6 +6,8 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:nittfest/models/events_response.dart';
 import 'package:nittfest/services/api_services.dart';
 import 'package:nittfest/services/storage_services.dart';
+import 'package:nittfest/widgets/events/video_view.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventController extends GetxController
     with StateMixin<List<EventResponse>> {
@@ -34,5 +36,16 @@ class EventController extends GetxController
       upcomingEvents.addAll(event.events);
     }
     return upcomingEvents;
+  }
+
+  void playVideo(Event event) async {
+    bool isLaunchable = await canLaunch(
+        event.eventLink ?? 'https://www.youtube.com/watch?v=W-rHIsDFrzQ');
+    if (isLaunchable) {
+      Get.to(VideoView(event: event),
+          arguments: ['https://www.youtube.com/watch?v=W-rHIsDFrzQ']);
+    } else {
+      Get.snackbar('Event is Not Started Yet!', '');
+    }
   }
 }

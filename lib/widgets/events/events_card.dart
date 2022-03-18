@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:nittfest/models/events_response.dart';
+import 'package:nittfest/widgets/events/event_details.dart';
 
 class EventCard extends StatelessWidget {
   final Event event;
@@ -16,16 +18,18 @@ class EventCard extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(10)),
         color: Colors.black54,
       ),
-      child: Center(
-          child: Stack(
-        children: [
-          Positioned(
-              left: 10,
-              bottom: 10,
-              child: Text(
-                event.name ?? '',
-                textAlign: TextAlign.center,
-              ))
-        ],
-      )));
+      child: InkWell(
+          onTap: () => Get.to(EventDetails(event: event)),
+          child: Center(
+              child: Stack(
+            children: [
+              Positioned(
+                  left: 10,
+                  bottom: 10,
+                  child: Text(
+                    event.name ?? '',
+                    textAlign: TextAlign.center,
+                  ))
+            ],
+          ))));
 }

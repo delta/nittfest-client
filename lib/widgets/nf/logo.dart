@@ -4,9 +4,10 @@ class Logo extends StatelessWidget {
   const Logo({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Container(
-        width: 80,
-        height: 80,
+  Widget build(BuildContext context) => Center(
+          child: Container(
+        width: 70,
+        height: 70,
         decoration: BoxDecoration(
             boxShadow: const [
               BoxShadow(
@@ -20,8 +21,5 @@ class Logo extends StatelessWidget {
               Color.fromARGB(220, 255, 100, 20),
             ]),
             border: Border.all(color: const Color.fromARGB(255, 150, 107, 10))),
-        transform: Matrix4.identity()
-          ..setEntry(2, 1, 0.01)
-          ..rotateY(0.2),
-      );
+      ));
 }

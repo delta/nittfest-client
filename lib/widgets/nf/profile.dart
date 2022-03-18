@@ -10,7 +10,6 @@ class Profile extends GetView<ScoresController> {
         (scores) {
           List<String> profile = controller.getProfile(scores!);
           return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(profile[0],
@@ -18,7 +17,7 @@ class Profile extends GetView<ScoresController> {
                         fontSize: 18, fontWeight: FontWeight.bold)),
                 Container(
                     margin: const EdgeInsets.symmetric(
-                        horizontal: 28, vertical: 24),
+                        horizontal: 20, vertical: 24),
                     padding: const EdgeInsets.all(20),
                     decoration: BoxDecoration(
                         borderRadius:

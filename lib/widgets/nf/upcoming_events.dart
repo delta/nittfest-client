@@ -9,7 +9,6 @@ class UpcomingEvent extends GetView<EventController> {
   @override
   Widget build(BuildContext context) => controller.obx((events) => Container(
       margin: const EdgeInsets.symmetric(
-        horizontal: 16,
         vertical: 16,
       ),
       child: ListView(

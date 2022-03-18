@@ -27,7 +27,6 @@ class Scores extends GetView<ScoresController> {
             margin: const EdgeInsets.only(left: 8, right: 8),
             decoration: BoxDecoration(
                 borderRadius: const BorderRadius.all(Radius.circular(10)),
-                border: Border.all(width: 0.5, color: Colors.white),
                 boxShadow: kElevationToShadow[10],
                 gradient: const LinearGradient(colors: [
                   Color.fromRGBO(100, 100, 100, 0.08),

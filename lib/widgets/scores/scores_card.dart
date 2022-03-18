@@ -25,59 +25,55 @@ class ScoresCard extends StatelessWidget {
         },
         child: Container(
             padding: const EdgeInsets.symmetric(vertical: 20),
-            margin: const EdgeInsets.only(left: 8, right: 8),
+            margin: const EdgeInsets.only(left: 8, right: 8, bottom: 2),
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10)),
-              border: Border.all(width: 0.5, color: Colors.white),
-              boxShadow: kElevationToShadow[5],
+              boxShadow: kElevationToShadow[8],
               color: const Color(0xF1121222),
             ),
             child: Wrap(children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 Text(scoresResponse.position,
                     style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Divider(),
                 Text(scoresResponse.department,
                     style: const TextStyle(fontWeight: FontWeight.bold)),
-                const Divider(),
                 Text(scoresResponse.totalPoints.toString(),
                     style: const TextStyle(fontWeight: FontWeight.bold)),
               ]),
               AnimatedContainer(
                   duration: const Duration(milliseconds: 1000),
                   child: controller.expandedIndex.value == index
-                      ? Column(children: [
-                          const SizedBox(height: 10),
-                          const Divider(color: Colors.blueGrey, height: 10),
-                          const Padding(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 30, vertical: 10),
-                              child: Text('CLUSTER',
-                                  style:
-                                      TextStyle(fontWeight: FontWeight.bold))),
-                          ...scoresResponse.clusterPoints
-                              .asMap()
-                              .map((i, value) => MapEntry(
-                                  i,
-                                  Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 10),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(value.cluster,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                          const Spacer(),
-                                          Text(value.points.toString(),
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
-                                      ))))
-                              .values
-                              .toList(),
-                        ])
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                              const SizedBox(height: 10),
+                              const Divider(color: Colors.blueGrey, height: 10),
+                              ...scoresResponse.clusterPoints
+                                  .asMap()
+                                  .map((i, value) => MapEntry(
+                                      i,
+                                      Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 50, vertical: 10),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Text(value.cluster,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              const Spacer(),
+                                              Text(value.points.toString(),
+                                                  textAlign: TextAlign.left,
+                                                  style: const TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ],
+                                          ))))
+                                  .values
+                                  .toList(),
+                            ])
                       : const SizedBox.shrink())
             ]))));
   }

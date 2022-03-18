@@ -30,8 +30,8 @@ class ScoreBar extends StatelessWidget {
             ]),
             border: Border.all(color: const Color.fromARGB(255, 150, 107, 10))),
         transform: Matrix4.identity()
-          ..setEntry(2, 1, 0.01)
-          ..rotateY(0.2),
+          ..setEntry(3, 2, 0.001)
+          ..rotateX(-0.2),
       ),
       Transform(
           transform: Matrix4.identity()
@@ -41,38 +41,35 @@ class ScoreBar extends StatelessWidget {
             dept.department,
             style: const TextStyle(fontWeight: FontWeight.w800),
           )),
+      const SizedBox(height: 10),
       Stack(alignment: AlignmentDirectional.bottomStart, children: [
         Container(
           height: height,
-          width: size.width / 4.2,
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 43, 24, 86),
-                Color.fromARGB(255, 79, 45, 140),
-                Color.fromARGB(255, 43, 24, 86),
+          width: size.width / 4,
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [
+                Color.fromARGB(220, 255, 150, 20),
+                Color.fromARGB(240, 255, 180, 10),
+                Color.fromARGB(210, 235, 100, 20),
               ]),
-              border: Border.symmetric(
-                  vertical:
-                      BorderSide(color: Color.fromARGB(105, 200, 100, 10)),
-                  horizontal:
-                      BorderSide(color: Color.fromARGB(100, 220, 100, 10)))),
+              border: Border.all(
+                color: const Color.fromARGB(210, 105, 50, 10),
+              )),
           transform: Matrix4.identity()
             ..setEntry(2, 1, 0.001)
             ..rotateX(0.1),
         ),
         Container(
           height: height - 30,
-          width: size.width / 4.2 - 3,
-          decoration: const BoxDecoration(
-              gradient: LinearGradient(colors: [
-                Color.fromARGB(255, 43, 24, 86),
-                Color.fromARGB(255, 79, 45, 140),
-                Color.fromARGB(255, 43, 24, 86),
+          width: size.width / 4 - 3,
+          decoration: BoxDecoration(
+              gradient: const LinearGradient(colors: [
+                Color.fromARGB(190, 255, 120, 20),
+                Color.fromARGB(240, 255, 180, 10),
+                Color.fromARGB(210, 235, 100, 20),
               ]),
-              border: Border.symmetric(
-                  vertical: BorderSide(color: Color.fromARGB(255, 43, 24, 86)),
-                  horizontal:
-                      BorderSide(color: Color.fromARGB(205, 43, 24, 86)))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 200, 100, 10))),
           transform: Matrix4.identity()
             ..setEntry(2, 1, 0.0009)
             ..rotateX(0.2),
