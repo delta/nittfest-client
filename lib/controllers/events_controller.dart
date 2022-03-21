@@ -1,4 +1,5 @@
 import 'package:get/get_core/src/get_main.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -14,6 +15,8 @@ class EventController extends GetxController
   final api = Get.find<ApiServices>().api;
   final storage = Get.find<StorageServices>();
   final currentCluster = 0.obs;
+  final isWatchButtonVisible = false.obs;
+  final isRegisterButtonVisible = false.obs;
 
   @override
   void onReady() {
@@ -47,5 +50,43 @@ class EventController extends GetxController
     } else {
       Get.snackbar('Event is Not Started Yet!', '');
     }
+  }
+
+  void updateisLaunchable(String eventUrl, String formUrl) async {
+    isRegisterButtonVisible.value = await canLaunch(formUrl);
+    isWatchButtonVisible.value = await canLaunch(eventUrl);
+  }
+
+  void watchButtonPressed(String url, bool isCompleted, Event event) {
+    if (isCompleted) {
+      snackResponse('Oops!', 'Event completed');
+      return;
+    }
+    playVideo(event);
+  }
+
+  void registerButtonPressed(String url, bool isCompleted) {
+    if (isCompleted) {
+      snackResponse('Oops!', 'Registration completed');
+      return;
+    }
+    launch(url);
+  }
+
+  void snackResponse(String header, String message) {
+    Get.snackbar(header, message,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundGradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(240, 255, 180, 10),
+            Color.fromARGB(220, 255, 100, 20)
+          ],
+        ),
+        colorText: Colors.white);
+  }
+
+  String formatTimeString(String date) {
+    var dateTime = DateTime.parse(date);
+    return '${dateTime.hour} : ${dateTime.minute}  (${dateTime.day}-${dateTime.month}-${dateTime.year})';
   }
 }

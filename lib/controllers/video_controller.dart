@@ -11,7 +11,9 @@ class VideoController extends GetxController {
     var args = Get.arguments;
     videoController = YoutubePlayerController(
         initialVideoId: YoutubePlayer.convertUrlToId(args[0])!,
-        flags: const YoutubePlayerFlags());
+        flags: const YoutubePlayerFlags(
+          isLive: true,
+        ));
     super.onInit();
   }
 
