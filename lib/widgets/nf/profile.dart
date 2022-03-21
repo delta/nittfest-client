@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:nittfest/config/themes.dart';
 import 'package:nittfest/controllers/scores_controller.dart';
 
 class Profile extends GetView<ScoresController> {
@@ -10,43 +11,45 @@ class Profile extends GetView<ScoresController> {
         (scores) {
           List<String> profile = controller.getProfile(scores!);
           return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(profile[0],
                     style: const TextStyle(
-                        fontSize: 18, fontWeight: FontWeight.bold)),
-                Container(
+                        fontSize: 20, fontWeight: FontWeight.bold)),
+                Card(
                     margin: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 24),
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                        border: Border.all(width: 1.0, color: Colors.white),
-                        gradient: const LinearGradient(colors: [
-                          Color.fromARGB(255, 43, 24, 86),
-                          Color.fromARGB(255, 79, 45, 140),
-                          Color.fromARGB(255, 43, 24, 86),
-                        ])),
-                    child: IntrinsicHeight(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ProfileDetails(
-                              icon: Icons.leaderboard_outlined,
-                              desc: 'Position',
-                              value: profile[1]),
-                          const VerticalDivider(
-                            color: Colors.white70,
-                            thickness: 2,
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    shadowColor: Colors.grey,
+                    child: Container(
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(10)),
+                            gradient: AppTheme.cardbg),
+                        child: IntrinsicHeight(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              ProfileDetails(
+                                  icon: Icons.leaderboard_outlined,
+                                  desc: 'Position',
+                                  value: profile[1]),
+                              const VerticalDivider(
+                                color: Colors.white70,
+                                thickness: 2,
+                              ),
+                              ProfileDetails(
+                                  icon: Icons.star_border_outlined,
+                                  desc: 'Points',
+                                  value: profile[2]),
+                            ],
                           ),
-                          ProfileDetails(
-                              icon: Icons.star_border_outlined,
-                              desc: 'Points',
-                              value: profile[2]),
-                        ],
-                      ),
-                    ))
+                        )))
               ]);
         },
         onLoading: const Center(child: CircularProgressIndicator()),
@@ -71,8 +74,16 @@ class ProfileDetails extends StatelessWidget {
           size: 35,
         ),
         Text(desc,
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400)),
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w400,
+              color: Colors.white,
+            )),
         Text(value,
-            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+            style: const TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            )),
       ]);
 }

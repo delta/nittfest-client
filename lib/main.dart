@@ -27,8 +27,7 @@ class NITTFEST extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           textTheme: GoogleFonts.poppinsTextTheme(
-            ThemeData.dark()
-                .textTheme, // If this is not set, then ThemeData.light().textTheme is used.
+            ThemeData.dark().textTheme,
           ),
         ),
         initialRoute: NavigationRoutes.main,
