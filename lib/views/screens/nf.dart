@@ -14,16 +14,16 @@ class NF extends StatelessWidget {
           height: size.height / 1.8,
           child: Stack(children: [
             Positioned(
-                height: size.height / 4,
+                height: 200,
                 width: size.width,
                 child: Image.asset('assets/bg.png', fit: BoxFit.cover)),
             Positioned(
                 left: 0,
                 right: 0,
-                top: size.height / 4 - 40,
+                top: 200 - size.height / 24,
                 child: const Logo()),
             Positioned(
-                top: size.height / 4 + 50,
+                top: size.height / 4 + 20,
                 left: 0,
                 right: 0,
                 child: Container(
@@ -34,9 +34,9 @@ class NF extends StatelessWidget {
                     child: const Profile()))
           ])),
       Container(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.only(bottom: 14),
           child: const Text('Upcoming Events',
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900))),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900))),
       const Expanded(child: UpcomingEvent())
     ]);
   }

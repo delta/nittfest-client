@@ -20,7 +20,7 @@ class Events extends GetView<EventController> {
           SliverToBoxAdapter(
               child: Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   child: const Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -58,20 +58,4 @@ class Events extends GetView<EventController> {
         onEmpty: const Text('No data found'),
         onError: (error) => Text(error!),
       ));
-}
-
-class CustomShapeBorder extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-    path.lineTo(0, size.height / 1.8);
-    path.lineTo(size.width / 2, size.height / 1.8 + 35);
-    path.lineTo(size.width, size.height / 1.8);
-    path.lineTo(size.width, 0);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) => true;
 }
