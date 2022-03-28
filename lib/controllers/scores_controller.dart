@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -23,8 +24,7 @@ class ScoresController extends GetxController
     api.getScores(storage).then((response) {
       change(sort(response), status: RxStatus.success());
     }, onError: (err) {
-      change(null, status: RxStatus.error(err.toString()));
-      Get.snackbar('Failed To Get Events', 'Check Your Internet Connection');
+      change(null, status: RxStatus.empty());
     });
   }
 
@@ -58,5 +58,17 @@ class ScoresController extends GetxController
       return '0' + pos.toString();
     }
     return pos.toString();
+  }
+
+  void snackResponse(String header, String message) {
+    Get.snackbar(header, message,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundGradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(240, 255, 180, 10),
+            Color.fromARGB(220, 255, 100, 20)
+          ],
+        ),
+        colorText: Colors.white);
   }
 }

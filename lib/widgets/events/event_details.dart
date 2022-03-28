@@ -29,7 +29,7 @@ class EventDetails extends StatelessWidget {
                             )),
                         expandedHeight: 200,
                         flexibleSpace:
-                            Image.asset('assets/bg.png', fit: BoxFit.cover)),
+                            Image.asset('assets/bg.jpeg', fit: BoxFit.cover)),
                     SliverToBoxAdapter(
                         child: Container(
                             margin: const EdgeInsets.only(top: 20, bottom: 45),

@@ -17,6 +17,9 @@ class EventController extends GetxController
   final currentCluster = 0.obs;
   final isWatchButtonVisible = false.obs;
   final isRegisterButtonVisible = false.obs;
+  List<EventResponse> totalEvents = [];
+  final TextEditingController textEditingController = TextEditingController();
+  var searchMode = false.obs;
 
   @override
   void onReady() {
@@ -26,10 +29,11 @@ class EventController extends GetxController
 
   Future<void> getEvents() async {
     api.getEvents(storage).then((response) {
+      totalEvents = response;
       change(response, status: RxStatus.success());
     }, onError: (err) {
-      change(null, status: RxStatus.error(err.toString()));
-      Get.snackbar('Failed To Get Events', 'Check Your Internet Connection');
+      change(null, status: RxStatus.empty());
+      //snackResponse('Failed To Get Events', 'Unable to fetch events');
     });
   }
 
@@ -87,6 +91,27 @@ class EventController extends GetxController
 
   String formatTimeString(String date) {
     var dateTime = DateTime.parse(date);
-    return '${dateTime.hour} : ${dateTime.minute}  (${dateTime.day}-${dateTime.month}-${dateTime.year})';
+    return '${dateTime.hour} : ${dateTime.minute}  (${dateTime.day}.${dateTime.month}.${dateTime.year})';
+  }
+
+  void searchEvent() {
+    List<EventResponse> searchedEvents = [];
+    for (var cluster in totalEvents) {
+      searchedEvents.add(EventResponse(cluster: cluster.cluster, events: []));
+      for (var clusterEvent in cluster.events) {
+        if ((clusterEvent.name ?? '')
+            .toLowerCase()
+            .contains(textEditingController.text.toLowerCase())) {
+          searchedEvents[searchedEvents.length - 1].events.add(clusterEvent);
+        }
+      }
+    }
+    change(searchedEvents, status: RxStatus.success());
+  }
+
+  void clearSearch(BuildContext context) {
+    textEditingController.clear();
+    FocusScope.of(context).unfocus();
+    change(totalEvents, status: RxStatus.success());
   }
 }

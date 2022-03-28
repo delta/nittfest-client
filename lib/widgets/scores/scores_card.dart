@@ -48,7 +48,7 @@ class ScoresCard extends StatelessWidget {
                           boxShadow: kElevationToShadow[16],
                           shape: BoxShape.circle,
                           border: Border.all(width: 0.75, color: Colors.white)),
-                      child: Image.asset('assets/delta_logo.png',
+                      child: Image.asset('assets/logo_nf.png',
                           fit: BoxFit.contain),
                     ),
                     const SizedBox(width: 10),

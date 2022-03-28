@@ -30,7 +30,7 @@ class ScoreBar extends StatelessWidget {
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
               ..rotateX(-0.2),
-            child: Image.asset('assets/delta_logo.png'),
+            child: Image.asset('assets/logo_nf.png'),
           )),
       Transform(
           transform: Matrix4.identity()
@@ -68,10 +68,6 @@ class ScoreBar extends StatelessWidget {
                     height: size.width / 7,
                     width: size.width / 7,
                     alignment: Alignment.center,
-                    // decoration: BoxDecoration(
-                    //     shape: BoxShape.circle,
-                    //     gradient: AppTheme.scoresbg,
-                    //     border: Border.all(width: 1, color: Colors.white)),
                     child: Text(
                       dept.position[1],
                       style: TextStyle(
