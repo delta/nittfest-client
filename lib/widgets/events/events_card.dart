@@ -43,10 +43,10 @@ class EventCard extends StatelessWidget {
                     event.name ?? '',
                     textAlign: TextAlign.center,
                     style: const TextStyle(
-                      color: Color.fromARGB(255, 249, 167, 20),
+                      color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.w900,
                       fontFamily: 'Riffic',
-                      fontSize: 18,
+                      fontSize: 32,
                     ),
                   ))
             ],
@@ -68,7 +68,7 @@ class EventCard extends StatelessWidget {
       case 'Tamil Lits':
         return 'https://i.imgur.com/i3dTrnV.png';
       case 'Telugu Lits':
-        return 'https://i.imgur.com/i3dTrnV.png';
+        return 'https://i.imgur.com/wlVuNb2.png';
       default:
         return 'https://i.imgur.com/i3dTrnV.png';
     }

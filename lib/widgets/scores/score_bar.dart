@@ -30,7 +30,11 @@ class ScoreBar extends StatelessWidget {
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
               ..rotateX(-0.2),
-            child: Image.asset('assets/logo_nf.png'),
+            child: Image.asset(
+              'https://static.nittfest.org/images/departments/' +
+                  dept.department +
+                  '.png',
+            ),
           )),
       Transform(
           transform: Matrix4.identity()

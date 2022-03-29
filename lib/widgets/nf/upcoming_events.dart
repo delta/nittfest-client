@@ -13,7 +13,7 @@ class UpcomingEvent extends GetView<DashboardController> {
             vertical: 16,
           ),
           child: ListView(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               children: dashboard!.upcomingEvents
                   .asMap()
                   .map((i, event) =>

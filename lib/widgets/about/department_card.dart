@@ -31,10 +31,12 @@ class DepartmentsCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image:
-                          const NetworkImage('https://i.imgur.com/cxQ0BFS.png'),
+                      image: NetworkImage(
+                          'https://static.nittfest.org/images/departments/' +
+                              department.name +
+                              '.png'),
                       onError: (context, stackTrace) => const Center(
-                        child: Text('Unable to fetch image'),
+                        child: Text(''),
                       ),
                     ),
                   ),
@@ -45,6 +47,12 @@ class DepartmentsCard extends StatelessWidget {
                     child: Text(
                       department.name,
                       textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Color.fromARGB(255, 252, 252, 252),
+                        fontWeight: FontWeight.w900,
+                        fontFamily: 'Riffic',
+                        fontSize: 20,
+                      ),
                     ))
               ],
             ))));

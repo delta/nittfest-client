@@ -28,7 +28,7 @@ class UpcomingEventsCard extends StatelessWidget {
                 child: Stack(
               children: [
                 Container(
-                    width: size.width / 2.5,
+                    width: size.width,
                     height: 175,
                     foregroundDecoration: BoxDecoration(
                       color: Colors.black.withOpacity(0.5),
@@ -45,10 +45,14 @@ class UpcomingEventsCard extends StatelessWidget {
                 Positioned(
                     left: 10,
                     bottom: 10,
-                    child: Text(
-                      event.name!,
-                      textAlign: TextAlign.center,
-                    ))
+                    child: Text(event.name!,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          fontWeight: FontWeight.w900,
+                          fontFamily: 'Riffic',
+                          fontSize: 30,
+                        )))
               ],
             ))));
   }
@@ -79,7 +83,7 @@ class UpcomingEventsCard extends StatelessWidget {
       case 'Tamil Lits':
         return 'https://i.imgur.com/i3dTrnV.png';
       case 'Telugu Lits':
-        return 'https://i.imgur.com/i3dTrnV.png';
+        return 'https://i.imgur.com/wlVuNb2.png';
       default:
         return 'https://i.imgur.com/i3dTrnV.png';
     }
