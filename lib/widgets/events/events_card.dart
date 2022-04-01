@@ -42,6 +42,8 @@ class EventCard extends StatelessWidget {
                   child: Text(
                     event.name ?? '',
                     textAlign: TextAlign.center,
+                    maxLines: 2,
+                    overflow: TextOverflow.clip,
                     style: const TextStyle(
                       color: Color.fromARGB(255, 255, 255, 255),
                       fontWeight: FontWeight.w900,

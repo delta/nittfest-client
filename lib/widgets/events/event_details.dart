@@ -71,7 +71,7 @@ class EventDetails extends StatelessWidget {
                     ),
                     SliverToBoxAdapter(
                       child: getExpandable(
-                          'Discription', Text(event.description ?? '')),
+                          'Description', Text(event.description ?? '')),
                     ),
                     SliverToBoxAdapter(
                         child: getExpandable(

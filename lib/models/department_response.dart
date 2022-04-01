@@ -17,7 +17,8 @@ class DepartmentResponse {
       DepartmentResponse(
         departments:
             // ignore: unnecessary_lambdas
-            List<Department>.from(json['departments'].map(Department.fromJson)),
+            List<Department>.from(
+                json['departments'].map((x) => Department.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

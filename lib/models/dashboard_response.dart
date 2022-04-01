@@ -29,7 +29,7 @@ class DashboardResponse {
         upcomingEvents: json['upcoming_events'] == null
             ? []
             : List<Event>.from(
-                json['upcoming_events'].map(Event.fromJson)),
+                json['upcoming_events'].map((x) => Event.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {

@@ -46,11 +46,9 @@ class EventController extends GetxController
   }
 
   void playVideo(Event event) async {
-    bool isLaunchable = await canLaunch(
-        event.eventLink ?? 'https://www.youtube.com/watch?v=W-rHIsDFrzQ');
+    bool isLaunchable = await canLaunch(event.eventLink ?? ' ');
     if (isLaunchable) {
-      Get.to(VideoView(event: event),
-          arguments: ['https://www.youtube.com/watch?v=W-rHIsDFrzQ']);
+      Get.to(VideoView(event: event), arguments: [event.eventLink]);
     } else {
       Get.snackbar('Event is Not Started Yet!', '');
     }

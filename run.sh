@@ -1,7 +1,7 @@
 #!/bin/sh
 
-FLUTTER_RUN="flutter run"
-
+FLUTTER_RUN="flutter build appbundle --release"
+#FLUTTER_RUN="flutter build apk --release"
 if [ ! -z "$1" ]
 then
     SUPPLIED_ENV_FILE="$1"
