@@ -24,10 +24,17 @@ class StorageServices extends GetxService {
   Future<void> storeScores(String res) async =>
       storage.write(StorageConstants.scores, res);
 
+  Future<void> storeDashboard(String res) async =>
+      storage.write(StorageConstants.dashboard, res);
+
+  Future<void> storeDepartments(String res) =>
+      storage.write(StorageConstants.departments, res);
+
   String? retriveEvents() => storage.read(StorageConstants.event);
   String? retriveScores() => storage.read(StorageConstants.scores);
-
+  String? retriveDashboard() => storage.read(StorageConstants.dashboard);
   String? retriveName() => storage.read(StorageConstants.name);
   String? retriveEmail() => storage.read(StorageConstants.email);
   String? retriveJWT() => storage.read(StorageConstants.jwt);
+  String? retriveDepartments() => storage.read(StorageConstants.departments);
 }

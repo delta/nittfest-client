@@ -1,4 +1,5 @@
 import 'package:get/get_core/src/get_main.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
@@ -14,6 +15,11 @@ class EventController extends GetxController
   final api = Get.find<ApiServices>().api;
   final storage = Get.find<StorageServices>();
   final currentCluster = 0.obs;
+  final isWatchButtonVisible = false.obs;
+  final isRegisterButtonVisible = false.obs;
+  List<EventResponse> totalEvents = [];
+  final TextEditingController textEditingController = TextEditingController();
+  var searchMode = false.obs;
 
   @override
   void onReady() {
@@ -23,10 +29,11 @@ class EventController extends GetxController
 
   Future<void> getEvents() async {
     api.getEvents(storage).then((response) {
+      totalEvents = response;
       change(response, status: RxStatus.success());
     }, onError: (err) {
-      change(null, status: RxStatus.error(err.toString()));
-      Get.snackbar('Failed To Get Events', 'Check Your Internet Connection');
+      change(null, status: RxStatus.empty());
+      //snackResponse('Failed To Get Events', 'Unable to fetch events');
     });
   }
 
@@ -39,13 +46,70 @@ class EventController extends GetxController
   }
 
   void playVideo(Event event) async {
-    bool isLaunchable = await canLaunch(
-        event.eventLink ?? 'https://www.youtube.com/watch?v=W-rHIsDFrzQ');
+    bool isLaunchable = await canLaunch(event.eventLink ?? ' ');
     if (isLaunchable) {
-      Get.to(VideoView(event: event),
-          arguments: ['https://www.youtube.com/watch?v=W-rHIsDFrzQ']);
+      Get.to(VideoView(event: event), arguments: [event.eventLink]);
     } else {
       Get.snackbar('Event is Not Started Yet!', '');
     }
+  }
+
+  void updateisLaunchable(String eventUrl, String formUrl) async {
+    isRegisterButtonVisible.value = await canLaunch(formUrl);
+    isWatchButtonVisible.value = await canLaunch(eventUrl);
+  }
+
+  void watchButtonPressed(String url, bool isCompleted, Event event) {
+    if (isCompleted) {
+      snackResponse('Oops!', 'Event completed');
+      return;
+    }
+    playVideo(event);
+  }
+
+  void registerButtonPressed(String url, bool isCompleted) {
+    if (isCompleted) {
+      snackResponse('Oops!', 'Registration completed');
+      return;
+    }
+    launch(url);
+  }
+
+  void snackResponse(String header, String message) {
+    Get.snackbar(header, message,
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundGradient: const LinearGradient(
+          colors: [
+            Color.fromARGB(240, 255, 180, 10),
+            Color.fromARGB(220, 255, 100, 20)
+          ],
+        ),
+        colorText: Colors.white);
+  }
+
+  String formatTimeString(String date) {
+    var dateTime = DateTime.parse(date);
+    return '${dateTime.hour} : ${dateTime.minute}  (${dateTime.day}.${dateTime.month}.${dateTime.year})';
+  }
+
+  void searchEvent() {
+    List<EventResponse> searchedEvents = [];
+    for (var cluster in totalEvents) {
+      searchedEvents.add(EventResponse(cluster: cluster.cluster, events: []));
+      for (var clusterEvent in cluster.events) {
+        if ((clusterEvent.name ?? '')
+            .toLowerCase()
+            .contains(textEditingController.text.toLowerCase())) {
+          searchedEvents[searchedEvents.length - 1].events.add(clusterEvent);
+        }
+      }
+    }
+    change(searchedEvents, status: RxStatus.success());
+  }
+
+  void clearSearch(BuildContext context) {
+    textEditingController.clear();
+    FocusScope.of(context).unfocus();
+    change(totalEvents, status: RxStatus.success());
   }
 }

@@ -1,4 +1,5 @@
 import 'package:get/get_connect/connect.dart';
+import 'package:nittfest/models/dashboard_response.dart';
 import 'package:nittfest/models/department_response.dart';
 import 'package:nittfest/models/events_response.dart';
 import 'package:nittfest/models/resource_response.dart';
@@ -32,12 +33,22 @@ class ApiManager extends GetConnect {
     }
   }
 
-  Future<DepartmentResponse> getDepartments(String token) async {
+  Future<DepartmentResponse> getDepartments(StorageServices storage) async {
+    final cache = storage.retriveDepartments();
     final response = await get(ApiConstants.departments, headers: headers);
-    if (response.status.hasError) {
-      return Future.error(response.statusText!);
-    } else {
-      return departmentResponseFromJson(response.bodyString!);
+    try {
+      if (response.status.hasError) {
+        if (cache == null) {
+          return Future.error(response.statusText!);
+        } else {
+          return departmentResponseFromJson(cache);
+        }
+      } else {
+        await storage.storeDepartments(response.bodyString!);
+        return departmentResponseFromJson(response.bodyString!);
+      }
+    } catch (e) {
+      return Future.error('Error deaprtments');
     }
   }
 
@@ -76,6 +87,31 @@ class ApiManager extends GetConnect {
       }
     } catch (e) {
       return Future.error('Error score');
+    }
+  }
+
+  Future<DashboardResponse> getDashboard(StorageServices storage) async {
+    final cache = storage.retriveDashboard();
+    final jwt = storage.retriveJWT();
+    var headers2 = {
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': 'Accept',
+      'Authorization': 'Bearer $jwt'
+    };
+    final response = await get(ApiConstants.dashboard, headers: headers2);
+    try {
+      if (response.status.hasError) {
+        if (cache == null) {
+          return Future.error(response.statusText!);
+        } else {
+          return dashboardFromJson(cache);
+        }
+      } else {
+        await storage.storeDashboard(response.bodyString!);
+        return dashboardFromJson(response.bodyString!);
+      }
+    } catch (e) {
+      return Future.error('Error dashboard');
     }
   }
 }

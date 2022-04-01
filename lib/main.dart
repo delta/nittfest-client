@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:nittfest/services/api_services.dart';
@@ -10,7 +11,12 @@ import 'package:nittfest/constants/navigation_routes.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initServices();
-  runApp(const NITTFEST());
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]).then((_) => runApp(NITTFEST(
+        loginStatus: Get.find<StorageServices>().retriveJWT() != null,
+      )));
 }
 
 Future<void> initServices() async {
@@ -20,7 +26,8 @@ Future<void> initServices() async {
 }
 
 class NITTFEST extends StatelessWidget {
-  const NITTFEST({Key? key}) : super(key: key);
+  final bool loginStatus;
+  const NITTFEST({Key? key, required this.loginStatus}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
@@ -30,7 +37,8 @@ class NITTFEST extends StatelessWidget {
             ThemeData.dark().textTheme,
           ),
         ),
-        initialRoute: NavigationRoutes.main,
+        initialRoute:
+            loginStatus ? NavigationRoutes.main : NavigationRoutes.authRoute,
         getPages: NavigationPages.getPages(),
       );
 }

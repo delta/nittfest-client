@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.nitt.delta.nittfest">
+    package="org.nittfest.app">
     
    <application
         android:label="Nittfest '22"
@@ -10,7 +10,8 @@
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
           <meta-data
               android:name="com.google.firebase.messaging.default_notification_icon"
               android:resource="@drawable/nf22" />

@@ -15,7 +15,7 @@ class Scores extends GetView<ScoresController> {
         (scores) => CustomScrollView(slivers: [
           SliverAppBar(
               expandedHeight: 200,
-              flexibleSpace: Image.asset('assets/bg.png', fit: BoxFit.cover)),
+              flexibleSpace: Image.asset('assets/bg.jpeg', fit: BoxFit.cover)),
           SliverToBoxAdapter(
               child: Container(
                   padding: const EdgeInsets.only(top: 20),
@@ -49,7 +49,9 @@ class Scores extends GetView<ScoresController> {
                               .toList()))))
         ]),
         onLoading: const Center(child: CircularProgressIndicator()),
-        onEmpty: const Text('No data found'),
+        onEmpty: const Center(
+          child: Text('Unable To Fetch LeaderBord'),
+        ),
         onError: (error) => Text(error!),
       ));
 }

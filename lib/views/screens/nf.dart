@@ -16,7 +16,7 @@ class NF extends StatelessWidget {
             Positioned(
                 height: 200,
                 width: size.width,
-                child: Image.asset('assets/bg.png', fit: BoxFit.cover)),
+                child: Image.asset('assets/bg.jpeg', fit: BoxFit.cover)),
             Positioned(
                 left: 0,
                 right: 0,
@@ -35,8 +35,10 @@ class NF extends StatelessWidget {
           ])),
       Container(
           padding: const EdgeInsets.only(bottom: 14),
-          child: const Text('Upcoming Events',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900))),
+          child: const Text(
+            'Upcoming Events',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
+          )),
       const Expanded(child: UpcomingEvent())
     ]);
   }

@@ -15,7 +15,7 @@ class Events extends GetView<EventController> {
         (clusters) => CustomScrollView(slivers: [
           SliverAppBar(
               expandedHeight: 200,
-              flexibleSpace: Image.asset('assets/bg.png', fit: BoxFit.cover)),
+              flexibleSpace: Image.asset('assets/bg.jpeg', fit: BoxFit.cover)),
           const SliverToBoxAdapter(child: SearchBar()),
           SliverToBoxAdapter(
               child: Container(
@@ -55,7 +55,9 @@ class Events extends GetView<EventController> {
           EventList(clusters: clusters)
         ]),
         onLoading: const Center(child: CircularProgressIndicator()),
-        onEmpty: const Text('No data found'),
+        onEmpty: const Center(
+          child: Text('Unable To Fetch Events'),
+        ),
         onError: (error) => Text(error!),
       ));
 }

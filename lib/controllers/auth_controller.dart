@@ -24,6 +24,7 @@ class AuthController extends GetxController {
 
   void login() async {
     String? token = storage.retriveJWT();
+    // return;
     if (token == null) {
       final url = Uri.https('auth.delta.nitt.edu', '/authorize', {
         'client_id': Environment.clientId,
@@ -42,6 +43,7 @@ class AuthController extends GetxController {
         ));
       } catch (e) {
         isLoading.value = false;
+
         log('$e');
       }
     } else {

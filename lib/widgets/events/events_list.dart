@@ -13,12 +13,20 @@ class EventList extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.find<EventController>();
     return Obx(() => SliverList(
-        delegate: SliverChildListDelegate(clusters[
-                controller.currentCluster.value]
-            .events
-            .asMap()
-            .map((i, event) => MapEntry(i, EventCard(index: i, event: event)))
-            .values
-            .toList())));
+        delegate:
+            SliverChildListDelegate(clusters[controller.currentCluster.value]
+                .events
+                .asMap()
+                .map((i, event) => MapEntry(
+                    i,
+                    EventCard(
+                      index: i,
+                      event: event,
+                      cluster:
+                          clusters[controller.currentCluster.value].cluster ??
+                              '',
+                    )))
+                .values
+                .toList())));
   }
 }

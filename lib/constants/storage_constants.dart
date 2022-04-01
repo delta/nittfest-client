@@ -6,4 +6,6 @@ class StorageConstants {
   static const String jwt = 'jwt';
   static const String event = 'event';
   static const String scores = 'scores';
+  static const String dashboard = 'dashboard';
+  static const String departments = 'departments';
 }
